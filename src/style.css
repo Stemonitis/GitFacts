@@ -1,0 +1,52 @@
+#container {
+  border: 5vw solid black;
+}
+#left-border {
+  background-color: black;
+  width: 5vw;
+  height: 100vh;
+}
+#right-border {
+  background-color: black;
+  width: 5vw;
+  height: 100vh;
+}
+#title {
+  font-size: 12vh;
+  border: 3px solid black;
+  margin: 0;
+}
+#logo {
+  width: 10vw;
+  height: auto;
+}
+#desc {
+  margin: 0 0 0 10vw;
+  border: 3px solid black;
+  font-style: italic;
+  font-size: 4vh;
+}
+header {
+  height: 20vh;
+  display: flex;
+  background-color: grey;
+  justify-content: space-between;
+  border: 3px solid black;
+  grid-area: header;
+}
+#header-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+#sunburst {
+  grid-area: sunburst;
+  background-color: hotpink;
+}
+#options {
+  grid-area: options;
+  background-color: greenyellow;
+}
+footer {
+  grid-area: footer;
+  background-color: black;
+}
