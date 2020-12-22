@@ -37,7 +37,7 @@ const Header = () => {
         <script
           async
           src="https://platform.twitter.com/widgets.js"
-          charset="utf-8"
+          charSet="utf-8"
         ></script>
       </h2>
     </header>
