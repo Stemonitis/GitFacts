@@ -3,6 +3,46 @@ import GoButton from "./GoButton";
 import SunBurst from "./SunBurst";
 import SearchSVG from "./SearchSVG.js";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
+const test = gql`
+  query test {
+    all: search(query: "lol", type: REPOSITORY) {
+      repositoryCount
+    }
+    CSS: search(query: "lol language:CSS", type: REPOSITORY) {
+      repositoryCount
+    }
+    javascript: search(query: "lol language:javascript", type: REPOSITORY) {
+      repositoryCount
+    }
+    brainfuck: search(query: "lol language:brainfuck", type: REPOSITORY) {
+      repositoryCount
+    }
+    brainfuckStarred: search(
+      query: "lol language:brainfuck stars:>0"
+      type: REPOSITORY
+    ) {
+      repositoryCount
+    }
+    javascriptStarred: search(
+      query: "lol language:javascript stars:>10"
+      type: REPOSITORY
+    ) {
+      repositoryCount
+    }
+    rateLimit(dryRun: false) {
+      cost
+      limit
+      nodeCount
+      remaining
+      resetAt
+      used
+    }
+  }
+`;
+
 const optionsDefault = [
   "programming languages",
   "repository size",
@@ -13,6 +53,7 @@ const optionsDefault = [
 const OptionsContainer = () => {
   const [keyword, updateKeyword] = useState("");
   const [options, updateOptions] = useState(optionsDefault);
+  const { data, loading, error } = useQuery(test);
   function handleOnDragEnd(result) {
     if (!result.destination) return;
 
@@ -24,6 +65,13 @@ const OptionsContainer = () => {
   }
   async function requestGitData() {
     //const { data } = 4; //await
+  }
+
+  if (loading) {
+    return <p>Loading</p>;
+  }
+  if (error) {
+    return <p>error</p>;
   }
   return (
     <main>
@@ -86,7 +134,7 @@ const OptionsContainer = () => {
         </div>
         <GoButton />
       </div>
-      <SunBurst id="Sunburst" />
+      <SunBurst id="Sunburst" queryResult={data} />
     </main>
   );
 };
