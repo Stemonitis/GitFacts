@@ -1,4 +1,5 @@
 import React from "react";
+import image from "./octocat.png";
 
 const Header = () => {
   return (
@@ -6,10 +7,9 @@ const Header = () => {
       <div id="header-wrapper">
         <h1 id="title">
           Git
-          <img
-            id="logo"
-            src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-          />
+          <button id="github" className="glow-on-hover">
+            <img id="logo" src={image} />
+          </button>
           Facts
         </h1>
         <h2 id="desc">visualize your github search...</h2>

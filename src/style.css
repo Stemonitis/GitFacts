@@ -47,53 +47,173 @@ main {
 
 #OptionsContainer {
   width: 40%;
-  height: 70vh;
+  /* height: 80vh; */
   display: flex;
   justify-content: space-evenly;
 }
+
+#Options {
+  width: 100%;
+  margin-left: 5vw;
+}
 #SearchBar {
   margin-top: 20px;
-  width: 100%;
   height: 10vh;
 }
 #searchWindow {
-  width: 66%;
+  width: 70%;
   font-style: italic;
   font-family: "Fira Sans Condensed", sans-serif;
 }
 #searchWindow:hover {
-  background-color: rgb(255, 177, 255);
+  background-color: rgb(132, 133, 132);
   height: 20px;
 }
-
-.OptionBox {
-  background-color: rgb(255, 177, 255);
-  height: 7vh;
+#SearchButton {
+  width: 20%;
+}
+ul {
+  padding: 1rem;
+  padding: 0;
+  margin: 0;
   border-radius: 5%;
-  width: 60%;
+}
+.options {
+  display: flex;
+  flex-direction: column;
+}
+.OptionBox {
+  padding: 5px;
+  flex: 1;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
   font-family: "Fira Sans Condensed", sans-serif;
+  border-radius: 2%;
+  background-image: linear-gradient(
+    to bottom left,
+    rgba(255, 255, 255, 0.308),
+    rgb(201, 200, 200),
+    rgb(255, 250, 250)
+  );
+}
+.buttonschoose {
+  border-radius: 5%;
+  /* display: flex; */
+  justify-self: center;
+  align-self: center;
+  margin: 10px;
+  border: darkgray;
+  border-radius: 20%;
+  background-color: rgb(255, 255, 255);
+  /* background: repeating-linear-gradient(
+    90deg,
+    yellow 0px,
+    blue 40px,
+    green 40px,
+    red 80px
+  ); */
 }
 .OptionBox:hover {
-  opacity: 0.7;
+  opacity: 2;
+  background-color: darkgray;
+  z-index: -1;
 }
 #buttonDiv {
   display: flex;
 }
+#github {
+  background-color: rgba(224, 218, 218, 0);
+}
+#github:after {
+  background: transparent;
+}
 #goButton {
-  height: 10vh;
-  width: 10vh;
-  background-color: rgb(242, 250, 166);
-  border: none;
+  height: 8vw;
+  width: 8vw;
+}
+.glow-on-hover {
   font-family: "Fira Sans Condensed", sans-serif;
   border-radius: 50%;
   align-self: center;
-}
-#goButton:hover {
-  opacity: 0.7;
-  border-radius: 50%;
-  background-color: chartreuse;
+  border: none;
+  outline: none;
+  color: rgb(17, 13, 13);
+  background: rgb(224, 218, 218);
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
 }
 
+.glow-on-hover:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: rgb(228, 222, 222);
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgb(245, 236, 236);
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.formOptions {
+  text-align: left;
+  font-size: smaller;
+  font-weight: 100;
+}
 #SunBurst {
   width: 60%;
   height: 70vh;
@@ -108,7 +228,7 @@ a:hover {
 }
 footer {
   text-align: right;
-  font-size: 30px;
+  font-size: 3vw;
   background-color: black;
   color: white;
   width: 100%;

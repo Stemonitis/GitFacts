@@ -1,0 +1,128 @@
+
+default drag and drop and advanced options within a plus button
+
+
+search for the total repository count
+{
+    javascript : search(query: "archived:false", type: REPOSITORY) {
+      repositoryCount
+    }
+    
+    search(query: "archived:true", type: REPOSITORY) {
+      repositoryCount
+  }
+  }
+
+language field does give back the primary repository language, sometimes the
+language does not get detected and in that case it is null
+for example {
+    search(query: "language:", type: REPOSITORY, first: 10) {
+      repositoryCount
+    }
+  }
+  result
+  {
+    "data": {
+      "search": {
+        "repositoryCount": 244827
+      }
+    }
+  }
+
+
+The weird thing is that when you put language:other by itself it gives zero results, but if you pair it with
+something else in the query it just ignores it and goes with the other query. In general if the language entered
+is not valid search just ignores the query
+
+
+1)fetch the total count of the repositories
+
+""+search word or if the string is empty
+search for the total repository count run this and get the end result
+{
+    javascript : search(query: "archived:false", type: REPOSITORY) {
+      repositoryCount
+    }
+    
+    search(query: "archived:true", type: REPOSITORY) {
+      repositoryCount
+  }
+  }
+
+Not optional ones
+
+1)Search by language
+#list of all the github languages
+#https://github.com/github/linguist 
+#https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
+
+
+
+2) Repository size default three calls: 0 to 50KB, 50 to 1 MB  and more than 1MB = default check box. Or
+if not default you can have a plus buttton that gives you three options, more than, less than and also option
+to choose from kilobytes to negabytes to gigabytes. You also have to make sure that it is inclusive. Maybe its
+better to make it in the form of a slider when you can add additional ones or optimal ones in the form of the 
+gistogram. Like every three or for times so you have to prefetch the data from the smallest and the largest 
+repository first.
++"size:<50"+"size:50...1000"+"size>=1000"
+
+
+2)Number of stars
+"stars:n"
+
+3)Search by when a repository was last created
+created:YYYY-MM-DD
+
+
+
+##optional number of contributors
+#https://blog.notfoss.com/posts/get-total-number-of-commits-for-a-repository-using-the-github-api/
+
+
+
+Hidden optional buttons that appear after you add them:
+
+ 1)Choose whether you want to search in the name in the description or in the readme or the specified repository
+ (gitfacts is going to be the default one). There will be 4 checkboxes and name with the description is are going
+ to be the default one. If you check the repository the prompt will appear to wright the stuff in the following
+ format "owner" "name"
+ default +""
+ +"in:name"
+ +"in:description"
+ +"in:readme"
+2)search in repository
+ +"repo:"+"owner"+"/"+"name"
+
+ 2)Search for specific user or organization. One checkbox "all", if notchecked it enables two radiobuttons
+ user or organization
+ +""
+ +"user:USERNAME"
+ +"org:ORGNAME"
+
+3)Number of followers. Maybe the same react component as the other suff with the repo size(custom hooks).
+"followers:0"
+
+4)Number of forks. The same as with the followers and the size. Think about the default value.
+forks:n
+
+5)Search for the ones that are forked only
+
+"forked:only"
+
+6)search by topic. maybe put the topic options
+topic:TOPIC
+7)search by the number of topics
+topics:>:3
+8)license multiple licenses or one license
+9)visibility is:public is:internal is:private
+10)is mirror
+mirror:true
+mirror:false
+11)archived or not
+archived:true
+archived:false
+12)by issues
+good-first-issues:>n	
+help-wanted-issues:>n	
+13)Search by when a repository was last updated
+pushed:YYYY-MM-DD
