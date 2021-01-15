@@ -37,6 +37,7 @@
     "react": "^16.14.0",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.14.0",
+    "react-multi-bar-slider": "^1.4.0",
     "src": "^1.1.2"
   },
   "browserslist": [
