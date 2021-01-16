@@ -1,19 +1,40 @@
 import React, { useState } from "react";
-import { UniqueDirectiveNamesRule } from "graphql";
 
 const useOptionBox = (option) => {
   const [query, setQuery] = useState({
     [option.query_name]: option.query_value,
   });
+  if (!query) {
+    setQuery({
+      [option.query_name]: option.query_value,
+    });
+  }
   console.log(query);
   const OptionBox = () => {
+    const [checkboxes, setCheckBox] = useState({});
     const [custom, unravel] = useState(option.unravel);
+
+    const handleCustomOptions = (e) => {
+      if (e.target.type == "checkbox") {
+        let newCheckSet = checkboxes;
+        newCheckSet[e.target.id] = e.target.checked;
+        setCheckBox(newCheckSet);
+
+        let languageArray = Object.keys(checkboxes).filter(
+          (key) => checkboxes[key]
+        );
+        setQuery({ [option.query_name]: languageArray });
+      } else setQuery({ [e.target.name]: e.target.value });
+    };
     return custom[0] ? (
       <div className="OptionBox">
         <button
           className="closeButton"
           type="button"
-          onClick={() => unravel([false, false, false])}
+          onClick={() => {
+            unravel([false, false, false]);
+            setQuery(false);
+          }}
         >
           X
         </button>
@@ -32,12 +53,13 @@ const useOptionBox = (option) => {
                 return (
                   <label key={index} htmlFor={item.htmlForAndInputId}>
                     <input
+                      key={item.query_value}
                       id={item.htmlForAndUnputId}
                       type={item.inputType}
                       name={item.name}
                       defaultChecked={item.checked}
                       onClick={() => {
-                        setQuery(item.query_value);
+                        setQuery({ [item.name]: item.query_value });
                         unravel([true, true, false]);
                       }}
                     />
@@ -53,18 +75,24 @@ const useOptionBox = (option) => {
                 id={option.input[option.input.length - 1].htmlForAndUnputId}
                 type={option.input[option.input.length - 1].inputType}
                 name={option.input[option.input.length - 1].name}
-                onChange={() => unravel([true, true, true])}
+                onChange={() => {
+                  unravel([true, true, true]);
+                  setQuery({
+                    [option.input[option.input.length - 1].name]: [],
+                  });
+                }}
               />
               {option.input[option.input.length - 1].title}
               <br></br>
             </label>
             <br></br>
             {custom[2] ? (
-              <form action="/action_page.php" target="_blank">
+              <form>
                 <button
                   className="buttonschoose"
-                  type="submit"
-                  onClick={() => unravel([true, true, false])}
+                  onClick={() => {
+                    unravel([true, true, false]);
+                  }}
                 >
                   Don`t forget to save me!
                 </button>
@@ -75,9 +103,10 @@ const useOptionBox = (option) => {
                     <label key={index} htmlFor={item.htmlForAndInputId}>
                       <input
                         className="inputLabel"
-                        id={item.htmlForAndUnputId}
+                        id={item.query_value}
                         type={item.inputType}
                         name={item.name}
+                        onChange={(e) => handleCustomOptions(e)}
                       />
                       {item.title}
                       <br></br>
