@@ -4,12 +4,12 @@ const useOptionBox = (option) => {
   const [query, setQuery] = useState({
     [option.query_name]: option.query_value,
   });
-  if (!query) {
-    setQuery({
-      [option.query_name]: option.query_value,
-    });
-  }
-  console.log(query);
+
+  // if (!query) {
+  //   setQuery({
+  //     [option.query_name]: option.query_value,
+  //   });
+  // }
   const OptionBox = () => {
     const [checkboxes, setCheckBox] = useState({});
     const [custom, unravel] = useState(option.unravel);
@@ -43,7 +43,7 @@ const useOptionBox = (option) => {
           className="buttonschoose"
           onClick={() => unravel([true, !custom[1], false])}
         >
-          >>
+          {">>"}
         </button>
         {custom[1] ? (
           <div className="formOptions">

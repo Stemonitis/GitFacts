@@ -1,30 +1,30 @@
 import React, { useState } from "react";
 import GoButton from "./GoButton";
-//import SunBurst from "./SunBurst";
+import SunBurst from "./SunBurst";
 import useOptionBox from "./useOptionBox";
 import SearchSVG from "./SearchSVG.js";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-//import { useQuery } from "@apollo/react-hooks";
-//import languageQuery from "../languages.js";
-import optionsDef from "../languages.js";
+import { useQuery } from "@apollo/react-hooks";
+import { optionsDef, test1 } from "../languages.js";
+import makeGQL from "./makeGQL.js";
 
 const OptionsContainer = () => {
+  console.log(test1);
   const [keyword, updateKeyword] = useState("");
   const [select, updateSelect] = useState(false);
   const [languageQuery, Language] = useOptionBox(optionsDef[0]);
   const [reposizeQuery, RepoSize] = useOptionBox(optionsDef[1]);
   const [datecreatedQuery, DateCreated] = useOptionBox(optionsDef[2]);
   const [starsQuery, Stars] = useOptionBox(optionsDef[3]);
-  //you HAVE to make this array from the components otherwise the
-  //items won`t splice
-
   const [optionsArray, updateOptions] = useState([
-    <Language key={0} />,
-    <RepoSize key={1} />,
-    <DateCreated key={2} />,
-    <Stars key={3} />,
+    <Language key={0} type="language" />,
+    <RepoSize key={1} type="size" />,
+    <DateCreated key={2} type="created" />,
+    <Stars key={3} type="stars" />,
   ]);
-  //const { data, loading, error } = useQuery(languageState.query, datecreatedState.query, starsState,query, reposizeState.query);
+  const [queryString, updateLanguageQueryString] = useState("");
+  const { data, loading, error } = useQuery(test1);
+
   function handleOnDragEnd(result) {
     if (!result.destination) return;
     const items = Array.from(optionsArray);
@@ -37,21 +37,39 @@ const OptionsContainer = () => {
     const [newItem] = items.filter((option) => option.key == e.target.value);
     const newnewItem = {
       ...newItem,
-      key: optionsArray.length + 1,
+      key: (optionsArray.length + 1).toString(),
+      props: {
+        type:
+          e.target.value === 0
+            ? "language"
+            : e.target.value === 1
+            ? "size"
+            : e.target.value === 2
+            ? "created"
+            : "stars",
+      },
     };
     items.push(newnewItem);
     updateOptions(items);
   }
-  async function requestGitData() {
-    //const { data } = 4; //await
+
+  function requestGitData() {
+    updateLanguageQueryString(
+      makeGQL(keyword, [
+        languageQuery,
+        reposizeQuery,
+        datecreatedQuery,
+        starsQuery,
+      ])
+    );
   }
 
-  // if (loading) {
-  //   return <p>Loading</p>;
-  // }
-  // if (error) {
-  //   return <p>error</p>;
-  // }
+  if (loading) {
+    return <p>Loading</p>;
+  }
+  if (error) {
+    return <p>error</p>;
+  }
   return (
     <main>
       <div id="OptionsContainer">
@@ -116,7 +134,7 @@ const OptionsContainer = () => {
             {select ? (
               <label id="labelOption" htmlFor="addOptions">
                 Select a Search Parameter
-                <select onChange={(e) => addANewOption(e)}>
+                <select onClick={(e) => addANewOption(e)}>
                   {optionsDef.map((option, index) => {
                     return (
                       <option key={index} value={option.index}>
@@ -133,9 +151,9 @@ const OptionsContainer = () => {
         </div>
         <GoButton />
       </div>
+      <SunBurst id="Sunburst" queryResult={data} />
     </main>
   );
 };
 
 export default OptionsContainer;
-//<SunBurst id="Sunburst" queryResult={data} />

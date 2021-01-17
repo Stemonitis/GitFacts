@@ -5918,18 +5918,18 @@ const languages = {
 const languageArray = Object.keys(languages);
 
 const languageQueryString =
-  `query languages {
-    ` +
+  `query gitfacts {
+` +
   languageArray.slice(8, 9).reduce(
     (total, language) =>
       total +
       `
-       l${language
-         .replace(/[\s.+\-'"*()01356789]+/g, "s")
-         .replace(/[24#]+/g, "sharp")} : search(query:"language:${language}", 
+   l${language
+     .replace(/[\s.+\-'"*()01356789]+/g, "s")
+     .replace(/[24#]+/g, "sharp")} : search(query:"language:${language}",
 type: REPOSITORY)
 {
-  repositoryCount
+repositoryCount
 }`,
     ""
   ) +
@@ -6209,4 +6209,4 @@ let optionsDef = [
   },
 ];
 
-export default optionsDef;
+export { optionsDef, test1 };
