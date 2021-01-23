@@ -9,7 +9,7 @@ const http = new HttpLink({ uri: "https://api.github.com/graphql" });
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   //https://www.apollographql.com/docs/react/networking/authentication/
-  const token = "464ad4609efaf82a50ffc996903634b06c0ee2d8";
+  const token = "42ff527a78a5624fcdb1279325ab8bcb4e7254b8";
   // return the headers to the context so httpLink can read them
   return {
     headers: {

@@ -5937,7 +5937,7 @@ repositoryCount
 const languageQuery = gql`
   ${languageQueryString}
 `;
-const test1 = gql`
+const test1 = `
   query test {
     all: search(query: "lol", type: REPOSITORY) {
       repositoryCount

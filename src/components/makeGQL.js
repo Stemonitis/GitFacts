@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+// import gql from "graphql-tag";
 
 const makeGQL = (keyword, filtersArray) => {
   const arrayOfSeparateQueries = filtersArray.map((arrayObject) => {
@@ -53,11 +53,14 @@ const makeGQL = (keyword, filtersArray) => {
     );
   });
 
-  const finalCountdown = finalQueries.map((query) => {
-    return gql`
-      ${query}
-    `;
-  });
-  return finalCountdown;
+  // const finalCountdown = finalQueries.map((query) => {
+  //   return gql`
+  //     ${query}
+  //   `;
+  // });
+  // const initialOptionsArray = filtersArray.map((arrayObject) => ({
+  //   [Object.keys(arrayObject)]: arrayObject[Object.keys(arrayObject)].length,
+  // }));
+  return [finalQueries, filtersArray];
 };
 export default makeGQL;

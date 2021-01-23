@@ -1,0 +1,88 @@
+This is to do list as of dat 23 of january.
+
+GRAPHQL
+1)You need to figure out how to make a sequence of api calls for one user request.
+
+2)Figure out how cahche works and if I can use it fot the local state and also how do i store initial information
+with the data for the whole github
+
+3)figure out how to do the optimistic api with the loading states or show how many requests were fulfilled out 
+of the ones the user has
+
+4)try to figure out how to not call for the cached results if one of the options was already called
+
+5)find cache and options in the dev tools
+
+6)write an algo to update the initial information every month or so and figure out the times when it is 
+best to perform it
+REACT
+1)Add all the other planned options to the list
+
+2)Figure out what to with the closed option boxes and how to manage states of the multiple option boxes of the 
+same king as it turns out that they have the same state
+
+3)add the field fot the custon query and attach the link to the github api
+
+4)try out christians tool for this app
+
+STYLING
+1)put back the sunburst button
+
+2)figure out the text on the button
+
+3)solve the nested form 
+
+4)solve the blurring of one of the d3 diagram part
+
+5)make sure that everything is accessible
+
+6)make the website responsive 
+
+7)test on different browsers and screens
+
+8)reorganize css sheet so it is more readable (maybe find some guides on that)
+
+9)get rid of the search button
+
+D3
+
+1)why the numbering starts not from zero in the array thingy
+
+2)write the function that breaks up the list of things into the hierarchy. Maybe from the build in functions
+
+3)set up the diagram
+
+4)make diagram circles draggable and interchangable
+
+5)make diagram switch from the draggable mode to the 
+
+6)add tooltip to the d3 diagram
+
+SAFETY
+
+1)create the option to authorize
+
+2)limit the number of requests for each user so i dont hammer the api
+
+3)hide my own key and protect it so it is not accessible to everyone
+
+
+
+TESTING
+
+1)figure out the testing part
+
+PUTTING ON THE SERVER 
+
+1)research the server options and 
+
+
+AFTERMATH
+
+1)write a long tutorial on how to build a website with react d3 and graphql
+
+2)write a good readme
+
+3)have a video like in the christians tool
+
+4)make it a progressive web pack application
