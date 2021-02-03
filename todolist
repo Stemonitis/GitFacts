@@ -1,20 +1,21 @@
 This is to do list as of dat 23 of january.
 
 GRAPHQL
-1)You need to figure out how to make a sequence of api calls for one user request.
+*done 1)You need to figure out how to make a sequence of api calls for one user request.
 
-2)Figure out how cahche works and if I can use it fot the local state and also how do i store initial information
+2)Figure out how cache works and if I can use it fot the local state and also how do i store initial information
 with the data for the whole github
 
 3)figure out how to do the optimistic api with the loading states or show how many requests were fulfilled out 
 of the ones the user has
 
-4)try to figure out how to not call for the cached results if one of the options was already called
+*it is done automatically by the cache :) 4)try to figure out how to not call for the cached results if one of the options was already called
 
 5)find cache and options in the dev tools
 
 6)write an algo to update the initial information every month or so and figure out the times when it is 
 best to perform it
+
 REACT
 1)Add all the other planned options to the list
 
@@ -57,6 +58,8 @@ D3
 5)make diagram switch from the draggable mode to the 
 
 6)add tooltip to the d3 diagram
+
+7) make the diagram update optimistically populating itself with every api call
 
 SAFETY
 

@@ -62,5 +62,21 @@ const makeGQL = (keyword, filtersArray) => {
   //   [Object.keys(arrayObject)]: arrayObject[Object.keys(arrayObject)].length,
   // }));
   return [finalQueries, filtersArray];
+  // return (
+  //   `query gitfacts {
+  //     ` +
+  //   finalCombinationQueryArray.reduce(
+  //     (total, query, index) =>
+  //       total +
+  //       `
+  //        l${index} : search(query:"${query}",
+  // type: REPOSITORY)
+  // {
+  //   repositoryCount
+  // }`,
+  //     ""
+  //   ) +
+  //   "}"
+  // );
 };
 export default makeGQL;

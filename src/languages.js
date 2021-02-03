@@ -6083,7 +6083,7 @@ let optionsDef = [
     index: 1,
     unravel: [true, false, false],
     query_name: "size",
-    query_value: ["<5000", "50000...1000000", ">=1000000"],
+    query_value: ["<5000", "50000..1000000", ">=1000000"],
     input: [
       {
         htmlForAndInputId: "default3",
@@ -6091,7 +6091,7 @@ let optionsDef = [
         inputType: "radio",
         name: "size",
         title: "Default (3 sizes: 0 to 50KB, 50KB to 1MB, more than 1MB)",
-        query_value: ["<5000", "50000...1000000", ">=1000000"],
+        query_value: ["<5000", "50000..1000000", ">=1000000"],
       },
       {
         htmlForAndInputId: "custom",
@@ -6106,7 +6106,7 @@ let optionsDef = [
         inputType: "text",
         name: "size",
         title:
-          'Please, enter all the desired repository size ranges in bytes, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repository sizes from 5KB to 10MB and greater than 1GB input: "5000...10000000 >=1000000000.',
+          'Please, enter all the desired repository size ranges in bytes, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repository sizes from 5KB to 10MB and greater than 1GB input: "5000..10000000 >=1000000000.',
       },
     ],
   },
@@ -6116,9 +6116,9 @@ let optionsDef = [
     unravel: [true, false, false],
     query_name: "created",
     query_value: [
-      "2018-01-01...2018-12-31",
-      "2019-01-01...2019-12-31",
-      "2020-01-01...2020-12-31",
+      "2018-01-01..2018-12-31",
+      "2019-01-01..2019-12-31",
+      "2020-01-01..2020-12-31",
     ],
     input: [
       {
@@ -6126,9 +6126,9 @@ let optionsDef = [
         inputType: "radio",
         checked: true,
         query_value: [
-          "2018-01-01...2018-12-31",
-          "2019-01-01...2019-12-31",
-          "2020-01-01...2020-12-31",
+          "2018-01-01..2018-12-31",
+          "2019-01-01..2019-12-31",
+          "2020-01-01..2020-12-31",
         ],
         name: "created",
         title: "Default: repositories created in years 2020, 2019 and 2018",
@@ -6159,7 +6159,7 @@ let optionsDef = [
         inputType: "text",
         name: "created",
         title:
-          'Please, enter all the desired repository date ranges in YYYY-MM-DD format, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories created on 30th of June 2020 and from 21 of July 2013 enter "2020-06-30 >=2013-07-21" ',
+          'Please, enter all the desired repository date ranges in YYYY-MM-DD format, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories created on 30th of June 2020 and from 21 of July 2013 enter "2020-06-30>=2013-07-21" ',
       },
     ],
   },
@@ -6167,14 +6167,14 @@ let optionsDef = [
     name: "Number of stars",
     index: 3,
     query_name: "stars",
-    query_value: ["<=10", "10...100", ">=100"],
+    query_value: ["<=10", "10..100", ">=100"],
     unravel: [true, false, false],
     input: [
       {
         htmlForAndInputId: "default 0 to 10, 10 to 100, more than 100",
         inputType: "radio",
         checked: true,
-        query_value: ["<=10", "10...100", ">=100"],
+        query_value: ["<=10", "10..100", ">=100"],
         name: "stars",
         title:
           "Default: search for the repositories that have 0 to 10, 10 to 100 and more than a hundred stars",
@@ -6203,7 +6203,7 @@ let optionsDef = [
     input_secondLayer: [
       {
         title:
-          'Please, enter all the desired repository stars ranges, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories created that have from 4 to 6 stars and more than a 1000 stars enter "4...6 >=1000" ',
+          'Please, enter all the desired repository stars ranges, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories created that have from 4 to 6 stars and more than a 1000 stars enter "4..6 >=1000" ',
       },
     ],
   },

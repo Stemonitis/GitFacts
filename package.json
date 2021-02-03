@@ -29,6 +29,8 @@
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.14",
+    "apollo-link-batch": "^1.1.15",
+    "apollo-link-batch-http": "^1.2.14",
     "apollo-link-http": "^1.5.17",
     "core-js": "^3.7.0",
     "d3": "^6.3.1",

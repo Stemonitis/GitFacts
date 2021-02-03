@@ -7,10 +7,9 @@ export default function SunBurst(props) {
   const [data, setData] = useState([25, 30, 45, 60, 20]);
   const svgRef = useRef();
   useEffect(() => {
-    const sunData = transformIntoPartionData();
-    const root = partition(sunData);
-
-    const svg = select(svgRef.current);
+    // const sunData = transformIntoPartionData();
+    // const root = partition(sunData);
+    // const svg = select(svgRef.current);
     //svg.selectAll("g").data(sunData).enter().append("g").append("path");
     //.attr("d", arc);
   }, [data]);
