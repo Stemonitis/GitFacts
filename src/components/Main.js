@@ -4,7 +4,7 @@ import SunBurst from "./SunBurst";
 import useOptionBox from "./useOptionBox";
 import SearchSVG from "./SearchSVG.js";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { useLazyQuery, useQueries } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/react-hooks";
 import { optionsDef, test1 } from "../languages.js";
 import makeGQL from "./makeGQL.js";
 import gql from "graphql-tag";
@@ -19,7 +19,6 @@ const OptionsContainer = () => {
   const [reposizeQuery, RepoSize] = useOptionBox(optionsDef[1]);
   const [datecreatedQuery, DateCreated] = useOptionBox(optionsDef[2]);
   const [starsQuery, Stars] = useOptionBox(optionsDef[3]);
-
   //this is the hook that updates the order of options it used in the
   //function handle on drag that makes sure that we keep track of the
   //order of draggable options. Options array gets mapped into the
@@ -30,7 +29,6 @@ const OptionsContainer = () => {
     <DateCreated key={2} type="created" />,
     <Stars key={3} type="stars" />,
   ]);
-
   //toggles the state of the "plus" button for adding options
   const [select, updateSelect] = useState(false);
 
@@ -40,49 +38,43 @@ const OptionsContainer = () => {
   //with max 100 2)initial array of optinbox states in the initial order.
   //you need to have a valid initial state in this hook, in other case the components will
   //not load
-  const [queryString, updateQueryString] = useState([[test1, test1, test1]]);
+  const [queryString, updateQueryString] = useState([
+    [test1, test1, test1],
+    [languageQuery, reposizeQuery, datecreatedQuery, starsQuery],
+  ]);
+  //this is the iterator that helps to loop through the array of queries
   const [queryIterator, updateQueryIterator] = useState(0);
+  //this is the api data
   let [responseData, updateResponseData] = useState([]);
-
   //lazyquery for calling the github server
-  const [fire, { error, loading, data }] = useLazyQuery(
+  const [fire, { error, loading }] = useLazyQuery(
     gql`
       ${queryString[0][queryIterator]}
     `,
     {
       onCompleted: (datachunk) => {
         //refetch data if error
-        if (error) {
+        //update response data
+        let append = responseData;
+        append.push(datachunk);
+        updateResponseData(append);
+        //if there are more items in the array than we want to fetch than we want to continue looping
+        //through the array
+        if (queryIterator > 0) {
+          updateQueryIterator(queryIterator - 1);
           fire();
-        } else {
-          //update response data
-          let append = responseData;
-          append.push(datachunk);
-          console.log(datachunk, "this is the response chunk");
-          console.log(
-            append,
-            "this is the new array in which the immediate response was pushed"
-          );
-          updateResponseData(append);
-          console.log(
-            responseData,
-            queryIterator,
-            "this is responsedata and queryiterator"
-          );
-          //if there are more items in the array than we want to fetch than we want to continue looping
-          //through the array
-          if (queryIterator > 0) {
-            updateQueryIterator(queryIterator - 1);
-            console.log("updating iterator");
-            fire();
-            console.log("calling the next query");
-          }
-          console.log("hi");
         }
       },
     }
   );
 
+  //transform the data from the api into the hierarchical data and feed it into the sunburst diagram
+  // useEffect(() => {
+  //   console.log(responseData, "responseData in the useeffect hook");
+
+  //   window.hierarchy = transformIntoPartionData(responseData, queryString[1]);
+  //   console.log(window.hierarchy, "useeffect data update");
+  // }, [responseData, queryString]);
   //this function handles rearrangement of options and updates the order of optionboxes
   function handleOnDragEnd(result) {
     if (!result.destination) return;
@@ -125,21 +117,9 @@ const OptionsContainer = () => {
     updateQueryString(newQuery);
     updateResponseData([]);
     fire();
-    // newQuery[0].forEach((query) => {
-    //   updateQueryString(query);
-    //   //fire();
-    //   console.log(data);
-    // });
   }
   //shows sunburst loading state
-  if (loading || queryIterator > 0) {
-    return <p>Loading</p>;
-  }
-  if (error) {
-    console.log(error);
-    return <p>Error</p>;
-  }
-  console.log(data);
+
   return (
     <main>
       <div id="OptionsContainer">
@@ -224,7 +204,14 @@ const OptionsContainer = () => {
           </div>
         </form>
       </div>
-      <SunBurst id="Sunburst" queryResult={data} />
+      <>
+        {loading ? <p>Loading</p> : error ? <p>Error</p> : <p>Sunburst</p>}
+        <SunBurst
+          id="Sunburst"
+          queryResult={responseData}
+          queryString={queryString[1]}
+        />
+      </>
     </main>
   );
 };

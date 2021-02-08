@@ -67,9 +67,9 @@ SAFETY
 
 2)limit the number of requests for each user so i dont hammer the api
 
-3)hide my own key and protect it so it is not accessible to everyone
+* done 3)hide my own key and protect it so it is not accessible to everyone
 
-
+3)check the accessibility issues
 
 TESTING
 
