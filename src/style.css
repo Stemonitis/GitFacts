@@ -286,6 +286,12 @@ a {
 a:hover {
   color: white;
 }
+
+#d3container {
+  width: 500px;
+  height: 500px;
+}
+
 footer {
   text-align: right;
   font-size: 3vw;
