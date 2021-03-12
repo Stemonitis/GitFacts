@@ -1,14 +1,50 @@
 import React, { useState } from "react";
-import GoButton from "./GoButton";
-import SunBurst from "./SunBurst";
+import SunBurstWhole from "./SunBurstWhole";
+import SunBurstZoomable from "./SunBurstZoomable";
+import LoadingBar from "./LoadingBar";
 import useOptionBox from "./useOptionBox";
-import SearchSVG from "./SearchSVG.js";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { optionsDef, test1 } from "../languages.js";
 import makeGQL from "./makeGQL.js";
 import gql from "graphql-tag";
-
+const mockData = {
+  name: "allData",
+  children: [
+    {
+      name: "python",
+      children: [
+        { name: "1 star", size: 4 },
+        { name: "2 star", size: 4 },
+      ],
+    },
+    {
+      name: "ja",
+      children: [
+        { name: "1 star", size: 3 },
+        { name: "2 star", size: 3 },
+        {
+          name: "Sub B3",
+          size: 3,
+        },
+      ],
+    },
+    {
+      name: "brainfuck",
+      children: [
+        { name: "1 stars", size: 4 },
+        { name: "2 star", size: 4, children: [{ name: "hoho", size: 7 }] },
+      ],
+    },
+    {
+      name: "fuck",
+      children: [
+        { name: "1 star", size: 6 },
+        { name: "2 star", size: 4 },
+      ],
+    },
+  ],
+};
 const OptionsContainer = () => {
   //this is the hook for the search bar. It updates automatically every
   //every time you type so you actually dont need the button
@@ -31,7 +67,6 @@ const OptionsContainer = () => {
   ]);
   //toggles the state of the "plus" button for adding options
   const [select, updateSelect] = useState(false);
-
   //this hook gets triggered every time we push sunburst. It tells
   //us that user is done with altering the options and wants to see the
   //result. QueryString is an array that consists of 1)array of GQL tags
@@ -47,6 +82,8 @@ const OptionsContainer = () => {
   //this is the api data
   let [responseData, updateResponseData] = useState([]);
   //lazyquery for calling the github server
+  let [sunBurstData, updateSunBurstData] = useState(mockData);
+  let [loadingCount, updateLoadingCount] = useState([0, 0]);
   const [fire, { error, loading }] = useLazyQuery(
     gql`
       ${queryString[0][queryIterator]}
@@ -58,6 +95,8 @@ const OptionsContainer = () => {
         let append = responseData;
         append.push(datachunk);
         updateResponseData(append);
+        updateSunBurstData(responseData);
+        updateLoadingCount([loadingCount[0] + 1, loadingCount[1]]);
         //if there are more items in the array than we want to fetch than we want to continue looping
         //through the array
         if (queryIterator > 0) {
@@ -67,7 +106,7 @@ const OptionsContainer = () => {
       },
     }
   );
-
+  const [toZoomOrNotToZoom, toggleSunburst] = useState(true);
   //transform the data from the api into the hierarchical data and feed it into the sunburst diagram
   // useEffect(() => {
   //   console.log(responseData, "responseData in the useeffect hook");
@@ -83,6 +122,7 @@ const OptionsContainer = () => {
     items.splice(result.destination.index, 0, reorderedItem);
     updateOptions(items);
   }
+
   //handles adding new options. When the new option of the same kind is added their state is shared
   function addANewOption(e) {
     const items = Array.from(optionsArray);
@@ -113,9 +153,11 @@ const OptionsContainer = () => {
       datecreatedQuery,
       starsQuery,
     ]);
+
     updateQueryIterator(newQuery[0].length - 1);
     updateQueryString(newQuery);
     updateResponseData([]);
+    updateLoadingCount([0, newQuery[0].length]);
     fire();
   }
   //shows sunburst loading state
@@ -123,94 +165,135 @@ const OptionsContainer = () => {
   return (
     <main>
       <div id="OptionsContainer">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            requestGitData();
-          }}
-        >
-          <div id="options">
-            <div id="SearchBar">
-              <form>
-                <label htmlFor="searchWindow">
-                  <input
-                    id="searchWindow"
-                    type="text"
-                    placeholder="Search in GitHub..."
-                    value={keyword}
-                    onChange={(e) => updateKeyword(e.target.value)}
-                  />
-                </label>
-
-                <button id="SearchButton" type="button">
-                  <SearchSVG />
-                </button>
-              </form>
-            </div>
-
-            <DragDropContext onDragEnd={handleOnDragEnd}>
-              <Droppable droppableId="options">
-                {(provided) => (
-                  <ul
-                    className="options"
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                  >
-                    {optionsArray.map((searchOption, index) => {
-                      return (
-                        <Draggable
-                          key={index}
-                          draggableId={index + "l"}
-                          index={index}
-                        >
-                          {(provided) => (
-                            <ul
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              {searchOption}
-                            </ul>
-                          )}
-                        </Draggable>
-                      );
-                    })}
-
-                    {provided.placeholder}
-                  </ul>
-                )}
-              </Droppable>
-              <button id="plus" onClick={() => updateSelect(!select)}>
-                {select ? "-" : "+"}
+        <div id="options">
+          <div id="SearchBar">
+            <label htmlFor="searchWindow">
+              <input
+                id="searchWindow"
+                type="text"
+                placeholder="Search in GitHub..."
+                value={keyword}
+                onChange={(e) => updateKeyword(e.target.value)}
+              />
+            </label>
+            <div id="buttonDiv" type="submit">
+              <button
+                id="goButton"
+                className="glow-on-hover"
+                onClick={() => {
+                  requestGitData();
+                }}
+              >
+                Sunburst My Search!
               </button>
-              {select ? (
-                <label id="labelOption" htmlFor="addOptions">
-                  Select a Search Parameter
-                  <select onClick={(e) => addANewOption(e)}>
-                    {optionsDef.map((option, index) => {
-                      return (
-                        <option key={index} value={option.index}>
-                          {option.name}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </label>
-              ) : (
-                ""
-              )}
-            </DragDropContext>
-            <GoButton />
+            </div>
           </div>
-        </form>
+
+          <DragDropContext onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId="options">
+              {(provided) => (
+                <ul
+                  className="options"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {optionsArray.map((searchOption, index) => {
+                    return (
+                      <Draggable
+                        key={index}
+                        draggableId={index + "l"}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <ul
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            {searchOption}
+                          </ul>
+                        )}
+                      </Draggable>
+                    );
+                  })}
+
+                  {provided.placeholder}
+                </ul>
+              )}
+            </Droppable>
+            <button id="plus" onClick={() => updateSelect(!select)}>
+              {select ? "-" : "+"}
+            </button>
+            {select ? (
+              <label id="labelOption" htmlFor="addOptions">
+                Select a Search Parameter
+                <select onClick={(e) => addANewOption(e)}>
+                  {optionsDef.map((option, index) => {
+                    return (
+                      <option key={index} value={option.index}>
+                        {option.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </label>
+            ) : (
+              ""
+            )}
+          </DragDropContext>
+        </div>
       </div>
       <>
-        {loading ? <p>Loading</p> : error ? <p>Error</p> : <p>Sunburst</p>}
-        <SunBurst
-          id="Sunburst"
-          queryResult={responseData}
-          queryString={queryString[1]}
-        />
+        <div className="SunBurstContainer">
+          <div className="buttonWrapper">
+            <div>
+              <div className="toggle">
+                <input
+                  className="toggle-state"
+                  type="checkbox"
+                  checked={toZoomOrNotToZoom}
+                  onChange={() => {
+                    return;
+                  }}
+                />
+                <div
+                  className="indicator"
+                  onClick={function () {
+                    toggleSunburst(!toZoomOrNotToZoom);
+                  }}
+                ></div>
+              </div>
+              <div id="toggler">
+                {toZoomOrNotToZoom
+                  ? "Toggle to zoomable diagram"
+                  : "Toggle to the whole diagram"}
+              </div>
+            </div>
+          </div>
+
+          {toZoomOrNotToZoom ? (
+            <SunBurstZoomable
+              key={sunBurstData}
+              queryResult={sunBurstData}
+              queryString={queryString[1]}
+            />
+          ) : (
+            <SunBurstWhole
+              key={sunBurstData}
+              queryResult={sunBurstData}
+              queryString={queryString[1]}
+            />
+          )}
+          <div id="SunBurstStatus">
+            {loading ? (
+              <LoadingBar key={loadingCount} loadingCount={loadingCount} />
+            ) : error ? (
+              <p>Error. Please, resubmit your search or try later</p>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
       </>
     </main>
   );

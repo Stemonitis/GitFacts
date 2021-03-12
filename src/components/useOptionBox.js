@@ -87,7 +87,11 @@ const useOptionBox = (option) => {
             </label>
             <br></br>
             {custom[2] ? (
-              <form>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              >
                 <button
                   className="buttonschoose"
                   onClick={() => {

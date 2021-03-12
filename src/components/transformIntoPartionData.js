@@ -52,7 +52,9 @@ export default function transformIntoPartionData(queryResult, requestArray) {
       children.push(lowestLayer[j]);
       if (j % n == n - 1) {
         nextLevelArray.push({
-          name: categoryNameForNaming + " " + nameArray[((j + 1) / n - 1) % k],
+          name: nameArray[((j + 1) / n - 1) % k],
+          longname:
+            categoryNameForNaming + " " + nameArray[((j + 1) / n - 1) % k],
           children: children,
         });
         children = [];
@@ -60,7 +62,7 @@ export default function transformIntoPartionData(queryResult, requestArray) {
     }
     lowestLayer = nextLevelArray;
   }
-  let finalHierarchy = { name: "gitdata", children: [lowestLayer] };
+  let finalHierarchy = { name: "gitdata", children: lowestLayer };
 
   return finalHierarchy;
 }
