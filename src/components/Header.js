@@ -8,7 +8,7 @@ const Header = () => {
         <h1 id="title">
           Git
           <button id="github" className="glow-on-hover">
-            <img id="logo" src={image} />
+            <img id="logo" src={image} alt="github-logo" />
           </button>
           Facts
         </h1>

@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const useOptionBox = (option) => {
   const [query, setQuery] = useState({
     [option.query_name]: option.query_value,
   });
-
-  // if (!query) {
-  //   setQuery({
-  //     [option.query_name]: option.query_value,
-  //   });
-  // }
+  console.log(query, "query in useoptionsbox");
   const OptionBox = () => {
     const [checkboxes, setCheckBox] = useState({});
     const [custom, unravel] = useState(option.unravel);
+    console.log(query, "query in optionboxs");
 
+    useEffect(() => {
+      if (query === false) {
+        console.log("false query detected");
+        console.log(query, "before");
+        setQuery({ [option.query_name]: option.query_value });
+        console.log(query, "after");
+      }
+    }, []);
     const handleCustomOptions = (e) => {
       if (e.target.type == "checkbox") {
         let newCheckSet = checkboxes;
@@ -24,7 +28,9 @@ const useOptionBox = (option) => {
           (key) => checkboxes[key]
         );
         setQuery({ [option.query_name]: languageArray });
-      } else setQuery({ [e.target.name]: e.target.value });
+      } else {
+        setQuery({ [e.target.name]: e.target.value.split(" ") });
+      }
     };
     return custom[0] ? (
       <div className="OptionBox">
@@ -81,6 +87,12 @@ const useOptionBox = (option) => {
                     [option.input[option.input.length - 1].name]: [],
                   });
                 }}
+                onBlur={() => {
+                  unravel([true, true, true]);
+                  setQuery({
+                    [option.input[option.input.length - 1].name]: [],
+                  });
+                }}
               />
               {option.input[option.input.length - 1].title}
               <br></br>
@@ -111,6 +123,7 @@ const useOptionBox = (option) => {
                         type={item.inputType}
                         name={item.name}
                         onChange={(e) => handleCustomOptions(e)}
+                        onBlur={(e) => handleCustomOptions(e)}
                       />
                       {item.title}
                       <br></br>

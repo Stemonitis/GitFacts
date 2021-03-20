@@ -7,11 +7,16 @@
     "dev": "parcel src/index.html",
     "format": "prettier \"src/**/*.{js,html}\" --write",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/preset-env": "^7.13.10",
+    "@babel/preset-react": "^7.12.13",
+    "react-test-renderer": "^17.0.1",
+    "babel-jest": "^26.6.3",
     "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.3",
     "eslint": "^7.19.0",
@@ -20,6 +25,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "jest": "^26.6.3",
     "parcel-bundler": "^1.12.4",
     "prettier": "^2.2.1"
   },

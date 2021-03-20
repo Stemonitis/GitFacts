@@ -12,35 +12,17 @@ const mockData = {
   name: "allData",
   children: [
     {
-      name: "python",
+      name: "past month",
       children: [
-        { name: "1 star", size: 4 },
-        { name: "2 star", size: 4 },
+        { name: "keyword 2 match", size: 4 },
+        { name: "no matches", size: 4 },
       ],
     },
     {
-      name: "ja",
+      name: "past year",
       children: [
-        { name: "1 star", size: 3 },
-        { name: "2 star", size: 3 },
-        {
-          name: "Sub B3",
-          size: 3,
-        },
-      ],
-    },
-    {
-      name: "brainfuck",
-      children: [
-        { name: "1 stars", size: 4 },
-        { name: "2 star", size: 4, children: [{ name: "hoho", size: 7 }] },
-      ],
-    },
-    {
-      name: "fuck",
-      children: [
-        { name: "1 star", size: 6 },
-        { name: "2 star", size: 4 },
+        { name: "keyword 2 match", size: 3 },
+        { name: "no matches", size: 3 },
       ],
     },
   ],
@@ -51,10 +33,26 @@ const OptionsContainer = () => {
   const [keyword, updateKeyword] = useState("");
   //these are the family of hooks for different options. I am planning to add
   //8 more of these
+  //main
   const [languageQuery, Language] = useOptionBox(optionsDef[0]);
   const [reposizeQuery, RepoSize] = useOptionBox(optionsDef[1]);
   const [datecreatedQuery, DateCreated] = useOptionBox(optionsDef[2]);
   const [starsQuery, Stars] = useOptionBox(optionsDef[3]);
+  //additional
+  const [searchInQuery, SearchIn] = useOptionBox(optionsDef[4]);
+  const [repoQuery, RepoSearch] = useOptionBox(optionsDef[5]);
+  const [userQuery, User] = useOptionBox(optionsDef[6]);
+  const [organizationQuery, Organization] = useOptionBox(optionsDef[7]);
+  const [followersQuery, Followers] = useOptionBox(optionsDef[8]);
+  const [forksQuery, Forks] = useOptionBox(optionsDef[9]);
+  const [pushedQuery, Pushed] = useOptionBox(optionsDef[10]);
+  const [topicQuery, Topic] = useOptionBox(optionsDef[11]);
+  const [topicsQuery, Topics] = useOptionBox(optionsDef[12]);
+  const [licenseQuery, License] = useOptionBox(optionsDef[13]);
+  const [visibilityQuery, Visibility] = useOptionBox(optionsDef[14]);
+  const [mirrorQuery, Mirror] = useOptionBox(optionsDef[15]);
+  const [archivedQuery, Archived] = useOptionBox(optionsDef[16]);
+
   //this is the hook that updates the order of options it used in the
   //function handle on drag that makes sure that we keep track of the
   //order of draggable options. Options array gets mapped into the
@@ -75,7 +73,7 @@ const OptionsContainer = () => {
   //not load
   const [queryString, updateQueryString] = useState([
     [test1, test1, test1],
-    [languageQuery, reposizeQuery, datecreatedQuery, starsQuery],
+    [languageQuery, datecreatedQuery],
   ]);
   //this is the iterator that helps to loop through the array of queries
   const [queryIterator, updateQueryIterator] = useState(0);
@@ -107,29 +105,95 @@ const OptionsContainer = () => {
     }
   );
   const [toZoomOrNotToZoom, toggleSunburst] = useState(true);
-  //transform the data from the api into the hierarchical data and feed it into the sunburst diagram
-  // useEffect(() => {
-  //   console.log(responseData, "responseData in the useeffect hook");
 
-  //   window.hierarchy = transformIntoPartionData(responseData, queryString[1]);
-  //   console.log(window.hierarchy, "useeffect data update");
-  // }, [responseData, queryString]);
   //this function handles rearrangement of options and updates the order of optionboxes
   function handleOnDragEnd(result) {
     if (!result.destination) return;
     const items = Array.from(optionsArray);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-    updateOptions(items);
+    const optionsOrder = optionsArray.map((option) => option.key);
+    const requestList = [
+      languageQuery,
+      reposizeQuery,
+      datecreatedQuery,
+      starsQuery,
+      searchInQuery,
+      repoQuery,
+      userQuery,
+      organizationQuery,
+      followersQuery,
+      forksQuery,
+      pushedQuery,
+      topicQuery,
+      topicsQuery,
+      licenseQuery,
+      visibilityQuery,
+      mirrorQuery,
+      archivedQuery,
+    ];
+    let queryList = optionsOrder.map((order) => requestList[order]);
+    let filtered = items.filter((option, i) => {
+      return queryList[i] !== false;
+    });
+    updateOptions(filtered);
   }
-
   //handles adding new options. When the new option of the same kind is added their state is shared
   function addANewOption(e) {
-    const items = Array.from(optionsArray);
-    const [newItem] = items.filter((option) => option.key == e.target.value);
+    //first check for the options that have false queries and delete them, so there are no
+    //duplicated options. Also we want to delete and splice out all of the options that
+    //have the same key (they will automatically dissapear from the options screen)
+    const optionsOrder = optionsArray.map((option) => option.key);
+    const requestList = [
+      languageQuery,
+      reposizeQuery,
+      datecreatedQuery,
+      starsQuery,
+      searchInQuery,
+      repoQuery,
+      userQuery,
+      organizationQuery,
+      followersQuery,
+      forksQuery,
+      pushedQuery,
+      topicQuery,
+      topicsQuery,
+      licenseQuery,
+      visibilityQuery,
+      mirrorQuery,
+      archivedQuery,
+    ];
+    let item = Array.from(optionsArray);
+    let queryList = optionsOrder.map((order) => requestList[order]);
+    let items = item.filter((option, i) => {
+      return queryList[i] !== false;
+    });
+    const allOptions = [
+      <Language key={0} type="language" />,
+      <RepoSize key={1} type="size" />,
+      <DateCreated key={2} type="created" />,
+      <Stars key={3} type="stars" />,
+      <SearchIn key={4} type="in" />,
+      <RepoSearch key={5} type="repo" />,
+      <User key={6} type="user" />,
+      <Organization key={7} type="organization" />,
+      <Followers key={8} type="followers" />,
+      <Forks key={9} type="forks" />,
+      <Pushed key={10} type="pushed" />,
+      <Topic key={11} type="topic" />,
+      <Topics key={12} type="topics" />,
+      <License key={13} type="license" />,
+      <Visibility key={14} type="visibility" />,
+      <Mirror key={15} type="mirror" />,
+      <Archived key={16} type="archived" />,
+    ];
+    const [newItem] = allOptions.filter(
+      (option) => option.key == e.target.value
+    );
+
     const newnewItem = {
       ...newItem,
-      key: (optionsArray.length + 1).toString(),
+      key: newItem.key,
       props: {
         type:
           e.target.value === 0
@@ -138,29 +202,89 @@ const OptionsContainer = () => {
             ? "size"
             : e.target.value === 2
             ? "created"
-            : "stars",
+            : e.target.value === 3
+            ? "stars"
+            : e.target.value === 4
+            ? "in"
+            : e.target.value === 5
+            ? "stars"
+            : e.target.value === 6
+            ? "user"
+            : e.target.value === 7
+            ? "organization"
+            : e.target.value === 8
+            ? "followers"
+            : e.target.value === 9
+            ? "forks"
+            : e.target.value === 10
+            ? "pushed"
+            : e.target.value === 11
+            ? "topic"
+            : e.target.value === 12
+            ? "topics"
+            : e.target.value === 13
+            ? "license"
+            : e.target.value === 14
+            ? "visibility"
+            : e.target.value === 15
+            ? "mirror"
+            : e.target.value === 16
+            ? "archived"
+            : "",
       },
     };
     items.push(newnewItem);
     updateOptions(items);
   }
+
   //this function gets triggered by "sunburst my search" button. it makes the proper gql formatted queries
   //and updates the query string state
   function requestGitData() {
-    const newQuery = makeGQL(keyword, [
+    const optionsOrder = optionsArray.map((option) => option.key);
+    const requestList = [
       languageQuery,
       reposizeQuery,
       datecreatedQuery,
       starsQuery,
-    ]);
+      searchInQuery,
+      repoQuery,
+      userQuery,
+      organizationQuery,
+      followersQuery,
+      forksQuery,
+      pushedQuery,
+      topicQuery,
+      topicsQuery,
+      licenseQuery,
+      visibilityQuery,
+      mirrorQuery,
+      archivedQuery,
+    ];
+    console.log(optionsOrder.map((order) => requestList[order]));
+    if (
+      optionsOrder.map((order) => requestList[order]).filter((i) => i !== false)
+        .length === 0
+    )
+      return;
 
+    const newQuery = makeGQL(
+      keyword,
+      optionsOrder.map((order) => requestList[order]).filter((i) => i !== false)
+    );
+    console.log(optionsArray, "optionsArray");
+    console.log(
+      optionsOrder
+        .map((order) => requestList[order])
+        .filter((i) => i !== false),
+      newQuery,
+      "newQuery"
+    );
     updateQueryIterator(newQuery[0].length - 1);
     updateQueryString(newQuery);
     updateResponseData([]);
     updateLoadingCount([0, newQuery[0].length]);
     fire();
   }
-  //shows sunburst loading state
 
   return (
     <main>
@@ -174,6 +298,7 @@ const OptionsContainer = () => {
                 placeholder="Search in GitHub..."
                 value={keyword}
                 onChange={(e) => updateKeyword(e.target.value)}
+                onBlur={(e) => updateKeyword(e.target.value)}
               />
             </label>
             <div id="buttonDiv" type="submit">
@@ -255,6 +380,9 @@ const OptionsContainer = () => {
                   onChange={() => {
                     return;
                   }}
+                  onBlur={() => {
+                    return;
+                  }}
                 />
                 <div
                   className="indicator"
@@ -270,20 +398,6 @@ const OptionsContainer = () => {
               </div>
             </div>
           </div>
-
-          {toZoomOrNotToZoom ? (
-            <SunBurstZoomable
-              key={sunBurstData}
-              queryResult={sunBurstData}
-              queryString={queryString[1]}
-            />
-          ) : (
-            <SunBurstWhole
-              key={sunBurstData}
-              queryResult={sunBurstData}
-              queryString={queryString[1]}
-            />
-          )}
           <div id="SunBurstStatus">
             {loading ? (
               <LoadingBar key={loadingCount} loadingCount={loadingCount} />
@@ -293,6 +407,19 @@ const OptionsContainer = () => {
               ""
             )}
           </div>
+          {toZoomOrNotToZoom ? (
+            <SunBurstWhole
+              key={sunBurstData}
+              queryResult={sunBurstData}
+              queryString={queryString[1]}
+            />
+          ) : (
+            <SunBurstZoomable
+              key={sunBurstData}
+              queryResult={sunBurstData}
+              queryString={queryString[1]}
+            />
+          )}
         </div>
       </>
     </main>

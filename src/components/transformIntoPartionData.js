@@ -18,7 +18,8 @@ export default function transformIntoPartionData(queryResult, requestArray) {
   let lowestLayerArray = lowestLayerNames[lowestLayerCategory]; // ["<=10", "10..100", ">=100"]
   let lowestLayer = repositoryCounts.map((size, i) => ({
     name:
-      lowestLayerCategory + " " + lowestLayerArray[i % lowestLayerArray.length],
+      //lowestLayerCategory + " " + lowestLayerArray[i % lowestLayerArray.length],
+      lowestLayerArray[i % lowestLayerArray.length],
     size: size,
   }));
 

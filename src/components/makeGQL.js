@@ -5,6 +5,7 @@ const makeGQL = (keyword, filtersArray) => {
     //first we get the array of query values
     //then we create an array of key:value query values (e.g. ["language:python", ...])
     let filter;
+
     typeof arrayObject[Object.keys(arrayObject)] === "string"
       ? (filter = [arrayObject[Object.keys(arrayObject)]])
       : (filter = arrayObject[Object.keys(arrayObject)]);

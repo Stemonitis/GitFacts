@@ -6207,6 +6207,429 @@ let optionsDef = [
       },
     ],
   },
+  {
+    name: "Search in...(default is name and description)",
+    index: 4,
+    query_name: "in",
+    query_value: ["name", "description"],
+    unravel: [true, false, false],
+    input: [
+      {
+        htmlForAndInputId: "default name",
+        inputType: "checkbox",
+        checked: true,
+        query_value: "name",
+        name: "in",
+        title: "Search in repository name",
+      },
+      {
+        htmlForAndInputId: "default description",
+        inputType: "checkbox",
+        checked: true,
+        query_value: "description",
+        name: "in",
+        title: "Search in repository description",
+      },
+      {
+        htmlForAndInputId: "readme",
+        inputType: "checkbox",
+        checked: false,
+        query_value: "readme",
+        name: "in",
+        title: "Search in readme",
+      },
+    ],
+  },
+  {
+    name: "Search in repository",
+    index: 5,
+    query_name: "repo",
+    query_value: ["Stemonitis/GitFacts"],
+    unravel: [true, false, false],
+    input: [
+      {
+        htmlForAndInputId: "default repo",
+        inputType: "radio",
+        checked: true,
+        query_value: "Stemonitis/GitFacts",
+        name: "repo",
+        title: "Search Stemonitis/GitFacts (this app)",
+      },
+      {
+        htmlForAndInputId: "customize",
+        inputType: "radio",
+        checked: false,
+        name: "repo",
+        title: "Enter repository owner and repository name",
+      },
+    ],
+    input_secondLayer: [
+      {
+        title:
+          'Search for the owner and repo in following format: "owner:repo"',
+      },
+    ],
+  },
+  {
+    name: "Search within user's repositories",
+    index: 6,
+    query_name: "user",
+    query_value: ["Stemonitis"],
+    unravel: [true, false, false],
+    input: [
+      {
+        htmlForAndInputId: "default Stemonitis",
+        inputType: "radio",
+        checked: true,
+        query_value: "",
+        name: "user",
+        title: "Default: search in repositories owned by Stemonitis",
+      },
+      {
+        htmlForAndInputId: "customize",
+        inputType: "radio",
+        checked: false,
+        name: "user",
+        title: "Enter username here",
+      },
+    ],
+    input_secondLayer: [
+      {
+        title:
+          "Please, enter user within whose repositories you want to conduct a search ",
+      },
+    ],
+  },
+  {
+    name: "Search within organization's repositories",
+    index: 7,
+    query_name: "organization",
+    query_value: ["Stemonitis"],
+    unravel: [true, false, false],
+    input: [
+      {
+        htmlForAndInputId: "default arch",
+        inputType: "radio",
+        checked: true,
+        query_value: "arch",
+        name: "organization",
+        title: "Default: search in repositories owned by arch linux",
+      },
+      {
+        htmlForAndInputId: "customize",
+        inputType: "radio",
+        checked: false,
+        name: "organization",
+        title: "Enter organization here",
+      },
+    ],
+    input_secondLayer: [
+      {
+        title: "Please, enter organization name",
+      },
+    ],
+  },
+  {
+    name: "Number of Followers",
+    index: 8,
+    query_name: "followers",
+    query_value: [">=10000"],
+    unravel: [true, false, false],
+    input: [
+      {
+        htmlForAndInputId: "default >=10000",
+        inputType: "radio",
+        checked: true,
+        query_value: [">=10000"],
+        name: "followers",
+        title:
+          "Default: search for the repositories that have more than 10 000 followers",
+      },
+      {
+        htmlForAndInputId: "more than a 1000 and 0 followers",
+        inputType: "radio",
+        query_value: ["0", ">1000"],
+        name: "followers",
+        title:
+          "Search for repositories with 0 and more than a thousand followers",
+      },
+      {
+        htmlForAndInputId: "customize",
+        inputType: "radio",
+        name: "followers",
+        title: "Customize",
+      },
+    ],
+    input_secondLayer: [
+      {
+        title:
+          'Please, enter all the desired repository followers ranges, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories that have from 4 to 6 followers and more than a 1000 followers enter "4..6 >=1000" ',
+      },
+    ],
+  },
+  {
+    name: "Number of Forks",
+    index: 9,
+    query_name: "forks",
+    query_value: [">=1"],
+    unravel: [true, false, false],
+    input: [
+      {
+        htmlForAndInputId: "default more than 1 or 1",
+        inputType: "radio",
+        checked: true,
+        query_value: [">=1"],
+        name: "forks",
+        title:
+          "Default: search for the repositories that have been forked one or more times",
+      },
+      {
+        htmlForAndInputId: "more than 10 forks",
+        inputType: "radio",
+        query_value: [">10"],
+        name: "forks",
+        title: "More than 10 forks",
+      },
+      {
+        htmlForAndInputId: "customize",
+        inputType: "radio",
+        name: "forks",
+        title: "Customize",
+      },
+    ],
+    input_secondLayer: [
+      {
+        title:
+          'Please, enter all the desired repository forks ranges, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories that have from 4 to 6 forks and more than a 1000 forks enter "4..6 >=1000" ',
+      },
+    ],
+  },
+  {
+    name: "Date Last Updated(pushed)",
+    query_name: "pushed",
+    index: 10,
+    unravel: [true, false, false],
+    query_value: [
+      "2018-01-01..2018-12-31",
+      "2019-01-01..2019-12-31",
+      "2020-01-01..2020-12-31",
+    ],
+    input: [
+      {
+        htmlForAndInputId: "past 3 years 1 year intervals",
+        inputType: "radio",
+        checked: true,
+        query_value: [
+          "2018-01-01..2018-12-31",
+          "2019-01-01..2019-12-31",
+          "2020-01-01..2020-12-31",
+        ],
+        name: "pushed",
+        title:
+          "Default: repositories last updated in years 2020, 2019 and 2018",
+      },
+      {
+        htmlForAndInputId: "Repositories updated in 2020",
+        inputType: "radio",
+        query_value: [">2019-12-31"],
+        name: "pushed",
+        title: "Repositories updated in 2020",
+      },
+      {
+        htmlForAndInputId: "All repositories",
+        inputType: "radio",
+        query_value: [""],
+        name: "pushed",
+        title: "All repositories",
+      },
+      {
+        htmlForAndInputId: "custom",
+        inputType: "radio",
+        name: "pushed",
+        title: "Customize",
+      },
+    ],
+    input_secondLayer: [
+      {
+        inputType: "text",
+        name: "pushed",
+        title:
+          'Please, enter all the desired repository date ranges in YYYY-MM-DD format, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories created on 30th of June 2020 and from 21 of July 2013 enter "2020-06-30>=2013-07-21" ',
+      },
+    ],
+  },
+  {
+    name: "Topic",
+    index: 11,
+    query_name: "topic",
+    query_value: ["Data visualization"],
+    unravel: [true, false, false],
+    input: [
+      {
+        htmlForAndInputId: "default Data visualization",
+        inputType: "radio",
+        checked: true,
+        query_value: ["Data visualiztion"],
+        name: "topic",
+        title:
+          'Default: search for the repositories with topic "Data visualization"',
+      },
+      {
+        htmlForAndInputId: "Customize",
+        inputType: "radio",
+        checked: false,
+        title: "Enter your topic. More on topics https://github.com/topics/",
+      },
+    ],
+    input_secondLayer: [
+      {
+        title: "Please, enter topic that you want to search for here.",
+      },
+    ],
+  },
+  {
+    name: "Number of Topics",
+    index: 12,
+    query_name: "topics",
+    query_value: ["Data visualization"],
+    unravel: [true, false, false],
+    input: [
+      {
+        htmlForAndInputId: "default more than 1",
+        inputType: "radio",
+        checked: true,
+        query_value: [">1"],
+        name: "topics",
+        title: "Default: search for the repositories with more than one topic",
+      },
+      {
+        htmlForAndInputId: "Customize",
+        inputType: "radio",
+        checked: false,
+        title:
+          "Enter your topic number. More on topics https://github.com/topics/",
+      },
+    ],
+    input_secondLayer: [
+      {
+        title:
+          'Please, enter all the desired repository topics ranges, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories that have from 4 to 6 topics and more than a 1000 topics enter "4..6 >=1000"',
+      },
+    ],
+  },
+  {
+    name: "Search by the license",
+    index: 13,
+    query_name: "license",
+    query_value: ["mit"],
+    unravel: [true, false, false],
+    input: [
+      {
+        htmlForAndInputId: "default mit",
+        inputType: "radio",
+        checked: true,
+        query_value: ["mit"],
+        name: "license",
+        title: "Default: search for the repositories with mit license",
+      },
+      {
+        htmlForAndInputId: "Customize",
+        inputType: "radio",
+        name: "license",
+        title:
+          "Customize. See license types https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository",
+      },
+    ],
+    input_secondLayer: [
+      {
+        title:
+          "Please, enter a license or list of licenses separated by commas",
+      },
+    ],
+  },
+  {
+    name: "Visibility",
+    query_name: "is",
+    index: 14,
+    query_value: ["public"],
+    unravel: [true, false, false],
+    input: [
+      {
+        htmlForAndInputId: "default public",
+        inputType: "checkbox",
+        checked: true,
+        query_value: ["public"],
+        name: "is",
+        title: "Default: search for public repositories",
+      },
+      {
+        htmlForAndInputId: "internal",
+        inputType: "checkbox",
+        query_value: ["internal"],
+        checked: false,
+        name: "is",
+        title: "Search for internal repositories",
+      },
+      {
+        htmlForAndInputId: "private",
+        inputType: "checkbox",
+        checked: false,
+        query_value: ["private"],
+        name: "is",
+        title: "Search for private repositories",
+      },
+    ],
+  },
+  {
+    name: "Mirror repositories",
+    query_name: "mirror",
+    query_value: ["true", "false"],
+    unravel: [true, false, false],
+    index: 15,
+    input: [
+      {
+        htmlForAndInputId: "default is a mirror",
+        inputType: "checkbox",
+        checked: true,
+        query_value: "true",
+        name: "mirror",
+        title: "Repository that is a mirror and is posted elsewhere",
+      },
+      {
+        htmlForAndInputId: "Default is not a mirror",
+        inputType: "checkbox",
+        checked: true,
+        query_value: "false",
+        name: "mirror",
+        title: "Not a mirror",
+      },
+    ],
+  },
+  {
+    name: "Archived",
+    query_name: "archived",
+    query_value: ["true", "false"],
+    unravel: [true, false, false],
+    index: 16,
+    input: [
+      {
+        htmlForAndInputId: "default is a archived",
+        inputType: "checkbox",
+        checked: true,
+        query_value: "true",
+        name: "archived",
+        title: "Repositories that are archived",
+      },
+      {
+        htmlForAndInputId: "Default is not a archived",
+        inputType: "checkbox",
+        checked: true,
+        query_value: "false",
+        name: "archived",
+        title: "Not archived",
+      },
+    ],
+  },
 ];
 
 export { optionsDef, test1 };

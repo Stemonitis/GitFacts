@@ -37,7 +37,7 @@ export default function SunBurstZoomable(props) {
       quantize(interpolateRainbow, sunData.children.length + 1)
     );
     //making image responsive and not going out of the borders
-    let widthN = width > height ? height : width;
+    let widthN = width; //width > height ? height : width;
     let radius = widthN / 6;
     //define auxiliary functions
     function arcVisible(d) {
@@ -91,7 +91,7 @@ export default function SunBurstZoomable(props) {
         return color(d.data.name);
       })
       .attr("fill-opacity", (d) =>
-        arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0
+        arcVisible(d.current) ? (d.children ? 0.9 : 0.6) : 0
       )
       .attr("d", (d) => arcC(d.current));
 

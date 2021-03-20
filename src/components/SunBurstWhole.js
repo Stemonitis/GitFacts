@@ -32,7 +32,7 @@ export default function SunBurstZoomable(props) {
       sunData = transformIntoPartionData(props.queryResult, props.queryString);
     }
 
-    let radius = width > height ? height / 2 : width / 2;
+    let radius = width / 2; //width > height ? height / 2 : width / 2;
     let color = scaleOrdinal(
       quantize(interpolateRainbow, sunData.children.length + 1)
     );
@@ -46,11 +46,11 @@ export default function SunBurstZoomable(props) {
     const svg = select(sunRef.current)
       .append("svg")
       .style("width", width + "px")
-      .style("height", height + "px");
+      .style("height", width + "px");
 
     svg
       .append("g")
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+      .attr("transform", "translate(" + width / 2 + "," + width / 2 + ")")
       .attr("fill-opacity", 0.95)
       .selectAll("path")
       .data(root.descendants().filter((d) => d.depth)) //filters out the 0 depth node
@@ -99,7 +99,7 @@ export default function SunBurstZoomable(props) {
       .attr("text-anchor", "middle")
       .attr("font-size", "1px")
       .attr("font-family", "sans-serif")
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+      .attr("transform", "translate(" + width / 2 + "," + width / 2 + ")")
       .selectAll("text")
       .data(
         root
@@ -116,8 +116,8 @@ export default function SunBurstZoomable(props) {
         let currentSize = d.data.name.length * 0.6;
         //shrinking coefficient
         let shrinCo = arcThickness / currentSize;
-        if (d.data.name.length < 5) {
-          shrinCo = arcThickness / 4;
+        if (d.data.name.length < 8) {
+          shrinCo = arcThickness / 5;
         }
         //now add the scale factor to fit the names into the sunburst sectors perfectly
         return (
@@ -126,7 +126,9 @@ export default function SunBurstZoomable(props) {
         );
       })
       .attr("dy", "0.1em")
-      .text((d) => d.data.name);
+      .text((d) => {
+        return d.data.name;
+      });
 
     svg.node();
     //if you don`t write the clean-out function it will just continue appending svgs

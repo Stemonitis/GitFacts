@@ -169,6 +169,7 @@ ul {
 
 #plus {
   width: 35px;
+  height: 35px;
   border-color: white;
   border-radius: 50%;
   background-color: white;
@@ -291,6 +292,7 @@ ul {
 .toggle {
   isolation: isolate;
   position: relative;
+  justify-self: center;
   height: 20px;
   width: 40px;
   border-radius: 15px;
@@ -318,14 +320,14 @@ ul {
 }
 .SunBurstContainer {
   width: 60%;
-  height: 80vh;
+  height: 100%;
   background-color: white;
   display: flex;
   flex-direction: column;
 }
 .SunBurst {
   width: 100%;
-  height: 60vh;
+  height: 100%;
   background-color: white;
 }
 #toggler {
@@ -373,4 +375,68 @@ footer {
   height: 5vw;
   z-index: 0;
   margin: 0;
+}
+@media (max-width: 425px) {
+  header {
+    height: 130px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  #title {
+    font-size: 47px;
+    margin-left: 39px;
+    margin-top: 10px;
+  }
+  #logo {
+    width: 60px;
+  }
+  #desc {
+    margin: 0 0 0 17px;
+    font-size: 13px;
+  }
+  #share {
+    margin-left: 4vw;
+    width: 25px;
+    font-size: 12px;
+    align-self: center;
+  }
+  #searchWindow {
+    width: 100%;
+    align-self: flex-start;
+  }
+  #OptionsContainer {
+    width: 100%;
+  }
+  main {
+    flex-direction: column;
+  }
+  #Options {
+    width: 100%;
+    margin: 0;
+  }
+  #SearchBar {
+    margin-top: 10px;
+    height: 10vh;
+    width: 85vw;
+  }
+  .OptionBox {
+    width: 85vw;
+  }
+  #buttonDiv {
+    width: 88vw;
+  }
+  #labelOption {
+    width: 85vw;
+  }
+  .SunBurstContainer {
+    width: 100%;
+  }
+  .buttonWrapper {
+    margin: auto;
+  }
+  .toggle {
+    align-self: center;
+    justify-self: center;
+  }
 }
