@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import SunBurstWhole from "./SunBurstWhole";
 import SunBurstZoomable from "./SunBurstZoomable";
 import LoadingBar from "./LoadingBar";
@@ -32,7 +32,6 @@ const OptionsContainer = () => {
   //every time you type so you actually dont need the button
   const [keyword, updateKeyword] = useState("");
   //these are the family of hooks for different options. I am planning to add
-  //8 more of these
   //main
   const [languageQuery, Language] = useOptionBox(optionsDef[0]);
   const [reposizeQuery, RepoSize] = useOptionBox(optionsDef[1]);
@@ -52,7 +51,6 @@ const OptionsContainer = () => {
   const [visibilityQuery, Visibility] = useOptionBox(optionsDef[14]);
   const [mirrorQuery, Mirror] = useOptionBox(optionsDef[15]);
   const [archivedQuery, Archived] = useOptionBox(optionsDef[16]);
-
   //this is the hook that updates the order of options it used in the
   //function handle on drag that makes sure that we keep track of the
   //order of draggable options. Options array gets mapped into the
@@ -260,7 +258,6 @@ const OptionsContainer = () => {
       mirrorQuery,
       archivedQuery,
     ];
-    console.log(optionsOrder.map((order) => requestList[order]));
     if (
       optionsOrder.map((order) => requestList[order]).filter((i) => i !== false)
         .length === 0
@@ -271,14 +268,7 @@ const OptionsContainer = () => {
       keyword,
       optionsOrder.map((order) => requestList[order]).filter((i) => i !== false)
     );
-    console.log(optionsArray, "optionsArray");
-    console.log(
-      optionsOrder
-        .map((order) => requestList[order])
-        .filter((i) => i !== false),
-      newQuery,
-      "newQuery"
-    );
+
     updateQueryIterator(newQuery[0].length - 1);
     updateQueryString(newQuery);
     updateResponseData([]);
