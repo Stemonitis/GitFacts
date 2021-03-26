@@ -1,7 +1,8 @@
 node modules/
-./cache
+.cache
 dist/
 coverage/
 .vscode/
 .env
 node_modules
+s
