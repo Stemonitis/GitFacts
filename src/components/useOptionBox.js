@@ -4,18 +4,13 @@ const useOptionBox = (option) => {
   const [query, setQuery] = useState({
     [option.query_name]: option.query_value,
   });
-  console.log(query, "query in useoptionsbox");
   const OptionBox = () => {
     const [checkboxes, setCheckBox] = useState({});
     const [custom, unravel] = useState(option.unravel);
-    console.log(query, "query in optionboxs");
 
     useEffect(() => {
       if (query === false) {
-        console.log("false query detected");
-        console.log(query, "before");
         setQuery({ [option.query_name]: option.query_value });
-        console.log(query, "after");
       }
     }, []);
     const handleCustomOptions = (e) => {

@@ -29,8 +29,6 @@ const authLink = setContext((_, { headers }) => {
 const link = ApolloLink.from([authLink, http]);
 const cache = new InMemoryCache();
 
-//"Authorization": "Bearer 464ad4609efaf82a50ffc996903634b06c0ee2d8"
-
 const client = new ApolloClient({
   link,
   cache,
