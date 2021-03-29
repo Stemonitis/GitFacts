@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import Main from "./Main";
 import { ApolloProvider } from "@apollo/react-hooks";
 import client from "./client";
+import {firestore} from "../firebase";
 
 const App = () => {
   return (
