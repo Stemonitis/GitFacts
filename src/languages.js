@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-//there are 421 languages currently supported b guthub
+//there are 421 languages currently supported by github
 const languages = {
   "1C Enterprise": {
     type: "programming",
@@ -2205,16 +2205,16 @@ const languages = {
     tm_scope: "source.jq",
     language_id: 177,
   },
-  JSX: {
-    type: "programming",
-    group: "JavaScript",
-    extensions: [".jsx"],
-    tm_scope: "source.js.jsx",
-    ace_mode: "javascript",
-    codemirror_mode: "jsx",
-    codemirror_mime_type: "text/jsx",
-    language_id: 178,
-  },
+  // JSX: {
+  //   type: "programming",
+  //   group: "JavaScript",
+  //   extensions: [".jsx"],
+  //   tm_scope: "source.js.jsx",
+  //   ace_mode: "javascript",
+  //   codemirror_mode: "jsx",
+  //   codemirror_mime_type: "text/jsx",
+  //   language_id: 178,
+  // },
   Jasmin: {
     type: "programming",
     ace_mode: "java",
@@ -5916,7 +5916,6 @@ const languages = {
 };
 
 const languageArray = Object.keys(languages);
-
 const languageQueryString =
   `query gitfacts {
 ` +
@@ -6631,5 +6630,5 @@ let optionsDef = [
     ],
   },
 ];
-
+console.log(languages.length);
 export { optionsDef, test1 };

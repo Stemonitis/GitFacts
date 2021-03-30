@@ -82,21 +82,25 @@ const OptionsContainer = () => {
   let [loadingCount, updateLoadingCount] = useState([0, 0]);
   const [fire, { error, loading }] = useLazyQuery(
     gql`
-      ${queryString[0][queryIterator]}
+      ${queryString[0][loadingCount[0]]}
     `,
     {
       onCompleted: (datachunk) => {
         //refetch data if error
         //update response data
+        console.log(loadingCount[0], "loadingcount");
+        console.log(queryIterator, "queryIterator");
+        console.log(queryString[0][loadingCount[0]], "gql query");
         let append = responseData;
         append.push(datachunk);
         updateResponseData(append);
         updateSunBurstData(responseData);
-        updateLoadingCount([loadingCount[0] + 1, loadingCount[1]]);
+
         //if there are more items in the array than we want to fetch than we want to continue looping
         //through the array
         if (queryIterator > 0) {
           updateQueryIterator(queryIterator - 1);
+          updateLoadingCount([loadingCount[0] + 1, loadingCount[1]]);
           fire();
         }
       },

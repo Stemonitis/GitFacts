@@ -31,7 +31,7 @@ const makeGQL = (keyword, filtersArray) => {
   let finalCombinationQueryArray = combinedFiltersArray.map(
     (query) => keyword + " " + query
   );
-  // turn into set of array with not more than 100 strings in it
+  // turn into set of arrays with not more than 100 strings in it
   let queriesSet = [];
   if (finalCombinationQueryArray.length <= 100) {
     queriesSet = finalCombinationQueryArray;
@@ -41,6 +41,9 @@ const makeGQL = (keyword, filtersArray) => {
     queriesSet[queriesSet.length] = finalCombinationQueryArray.slice(0, 100);
     finalCombinationQueryArray = finalCombinationQueryArray.slice(100);
   }
+  //don`t forget to append the rest
+  queriesSet[queriesSet.length] = finalCombinationQueryArray;
+  console.log(queriesSet.length, "queriesSet.length");
   let finalQueries;
   if (typeof queriesSet[0] === "string") {
     finalQueries = [
@@ -60,7 +63,8 @@ const makeGQL = (keyword, filtersArray) => {
         "}",
     ];
   } else {
-    finalQueries = queriesSet.map((queryArray) => {
+    finalQueries = queriesSet.map((queryArray, i) => {
+      console.log(i);
       return (
         `query gitfacts {
         ` +
