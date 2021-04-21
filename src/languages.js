@@ -6630,5 +6630,4 @@ let optionsDef = [
     ],
   },
 ];
-console.log(languages.length);
 export { optionsDef, test1 };

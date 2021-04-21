@@ -43,7 +43,6 @@ const makeGQL = (keyword, filtersArray) => {
   }
   //don`t forget to append the rest
   queriesSet[queriesSet.length] = finalCombinationQueryArray;
-  console.log(queriesSet.length, "queriesSet.length");
   let finalQueries;
   if (typeof queriesSet[0] === "string") {
     finalQueries = [
@@ -64,7 +63,6 @@ const makeGQL = (keyword, filtersArray) => {
     ];
   } else {
     finalQueries = queriesSet.map((queryArray, i) => {
-      console.log(i);
       return (
         `query gitfacts {
         ` +

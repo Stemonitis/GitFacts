@@ -8,25 +8,8 @@ import { useLazyQuery } from "@apollo/react-hooks";
 import { optionsDef, test1 } from "../languages.js";
 import makeGQL from "./makeGQL.js";
 import gql from "graphql-tag";
-const mockData = {
-  name: "allData",
-  children: [
-    {
-      name: "past month",
-      children: [
-        { name: "keyword 2 match", size: 4 },
-        { name: "no matches", size: 4 },
-      ],
-    },
-    {
-      name: "past year",
-      children: [
-        { name: "keyword 2 match", size: 3 },
-        { name: "no matches", size: 3 },
-      ],
-    },
-  ],
-};
+import initialData from "./initialData.js";
+
 const OptionsContainer = () => {
   //this is the hook for the search bar. It updates automatically every
   //every time you type so you actually dont need the button
@@ -78,7 +61,7 @@ const OptionsContainer = () => {
   //this is the api data
   let [responseData, updateResponseData] = useState([]);
   //lazyquery for calling the github server
-  let [sunBurstData, updateSunBurstData] = useState(mockData);
+  let [sunBurstData, updateSunBurstData] = useState(initialData);
   let [loadingCount, updateLoadingCount] = useState([0, 0]);
   const [fire, { error, loading }] = useLazyQuery(
     gql`
@@ -88,9 +71,6 @@ const OptionsContainer = () => {
       onCompleted: (datachunk) => {
         //refetch data if error
         //update response data
-        console.log(loadingCount[0], "loadingcount");
-        console.log(queryIterator, "queryIterator");
-        console.log(queryString[0][loadingCount[0]], "gql query");
         let append = responseData;
         append.push(datachunk);
         updateResponseData(append);
