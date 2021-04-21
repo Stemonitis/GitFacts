@@ -30,8 +30,6 @@ export default function SunBurstZoomable(props) {
       sunData = props.queryResult;
     } else {
       sunData = transformIntoPartionData(props.queryResult, props.queryString);
-      console.log(props.queryResult, props.queryString);
-      console.log(sunData, "sunData");
     }
 
     let radius = width / 2; //width > height ? height / 2 : width / 2;
