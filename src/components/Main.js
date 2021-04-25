@@ -1,8 +1,6 @@
 import React, { useState, useRef } from "react";
-import SunBurstWhole from "./SunBurstWhole";
-import SunBurstZoomable from "./SunBurstZoomable";
-import LoadingBar from "./LoadingBar";
 import useOptionBox from "./useOptionBox";
+import DataDisplay from "./DataDisplay";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { optionsDef, test1 } from "../languages.js";
@@ -10,7 +8,7 @@ import makeGQL from "./makeGQL.js";
 import gql from "graphql-tag";
 import initialData from "./initialData.js";
 
-const OptionsContainer = () => {
+const Main = () => {
   //this is the hook for the search bar. It updates automatically every
   //every time you type so you actually dont need the button
   const [keyword, updateKeyword] = useState("");
@@ -86,7 +84,6 @@ const OptionsContainer = () => {
       },
     }
   );
-  const [toZoomOrNotToZoom, toggleSunburst] = useState(true);
 
   //this function handles rearrangement of options and updates the order of optionboxes
   function handleOnDragEnd(result) {
@@ -342,62 +339,15 @@ const OptionsContainer = () => {
           </DragDropContext>
         </div>
       </div>
-      <>
-        <div className="SunBurstContainer">
-          <div className="buttonWrapper">
-            <div>
-              <div className="toggle">
-                <input
-                  className="toggle-state"
-                  type="checkbox"
-                  checked={toZoomOrNotToZoom}
-                  onChange={() => {
-                    return;
-                  }}
-                  onBlur={() => {
-                    return;
-                  }}
-                />
-                <div
-                  className="indicator"
-                  onClick={function () {
-                    toggleSunburst(!toZoomOrNotToZoom);
-                  }}
-                ></div>
-              </div>
-              <div id="toggler">
-                {toZoomOrNotToZoom
-                  ? "Toggle to zoomable diagram"
-                  : "Toggle to the whole diagram"}
-              </div>
-            </div>
-          </div>
-          <div id="SunBurstStatus">
-            {loading ? (
-              <LoadingBar key={loadingCount} loadingCount={loadingCount} />
-            ) : error ? (
-              <p>Error. Please, resubmit your search or try later</p>
-            ) : (
-              ""
-            )}
-          </div>
-          {toZoomOrNotToZoom ? (
-            <SunBurstWhole
-              key={sunBurstData}
-              queryResult={sunBurstData}
-              queryString={queryString[1]}
-            />
-          ) : (
-            <SunBurstZoomable
-              key={sunBurstData}
-              queryResult={sunBurstData}
-              queryString={queryString[1]}
-            />
-          )}
-        </div>
-      </>
+      <DataDisplay
+        loading={loading}
+        loadingCount={loadingCount}
+        error={error}
+        queryResult={sunBurstData}
+        queryString={queryString[1]}
+      />
     </main>
   );
 };
 
-export default OptionsContainer;
+export default Main;
