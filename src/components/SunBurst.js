@@ -17,7 +17,6 @@ export default function SunBurst(props) {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [size, resize] = useState(0);
-
   //happens synchronously with the render
   useLayoutEffect(() => {
     setWidth(sunRef.current.clientWidth);
@@ -27,21 +26,21 @@ export default function SunBurst(props) {
   useEffect(() => {
     window.addEventListener("resize", resize);
   }, [size, resize]);
+
   //kind of renders two time as it takes time to measure the components
   //with the layout effect
-  useEffect(() => {
-    //this is the d3 code for the whole diagram
-    if (props.zoomState) {
-      let sunData;
-      if (props.queryResult.name === "allData") {
-        sunData = props.queryResult;
-      } else {
-        sunData = transformIntoPartionData(
-          props.queryResult,
-          props.queryString
-        );
-      }
 
+  useEffect(() => {
+    let sunData;
+    if (props.queryResult.name === "initialData") {
+      sunData = props.queryResult;
+    } else {
+      sunData = transformIntoPartionData(props.queryResult, props.queryString);
+    }
+    console.log(sunData, "sundata");
+
+    //this is the d3 code for the whole diagram
+    if (props.zoom) {
       let radius = width / 2; //width > height ? height / 2 : width / 2;
       let color = scaleOrdinal(
         quantize(interpolateRainbow, sunData.children.length + 1)
@@ -92,16 +91,21 @@ export default function SunBurst(props) {
           let labelsArray = props.queryString.map((l) =>
             Object.keys(l).reverse()
           );
-          return `${d
-            .ancestors()
-            //here we take away the root object name
-            .map((d, i, array) =>
-              i === array.length - 1
-                ? ""
-                : labelsArray[d.depth - 1] + " : " + d.data.name
-            )
-            .reverse()
-            .join("\n")}\n repository count : ${format(",d")(d.value)}`;
+          return (
+            `${d
+              .ancestors()
+              //here we take away the root object name
+              .map((d, i, array) =>
+                i === array.length - 1
+                  ? ""
+                  : labelsArray[d.depth - 1] + " : " + d.data.name
+              )
+              .reverse()
+              .join("\n")}` +
+            "\n" +
+            `repository count : ${format(",d")(d.value)} 
+          `
+          );
         });
       svg
         .append("g")
@@ -120,22 +124,33 @@ export default function SunBurst(props) {
         .attr("transform", function (d) {
           const x = (((d.x0 + d.x1) / 2) * 180) / Math.PI;
           const y = (d.y0 + d.y1) / 2;
+          //calculating growing coefficient
+          //text should fit both in width and in height, for that we need the height and the width
+          //of both the arches and the text
           let arcThickness = d.y1 - d.y0;
+          let arcAngle = d.x1 - d.x0;
+          let innerArcLength = d.y0 * arcAngle;
           //current font size(height of the font) is set in the previous font attributes (1px)
           //and the average height to width ratio is about 2
-          let currentSize = d.data.name.length * 0.6;
-          //shrinking coefficient
-          let shrinCo = arcThickness / currentSize;
-          if (d.data.name.length < 8) {
-            shrinCo = arcThickness / 5;
+          let currentSize = d.data.name.length * 0.7;
+
+          let growCo = arcThickness / currentSize; //this yields scale factor but also height of the
+          //font in pixels, as our font size starting point is 1px
+          //in case innerArch is too small for the font, lets set font height to the inner arch length
+          if (innerArcLength < growCo) {
+            growCo = innerArcLength;
+          }
+          //for some reason big fonts on the outer layersof the diagram also do not look good
+          if (d.depth > 1 && growCo > 8) {
+            growCo = 8;
           }
           //now add the scale factor to fit the names into the sunburst sectors perfectly
+
           return (
             `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})` +
-            `scale(${shrinCo})`
+            `scale(${growCo})`
           );
         })
-        .attr("dy", "0.1em")
         .text((d) => {
           return d.data.name;
         });
@@ -147,16 +162,6 @@ export default function SunBurst(props) {
     }
     //this is the d3 code for the zoomable diagram
     else {
-      let sunData;
-      if (props.queryResult.name === "allData") {
-        sunData = props.queryResult;
-      } else {
-        sunData = transformIntoPartionData(
-          props.queryResult,
-          props.queryString
-        );
-      }
-
       //define color
       let color = scaleOrdinal(
         quantize(interpolateRainbow, sunData.children.length + 1)
@@ -231,16 +236,20 @@ export default function SunBurst(props) {
         let labelsArray = props.queryString.map((l) =>
           Object.keys(l).reverse()
         );
-        return `${d
-          .ancestors()
-          //here we take away the root object name
-          .map((d, i, array) =>
-            i === array.length - 1
-              ? ""
-              : labelsArray[d.depth - 1] + " : " + d.data.name
-          )
-          .reverse()
-          .join("\n")}\n repository count : ${format(",d")(d.value)}`;
+        return (
+          `${d
+            .ancestors()
+            //here we take away the root object name
+            .map((d, i, array) =>
+              i === array.length - 1
+                ? ""
+                : labelsArray[d.depth - 1] + " : " + d.data.name
+            )
+            .reverse()
+            .join("\n")}` +
+          "\n" +
+          `repository count : ${format(",d")(d.value)}`
+        );
       });
 
       const label = g

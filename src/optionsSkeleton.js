@@ -5933,47 +5933,8 @@ repositoryCount
     ""
   ) +
   "}";
-const languageQuery = gql`
-  ${languageQueryString}
-`;
-const test1 = `
-  query test {
-    all: search(query: "lol", type: REPOSITORY) {
-      repositoryCount
-    }
-    CSS: search(query: "lol language:CSS", type: REPOSITORY) {
-      repositoryCount
-    }
-    javascript: search(query: "lol language:javascript", type: REPOSITORY) {
-      repositoryCount
-    }
-    brainfuck: search(query: "lol language:brainfuck", type: REPOSITORY) {
-      repositoryCount
-    }
-    brainfuckStarred: search(
-      query: "lol language:brainfuck stars:>0"
-      type: REPOSITORY
-    ) {
-      repositoryCount
-    }
-    javascriptStarred: search(
-      query: "lol language:javascript stars:>10"
-      type: REPOSITORY
-    ) {
-      repositoryCount
-    }
-    rateLimit(dryRun: false) {
-      cost
-      limit
-      nodeCount
-      remaining
-      resetAt
-      used
-    }
-  }
-`;
-
-let optionsDef = [
+console.log(languageArray.length);
+let optionsSkeleton = [
   {
     name: "Programming Languages",
     index: 0,
@@ -5988,7 +5949,6 @@ let optionsDef = [
       "C++",
       "C",
       "Shell",
-      "Ruby",
       "Visual Basic .NET",
       "Objective-C",
       "SQL",
@@ -6010,7 +5970,8 @@ let optionsDef = [
         inputType: "radio",
         name: "language",
         checked: true,
-        title: "Default (20 most popular languages)",
+        title:
+          "Default 20 most popular languages (JavaScript, Python, Java, TypeScript, C#, PhP, C++, C, Shell, Ruby, Visual Basic .NET, Objective-C, SQL, Ruby, MATLAB, Groovy, Pascal, Assembly, Visual Basic, Go, Swift, Perl, R)",
         query_value: [
           "JavaScript",
           "Python",
@@ -6041,7 +6002,8 @@ let optionsDef = [
         htmlForAndInputId: "first10",
         inputType: "radio",
         name: "language",
-        title: "First 10 most popular languages",
+        title:
+          "First 10 most popular languages (JavaScript, Python, Java, TypeScript, C#, PhP, C++, C, Shell, Ruby)",
         query_value: [
           "JavaScript",
           "Python",
@@ -6085,13 +6047,23 @@ let optionsDef = [
     query_value: ["<5000", "50000..1000000", ">=1000000"],
     input: [
       {
-        htmlForAndInputId: "default3",
+        htmlForAndInputId: "default",
         checked: true,
         inputType: "radio",
         name: "size",
-        title: "Default (3 sizes: 0 to 50KB, 50KB to 1MB, more than 1MB)",
+        title:
+          "Default (3 sizes: 0 to 50KB, 50KB to 1MB, more than 1MB) (<5000, 50000..1000000, >=1000000)",
         query_value: ["<5000", "50000..1000000", ">=1000000"],
       },
+      {
+        htmlForAndInputId: "4 categories",
+        checked: false,
+        inputType: "radio",
+        name: "size",
+        title: "4 sizes: 0 to 50KB, 50KB to 1MB, more than 1MB)",
+        query_value: ["0..50", "50..1000", "1000..10000", ">10000"],
+      },
+
       {
         htmlForAndInputId: "custom",
         inputType: "radio",
@@ -6630,4 +6602,4 @@ let optionsDef = [
     ],
   },
 ];
-export { optionsDef, test1 };
+export default optionsSkeleton;

@@ -33,13 +33,13 @@ const makeGQL = (keyword, filtersArray) => {
   );
   // turn into set of arrays with not more than 100 strings in it
   let queriesSet = [];
-  if (finalCombinationQueryArray.length <= 100) {
+  if (finalCombinationQueryArray.length <= 50) {
     queriesSet = finalCombinationQueryArray;
   }
 
-  while (finalCombinationQueryArray.length > 100) {
-    queriesSet[queriesSet.length] = finalCombinationQueryArray.slice(0, 100);
-    finalCombinationQueryArray = finalCombinationQueryArray.slice(100);
+  while (finalCombinationQueryArray.length > 50) {
+    queriesSet[queriesSet.length] = finalCombinationQueryArray.slice(0, 50);
+    finalCombinationQueryArray = finalCombinationQueryArray.slice(50);
   }
   //don`t forget to append the rest
   queriesSet[queriesSet.length] = finalCombinationQueryArray;

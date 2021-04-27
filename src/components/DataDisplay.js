@@ -39,23 +39,12 @@ const DataDisplay = (props) => {
         loading={props.loading}
         error={props.error}
       />
-      <SunBurstWhole
-        zoomState={toZoomOrNotToZoom}
+      <SunBurst
+        key={[toZoomOrNotToZoom, props.loadingCount]}
+        zoom={toZoomOrNotToZoom}
         queryResult={props.queryResult}
         queryString={props.queryString}
       />
-      {/* {toZoomOrNotToZoom && (
-        <SunBurstWhole
-          queryResult={props.queryResult}
-          queryString={props.queryString}
-        />
-      )}
-      {!toZoomOrNotToZoom && (
-        <SunBurstZoomable
-          queryResult={props.queryResult}
-          queryString={props.queryString}
-        />
-      )} */}
     </div>
   );
 };
