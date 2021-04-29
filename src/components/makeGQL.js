@@ -9,6 +9,14 @@ const makeGQL = (keyword, filtersArray) => {
     typeof arrayObject[Object.keys(arrayObject)] === "string"
       ? (filter = [arrayObject[Object.keys(arrayObject)]])
       : (filter = arrayObject[Object.keys(arrayObject)]);
+    //make sure that all the language names with spaces in names are
+    //wrapped with !!doublequotes (otherwise search will give false results)
+    if (Object.keys(arrayObject)[0] === "language") {
+      console.log(Object.values(arrayObject));
+      // prettier-ignore
+      filter=Object.values(arrayObject)[0].map((l)=>(l.replaceAll("'", "\\\"")))
+    }
+    console.log(filter, "filter");
     return filter.map((queryValue) => {
       return Object.keys(arrayObject) + ":" + queryValue + " ";
     });

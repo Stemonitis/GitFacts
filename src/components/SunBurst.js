@@ -32,12 +32,12 @@ export default function SunBurst(props) {
 
   useEffect(() => {
     let sunData;
+    // if (props.queryResult === 0) {
     if (props.queryResult.name === "initialData") {
       sunData = props.queryResult;
     } else {
       sunData = transformIntoPartionData(props.queryResult, props.queryString);
     }
-    console.log(sunData, "sundata");
 
     //this is the d3 code for the whole diagram
     if (props.zoom) {
@@ -144,6 +144,11 @@ export default function SunBurst(props) {
           if (d.depth > 1 && growCo > 8) {
             growCo = 8;
           }
+          //set a cap to very big characters
+          if (d.depth <= 1 && growCo > 20) {
+            growCo = 20;
+          }
+
           //now add the scale factor to fit the names into the sunburst sectors perfectly
 
           return (

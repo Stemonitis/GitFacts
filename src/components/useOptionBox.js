@@ -7,6 +7,7 @@ const useOptionBox = (option) => {
   const OptionBox = () => {
     const [checkboxes, setCheckBox] = useState({});
     const [custom, unravel] = useState(option.unravel);
+    console.log(custom, "custom");
 
     useEffect(() => {
       if (query === false) {
@@ -24,7 +25,7 @@ const useOptionBox = (option) => {
         );
         setQuery({ [option.query_name]: languageArray });
       } else {
-        setQuery({ [e.target.name]: e.target.value.split(" ") });
+        setQuery({ [e.target.name]: e.target.value.trim().split(" ") });
       }
     };
     return custom[0] ? (
@@ -113,6 +114,7 @@ const useOptionBox = (option) => {
                   return (
                     <label key={index} htmlFor={item.htmlForAndInputId}>
                       <input
+                        placeholder={item.placeholder}
                         className="inputLabel"
                         id={item.query_value}
                         type={item.inputType}
@@ -120,6 +122,8 @@ const useOptionBox = (option) => {
                         onChange={(e) => handleCustomOptions(e)}
                         onBlur={(e) => handleCustomOptions(e)}
                       />
+                      <br></br>
+
                       {item.title}
                       <br></br>
                     </label>

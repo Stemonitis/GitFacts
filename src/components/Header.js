@@ -1,9 +1,11 @@
 import React from "react";
+import Navigation from "./Navigation";
 import image from "./octocat.png";
 
 const Header = () => {
   return (
     <header>
+      <Navigation />
       <div id="header-wrapper">
         <h1 id="title">
           Git
@@ -14,7 +16,7 @@ const Header = () => {
         </h1>
         <h2 id="desc">visualize your github search...</h2>
       </div>
-      <h2 id="share">
+      {/* <h2 id="share">
         <a
           href="https://twitter.com/share?ref_src=twsrc%5Etfw"
           className="twitter-share-button"
@@ -39,7 +41,7 @@ const Header = () => {
           src="https://platform.twitter.com/widgets.js"
           charSet="utf-8"
         ></script>
-      </h2>
+      </h2> */}
     </header>
   );
 };

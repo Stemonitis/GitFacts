@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 //there are 421 languages currently supported by github
 const languages = {
-  "1C Enterprise": {
+  "'1C Enterprise'": {
     type: "programming",
     color: "#814CCC",
     extensions: [".bsl", ".os"],
@@ -32,7 +32,7 @@ const languages = {
     tm_scope: "source.abnf",
     language_id: 429,
   },
-  "AGS Script": {
+  "'AGS Script'": {
     type: "programming",
     color: "#B9D9FF",
     aliases: ["ags"],
@@ -67,7 +67,7 @@ const languages = {
     ace_mode: "text",
     language_id: 4,
   },
-  "API Blueprint": {
+  "'API Blueprint'": {
     type: "markup",
     color: "#2ACCA8",
     ace_mode: "markdown",
@@ -140,7 +140,7 @@ const languages = {
     ace_mode: "ada",
     language_id: 11,
   },
-  "Adobe Font Metrics": {
+  "'Adobe Font Metrics'": {
     type: "data",
     tm_scope: "source.afm",
     extensions: [".afm"],
@@ -169,7 +169,7 @@ const languages = {
     ace_mode: "text",
     language_id: 13,
   },
-  "Alpine Abuild": {
+  "'Alpine Abuild'": {
     type: "programming",
     group: "Shell",
     aliases: ["abuild", "apkbuild"],
@@ -180,7 +180,7 @@ const languages = {
     codemirror_mime_type: "text/x-sh",
     language_id: 14,
   },
-  "Altium Designer": {
+  "'Altium Designer'": {
     type: "data",
     aliases: ["altium"],
     extensions: [".OutJob", ".PcbDoc", ".PrjPCB", ".SchDoc"],
@@ -198,7 +198,7 @@ const languages = {
     codemirror_mime_type: "text/x-c++src",
     language_id: 389477596,
   },
-  "Ant Build System": {
+  "'Ant Build System'": {
     type: "data",
     tm_scope: "text.xml.ant",
     filenames: ["ant.xml", "build.xml"],
@@ -226,7 +226,7 @@ const languages = {
     codemirror_mime_type: "text/x-java",
     language_id: 17,
   },
-  "Apollo Guidance Computer": {
+  "'Apollo Guidance Computer'": {
     type: "programming",
     color: "#0B3D91",
     group: "Assembly",
@@ -314,7 +314,7 @@ const languages = {
     ace_mode: "autohotkey",
     language_id: 27,
   },
-  "Avro IDL": {
+  "'Avro IDL'": {
     type: "data",
     extensions: [".avdl"],
     tm_scope: "source.avro",
@@ -502,7 +502,7 @@ const languages = {
     ace_mode: "assembly_x86",
     language_id: 44,
   },
-  "C2hs Haskell": {
+  "'C2hs Haskell'": {
     type: "programming",
     group: "Haskell",
     aliases: ["c2hs"],
@@ -582,7 +582,7 @@ const languages = {
     ace_mode: "text",
     language_id: 657332628,
   },
-  "Cabal Config": {
+  "'Cabal Config'": {
     type: "data",
     aliases: ["Cabal"],
     extensions: [".cabal"],
@@ -593,7 +593,7 @@ const languages = {
     tm_scope: "source.cabal",
     language_id: 677095381,
   },
-  "Cap'n Proto": {
+  "'Cap'n Proto'": {
     type: "programming",
     tm_scope: "source.capnp",
     extensions: [".capnp"],
@@ -657,7 +657,7 @@ const languages = {
     tm_scope: "source.clarion",
     language_id: 59,
   },
-  "Classic ASP": {
+  "'Classic ASP'": {
     type: "programming",
     color: "#6a40fd",
     tm_scope: "text.html.asp",
@@ -703,7 +703,7 @@ const languages = {
     filenames: ["riemann.config"],
     language_id: 62,
   },
-  "Closure Templates": {
+  "'Closure Templates'": {
     type: "markup",
     group: "HTML",
     ace_mode: "soy_template",
@@ -714,7 +714,7 @@ const languages = {
     tm_scope: "text.html.soy",
     language_id: 357046146,
   },
-  "Cloud Firestore Security Rules": {
+  "'Cloud Firestore Security Rules'": {
     type: "data",
     ace_mode: "less",
     codemirror_mode: "css",
@@ -761,7 +761,7 @@ const languages = {
     tm_scope: "text.html.cfm",
     language_id: 64,
   },
-  "ColdFusion CFC": {
+  "'ColdFusion CFC'": {
     type: "programming",
     color: "#ed2cd6",
     group: "ColdFusion",
@@ -771,7 +771,7 @@ const languages = {
     tm_scope: "source.cfscript",
     language_id: 65,
   },
-  "Common Lisp": {
+  "'Common Lisp'": {
     type: "programming",
     tm_scope: "source.lisp",
     color: "#3fb68b",
@@ -792,7 +792,7 @@ const languages = {
     codemirror_mime_type: "text/x-common-lisp",
     language_id: 66,
   },
-  "Common Workflow Language": {
+  "'Common Workflow Language'": {
     aliases: ["cwl"],
     type: "programming",
     ace_mode: "yaml",
@@ -804,7 +804,7 @@ const languages = {
     tm_scope: "source.cwl",
     language_id: 988547172,
   },
-  "Component Pascal": {
+  "'Component Pascal'": {
     type: "programming",
     color: "#B0CE4E",
     extensions: [".cp", ".cps"],
@@ -869,7 +869,7 @@ const languages = {
     ace_mode: "csound_orchestra",
     language_id: 73,
   },
-  "Csound Document": {
+  "'Csound Document'": {
     type: "programming",
     aliases: ["csound-csd"],
     extensions: [".csd"],
@@ -877,7 +877,7 @@ const languages = {
     ace_mode: "csound_document",
     language_id: 74,
   },
-  "Csound Score": {
+  "'Csound Score'": {
     type: "programming",
     aliases: ["csound-sco"],
     extensions: [".sco"],
@@ -932,7 +932,7 @@ const languages = {
     ace_mode: "assembly_x86",
     language_id: 81,
   },
-  "DIGITAL Command Language": {
+  "'DIGITAL Command Language'": {
     type: "programming",
     aliases: ["dcl"],
     extensions: [".com"],
@@ -949,7 +949,7 @@ const languages = {
     ace_mode: "c_cpp",
     language_id: 83,
   },
-  "DNS Zone": {
+  "'DNS Zone'": {
     type: "data",
     extensions: [".zone", ".arpa"],
     tm_scope: "text.zone_file",
@@ -976,7 +976,7 @@ const languages = {
     ace_mode: "text",
     language_id: 969323346,
   },
-  "Darcs Patch": {
+  "'Darcs Patch'": {
     type: "data",
     aliases: ["dpatch"],
     extensions: [".darcspatch", ".dpatch"],
@@ -1023,7 +1023,7 @@ const languages = {
     codemirror_mime_type: "text/x-diff",
     language_id: 88,
   },
-  "DirectX 3D File": {
+  "'DirectX 3D File'": {
     type: "data",
     extensions: [".x"],
     ace_mode: "text",
@@ -1140,7 +1140,7 @@ const languages = {
     extensions: [".eb"],
     language_id: 342840477,
   },
-  "Ecere Projects": {
+  "'Ecere Projects'": {
     type: "data",
     group: "JavaScript",
     extensions: [".epj"],
@@ -1161,7 +1161,7 @@ const languages = {
     tm_scope: "source.editorconfig",
     language_id: 96139566,
   },
-  "Edje Data Collection": {
+  "'Edje Data Collection'": {
     type: "data",
     extensions: [".edc"],
     tm_scope: "source.c++",
@@ -1200,7 +1200,7 @@ const languages = {
     codemirror_mime_type: "text/x-elm",
     language_id: 101,
   },
-  "Emacs Lisp": {
+  "'Emacs Lisp'": {
     type: "programming",
     tm_scope: "source.emacs.lisp",
     color: "#c065db",
@@ -1266,7 +1266,7 @@ const languages = {
     ace_mode: "text",
     language_id: 336943375,
   },
-  "FIGlet Font": {
+  "'FIGlet Font'": {
     type: "data",
     aliases: ["FIGfont"],
     extensions: [".flf"],
@@ -1318,7 +1318,7 @@ const languages = {
     ace_mode: "text",
     language_id: 622529198,
   },
-  "Filebench WML": {
+  "'Filebench WML'": {
     type: "programming",
     extensions: [".f"],
     tm_scope: "none",
@@ -1361,7 +1361,7 @@ const languages = {
     codemirror_mime_type: "text/x-fortran",
     language_id: 107,
   },
-  "Fortran Free Form": {
+  "'Fortran Free Form'": {
     group: "Fortran",
     type: "programming",
     extensions: [".f90", ".f03", ".f08", ".f95"],
@@ -1426,7 +1426,7 @@ const languages = {
     ace_mode: "text",
     language_id: 119,
   },
-  "GCC Machine Description": {
+  "'GCC Machine Description'": {
     type: "programming",
     extensions: [".md"],
     tm_scope: "source.lisp",
@@ -1496,7 +1496,7 @@ const languages = {
     codemirror_mime_type: "text/x-python",
     language_id: 302957008,
   },
-  "Game Maker Language": {
+  "'Game Maker Language'": {
     type: "programming",
     color: "#71b417",
     extensions: [".gml"],
@@ -1524,7 +1524,7 @@ const languages = {
     codemirror_mime_type: "text/xml",
     language_id: 126,
   },
-  "Gentoo Ebuild": {
+  "'Gentoo Ebuild'": {
     type: "programming",
     group: "Shell",
     extensions: [".ebuild"],
@@ -1534,7 +1534,7 @@ const languages = {
     codemirror_mime_type: "text/x-sh",
     language_id: 127,
   },
-  "Gentoo Eclass": {
+  "'Gentoo Eclass'": {
     type: "programming",
     group: "Shell",
     extensions: [".eclass"],
@@ -1544,7 +1544,7 @@ const languages = {
     codemirror_mime_type: "text/x-sh",
     language_id: 128,
   },
-  "Gerber Image": {
+  "'Gerber Image'": {
     type: "data",
     aliases: ["rs-274x"],
     extensions: [
@@ -1570,7 +1570,7 @@ const languages = {
     ace_mode: "text",
     language_id: 404627610,
   },
-  "Gettext Catalog": {
+  "'Gettext Catalog'": {
     type: "prose",
     searchable: false,
     aliases: ["pot"],
@@ -1588,7 +1588,7 @@ const languages = {
     color: "#5B2063",
     language_id: 76,
   },
-  "Git Attributes": {
+  "'Git Attributes'": {
     type: "data",
     group: "INI",
     aliases: ["gitattributes"],
@@ -1599,7 +1599,7 @@ const languages = {
     codemirror_mime_type: "text/x-sh",
     language_id: 956324166,
   },
-  "Git Config": {
+  "'Git Config'": {
     type: "data",
     group: "INI",
     aliases: ["gitconfig", "gitmodules"],
@@ -1621,7 +1621,7 @@ const languages = {
     codemirror_mime_type: "text/x-tcl",
     language_id: 130,
   },
-  "Glyph Bitmap Distribution Format": {
+  "'Glyph Bitmap Distribution Format'": {
     type: "data",
     extensions: [".bdf"],
     tm_scope: "source.bdf",
@@ -1678,7 +1678,7 @@ const languages = {
     ace_mode: "text",
     language_id: 136,
   },
-  "Grammatical Framework": {
+  "'Grammatical Framework'": {
     type: "programming",
     aliases: ["gf"],
     extensions: [".gf"],
@@ -1689,7 +1689,7 @@ const languages = {
     codemirror_mime_type: "text/x-haskell",
     language_id: 137,
   },
-  "Graph Modeling Language": {
+  "'Graph Modeling Language'": {
     type: "data",
     extensions: [".gml"],
     tm_scope: "none",
@@ -1704,7 +1704,7 @@ const languages = {
     ace_mode: "text",
     language_id: 139,
   },
-  "Graphviz (DOT)": {
+  "'Graphviz (DOT)'": {
     type: "data",
     tm_scope: "source.dot",
     extensions: [".dot", ".gv"],
@@ -1723,7 +1723,7 @@ const languages = {
     filenames: ["Jenkinsfile"],
     language_id: 142,
   },
-  "Groovy Server Pages": {
+  "'Groovy Server Pages'": {
     type: "programming",
     group: "Groovy",
     aliases: ["gsp", "java server page"],
@@ -1961,7 +1961,7 @@ const languages = {
     codemirror_mime_type: "text/x-idl",
     language_id: 161,
   },
-  "IGOR Pro": {
+  "'IGOR Pro'": {
     type: "programming",
     color: "#0000cc",
     extensions: [".ipf"],
@@ -1989,7 +1989,7 @@ const languages = {
     codemirror_mime_type: "text/x-properties",
     language_id: 163,
   },
-  "IRC log": {
+  "'IRC log'": {
     type: "data",
     aliases: ["irc", "irc logs"],
     extensions: [".irclog", ".weechatlog"],
@@ -2007,7 +2007,7 @@ const languages = {
     tm_scope: "source.idris",
     language_id: 165,
   },
-  "Ignore List": {
+  "'Ignore List'": {
     type: "data",
     group: "INI",
     aliases: ["ignore", "gitignore", "git-ignore"],
@@ -2035,7 +2035,7 @@ const languages = {
     codemirror_mime_type: "text/x-sh",
     language_id: 74444240,
   },
-  "Inform 7": {
+  "'Inform 7'": {
     type: "programming",
     wrap: true,
     extensions: [".ni", ".i7x"],
@@ -2044,7 +2044,7 @@ const languages = {
     ace_mode: "text",
     language_id: 166,
   },
-  "Inno Setup": {
+  "'Inno Setup'": {
     type: "programming",
     extensions: [".iss", ".isl"],
     tm_scope: "source.inno",
@@ -2077,7 +2077,7 @@ const languages = {
     ace_mode: "text",
     language_id: 170,
   },
-  "Isabelle ROOT": {
+  "'Isabelle ROOT'": {
     type: "programming",
     group: "Isabelle",
     filenames: ["ROOT"],
@@ -2139,7 +2139,7 @@ const languages = {
     ],
     language_id: 174,
   },
-  "JSON with Comments": {
+  "'JSON with Comments'": {
     type: "data",
     group: "JSON",
     tm_scope: "source.js",
@@ -2232,7 +2232,7 @@ const languages = {
     extensions: [".java"],
     language_id: 181,
   },
-  "Java Properties": {
+  "'Java Properties'": {
     type: "data",
     extensions: [".properties"],
     tm_scope: "source.java-properties",
@@ -2241,7 +2241,7 @@ const languages = {
     codemirror_mime_type: "text/x-properties",
     language_id: 519377561,
   },
-  "Java Server Pages": {
+  "'Java Server Pages'": {
     type: "programming",
     group: "Java",
     aliases: ["jsp"],
@@ -2316,7 +2316,7 @@ const languages = {
     ace_mode: "text",
     language_id: 284531423,
   },
-  "Jison Lex": {
+  "'Jison Lex'": {
     type: "programming",
     group: "Lex",
     extensions: [".jisonlex"],
@@ -2352,7 +2352,7 @@ const languages = {
     codemirror_mime_type: "text/x-julia",
     language_id: 184,
   },
-  "Jupyter Notebook": {
+  "'Jupyter Notebook'": {
     type: "markup",
     ace_mode: "json",
     codemirror_mode: "javascript",
@@ -2372,7 +2372,7 @@ const languages = {
     ace_mode: "text",
     language_id: 186,
   },
-  "Kaitai Struct": {
+  "'Kaitai Struct'": {
     type: "programming",
     aliases: ["ksy"],
     ace_mode: "yaml",
@@ -2383,7 +2383,7 @@ const languages = {
     tm_scope: "source.yaml",
     language_id: 818804755,
   },
-  "KiCad Layout": {
+  "'KiCad Layout'": {
     type: "data",
     aliases: ["pcbnew"],
     extensions: [".kicad_pcb", ".kicad_mod", ".kicad_wks"],
@@ -2394,14 +2394,14 @@ const languages = {
     codemirror_mime_type: "text/x-common-lisp",
     language_id: 187,
   },
-  "KiCad Legacy Layout": {
+  "'KiCad Legacy Layout'": {
     type: "data",
     extensions: [".brd"],
     tm_scope: "source.pcb.board",
     ace_mode: "text",
     language_id: 140848857,
   },
-  "KiCad Schematic": {
+  "'KiCad Schematic'": {
     type: "data",
     aliases: ["eeschema schematic"],
     extensions: [".sch"],
@@ -2463,7 +2463,7 @@ const languages = {
     color: "#3d9970",
     language_id: 193,
   },
-  "LTspice Symbol": {
+  "'LTspice Symbol'": {
     type: "data",
     extensions: [".asy"],
     tm_scope: "source.ltspice.symbol",
@@ -2552,7 +2552,7 @@ const languages = {
     ace_mode: "text",
     language_id: 201,
   },
-  "Linker Script": {
+  "'Linker Script'": {
     type: "data",
     extensions: [".ld", ".lds", ".x"],
     filenames: ["ld.script"],
@@ -2560,7 +2560,7 @@ const languages = {
     ace_mode: "text",
     language_id: 202,
   },
-  "Linux Kernel Module": {
+  "'Linux Kernel Module'": {
     type: "data",
     extensions: [".mod"],
     tm_scope: "none",
@@ -2574,7 +2574,7 @@ const languages = {
     ace_mode: "liquid",
     language_id: 204,
   },
-  "Literate Agda": {
+  "'Literate Agda'": {
     type: "programming",
     group: "Agda",
     extensions: [".lagda"],
@@ -2582,7 +2582,7 @@ const languages = {
     ace_mode: "text",
     language_id: 205,
   },
-  "Literate CoffeeScript": {
+  "'Literate CoffeeScript'": {
     type: "programming",
     tm_scope: "source.litcoffee",
     group: "CoffeeScript",
@@ -2592,7 +2592,7 @@ const languages = {
     extensions: [".litcoffee", ".coffee.md"],
     language_id: 206,
   },
-  "Literate Haskell": {
+  "'Literate Haskell'": {
     type: "programming",
     group: "Haskell",
     aliases: ["lhaskell", "lhs"],
@@ -2864,7 +2864,7 @@ const languages = {
     codemirror_mime_type: "text/x-mathematica",
     language_id: 224,
   },
-  "Maven POM": {
+  "'Maven POM'": {
     type: "data",
     tm_scope: "text.xml.pom",
     filenames: ["pom.xml"],
@@ -2919,7 +2919,7 @@ const languages = {
     codemirror_mime_type: "text/x-c++src",
     language_id: 230,
   },
-  "Microsoft Developer Studio Project": {
+  "'Microsoft Developer Studio Project'": {
     type: "data",
     extensions: [".dsp"],
     tm_scope: "none",
@@ -2968,7 +2968,7 @@ const languages = {
     tm_scope: "source.modula-3",
     language_id: 564743864,
   },
-  "Module Management System": {
+  "'Module Management System'": {
     type: "programming",
     extensions: [".mms", ".mmk"],
     filenames: ["descrip.mmk", "descrip.mms"],
@@ -2998,7 +2998,7 @@ const languages = {
     ace_mode: "text",
     language_id: 238,
   },
-  "Motorola 68K Assembly": {
+  "'Motorola 68K Assembly'": {
     type: "programming",
     group: "Assembly",
     aliases: ["m68k"],
@@ -3063,7 +3063,7 @@ const languages = {
     ace_mode: "text",
     language_id: 241,
   },
-  "NPM Config": {
+  "'NPM Config'": {
     type: "data",
     group: "INI",
     aliases: ["npmrc"],
@@ -3240,7 +3240,7 @@ const languages = {
     ace_mode: "assembly_x86",
     language_id: 256,
   },
-  "Object Data Instance Notation": {
+  "'Object Data Instance Notation'": {
     type: "data",
     extensions: [".odin"],
     tm_scope: "source.odin-ehr",
@@ -3318,7 +3318,7 @@ const languages = {
     ace_mode: "text",
     language_id: 262,
   },
-  "Open Policy Agent": {
+  "'Open Policy Agent'": {
     type: "programming",
     ace_mode: "text",
     extensions: [".rego"],
@@ -3335,7 +3335,7 @@ const languages = {
     codemirror_mime_type: "text/x-csrc",
     language_id: 263,
   },
-  "OpenEdge ABL": {
+  "'OpenEdge ABL'": {
     type: "programming",
     aliases: ["progress", "openedge", "abl"],
     extensions: [".p", ".cls", ".w"],
@@ -3351,7 +3351,7 @@ const languages = {
     ace_mode: "text",
     language_id: 153739399,
   },
-  "OpenRC runscript": {
+  "'OpenRC runscript'": {
     type: "programming",
     group: "Shell",
     aliases: ["openrc"],
@@ -3369,14 +3369,14 @@ const languages = {
     ace_mode: "scad",
     language_id: 266,
   },
-  "OpenStep Property List": {
+  "'OpenStep Property List'": {
     type: "data",
     extensions: [".plist", ".glyphs"],
     tm_scope: "source.plist",
     ace_mode: "text",
     language_id: 598917541,
   },
-  "OpenType Feature File": {
+  "'OpenType Feature File'": {
     type: "data",
     aliases: ["AFDKO"],
     extensions: [".fea"],
@@ -3485,7 +3485,7 @@ const languages = {
     extensions: [".pgsql", ".sql"],
     language_id: 274,
   },
-  "POV-Ray SDL": {
+  "'POV-Ray SDL'": {
     type: "programming",
     aliases: ["pov-ray", "povray"],
     extensions: [".pov", ".inc"],
@@ -3517,7 +3517,7 @@ const languages = {
     ace_mode: "text",
     language_id: 278,
   },
-  "Parrot Assembly": {
+  "'Parrot Assembly'": {
     group: "Parrot",
     type: "programming",
     aliases: ["pasm"],
@@ -3527,7 +3527,7 @@ const languages = {
     ace_mode: "text",
     language_id: 279,
   },
-  "Parrot Internal Representation": {
+  "'Parrot Internal Representation'": {
     group: "Parrot",
     tm_scope: "source.parrot.pir",
     type: "programming",
@@ -3649,7 +3649,7 @@ const languages = {
     tm_scope: "none",
     language_id: 288,
   },
-  "Pod 6": {
+  "'Pod 6'": {
     type: "prose",
     ace_mode: "perl",
     tm_scope: "source.raku",
@@ -3742,7 +3742,7 @@ const languages = {
     ace_mode: "prolog",
     language_id: 295,
   },
-  "Propeller Spin": {
+  "'Propeller Spin'": {
     type: "programming",
     color: "#7fa2a7",
     extensions: [".spin"],
@@ -3750,7 +3750,7 @@ const languages = {
     ace_mode: "text",
     language_id: 296,
   },
-  "Protocol Buffer": {
+  "'Protocol Buffer'": {
     type: "data",
     aliases: ["protobuf", "Protocol Buffers"],
     extensions: [".proto"],
@@ -3760,7 +3760,7 @@ const languages = {
     codemirror_mime_type: "text/x-protobuf",
     language_id: 297,
   },
-  "Public Key": {
+  "'Public Key'": {
     type: "data",
     extensions: [".asc", ".pub"],
     tm_scope: "none",
@@ -3790,7 +3790,7 @@ const languages = {
     tm_scope: "source.puppet",
     language_id: 299,
   },
-  "Pure Data": {
+  "'Pure Data'": {
     type: "data",
     extensions: [".pd"],
     tm_scope: "none",
@@ -3854,7 +3854,7 @@ const languages = {
     aliases: ["python3", "rusthon"],
     language_id: 303,
   },
-  "Python console": {
+  "'Python console'": {
     type: "programming",
     group: "Python",
     searchable: false,
@@ -3863,7 +3863,7 @@ const languages = {
     ace_mode: "text",
     language_id: 428,
   },
-  "Python traceback": {
+  "'Python traceback'": {
     type: "data",
     group: "Python",
     searchable: false,
@@ -3897,7 +3897,7 @@ const languages = {
     ace_mode: "text",
     language_id: 306,
   },
-  "Qt Script": {
+  "'Qt Script'": {
     type: "programming",
     ace_mode: "javascript",
     codemirror_mode: "javascript",
@@ -3988,7 +3988,7 @@ const languages = {
     tm_scope: "source.c",
     language_id: 1031374237,
   },
-  "RPM Spec": {
+  "'RPM Spec'": {
     type: "data",
     tm_scope: "source.rpm-spec",
     extensions: [".spec"],
@@ -4057,7 +4057,7 @@ const languages = {
     ace_mode: "text",
     language_id: 173616037,
   },
-  "Raw token data": {
+  "'Raw token data'": {
     type: "data",
     aliases: ["raw"],
     extensions: [".raw"],
@@ -4076,7 +4076,7 @@ const languages = {
     tm_scope: "source.rescript",
     language_id: 501875647,
   },
-  "Readline Config": {
+  "'Readline Config'": {
     type: "data",
     group: "INI",
     aliases: ["inputrc", "readline"],
@@ -4119,7 +4119,7 @@ const languages = {
     ace_mode: "text",
     language_id: 321,
   },
-  "Regular Expression": {
+  "'Regular Expression'": {
     type: "data",
     extensions: [".regexp", ".regex"],
     aliases: ["regexp", "regex"],
@@ -4143,7 +4143,7 @@ const languages = {
     ace_mode: "text",
     language_id: 323,
   },
-  "Rich Text Format": {
+  "'Rich Text Format'": {
     type: "markup",
     extensions: [".rtf"],
     tm_scope: "text.rtf",
@@ -4224,7 +4224,7 @@ const languages = {
     codemirror_mime_type: "text/troff",
     language_id: 141,
   },
-  "Roff Manpage": {
+  "'Roff Manpage'": {
     type: "markup",
     group: "Roff",
     extensions: [
@@ -4419,7 +4419,7 @@ const languages = {
     extensions: [".sql", ".db2"],
     language_id: 334,
   },
-  "SRecode Template": {
+  "'SRecode Template'": {
     type: "markup",
     color: "#348a34",
     tm_scope: "source.lisp",
@@ -4429,7 +4429,7 @@ const languages = {
     extensions: [".srt"],
     language_id: 335,
   },
-  "SSH Config": {
+  "'SSH Config'": {
     type: "data",
     group: "INI",
     filenames: [
@@ -4736,7 +4736,7 @@ const languages = {
     ace_mode: "text",
     language_id: 354,
   },
-  "Spline Font Database": {
+  "'Spline Font Database'": {
     type: "data",
     extensions: [".sfd"],
     tm_scope: "text.sfd",
@@ -4761,7 +4761,7 @@ const languages = {
     tm_scope: "source.stan",
     language_id: 356,
   },
-  "Standard ML": {
+  "'Standard ML'": {
     type: "programming",
     color: "#dc566d",
     aliases: ["sml"],
@@ -4799,7 +4799,7 @@ const languages = {
     ace_mode: "stylus",
     language_id: 359,
   },
-  "SubRip Text": {
+  "'SubRip Text'": {
     type: "data",
     extensions: [".srt"],
     ace_mode: "text",
@@ -4853,7 +4853,7 @@ const languages = {
     codemirror_mime_type: "text/x-systemverilog",
     language_id: 363,
   },
-  "TI Program": {
+  "'TI Program'": {
     type: "programming",
     ace_mode: "text",
     color: "#A0AA87",
@@ -5067,7 +5067,7 @@ const languages = {
     codemirror_mime_type: "text/x-twig",
     language_id: 377,
   },
-  "Type Language": {
+  "'Type Language'": {
     type: "data",
     aliases: ["tl"],
     extensions: [".tl"],
@@ -5087,7 +5087,7 @@ const languages = {
     codemirror_mime_type: "application/typescript",
     language_id: 378,
   },
-  "Unified Parallel C": {
+  "'Unified Parallel C'": {
     type: "programming",
     color: "#4e3617",
     group: "C",
@@ -5098,7 +5098,7 @@ const languages = {
     tm_scope: "source.c",
     language_id: 379,
   },
-  "Unity3D Asset": {
+  "'Unity3D Asset'": {
     type: "data",
     ace_mode: "yaml",
     codemirror_mode: "yaml",
@@ -5115,7 +5115,7 @@ const languages = {
     tm_scope: "source.yaml",
     language_id: 380,
   },
-  "Unix Assembly": {
+  "'Unix Assembly'": {
     type: "programming",
     group: "Assembly",
     extensions: [".s", ".ms"],
@@ -5228,7 +5228,7 @@ const languages = {
     codemirror_mime_type: "text/x-verilog",
     language_id: 387,
   },
-  "Vim Help File": {
+  "'Vim Help File'": {
     type: "prose",
     aliases: ["vimhelp"],
     extensions: [".txt"],
@@ -5236,7 +5236,7 @@ const languages = {
     ace_mode: "text",
     language_id: 508563686,
   },
-  "Vim Snippet": {
+  "'Vim Snippet'": {
     type: "markup",
     aliases: ["SnipMate", "UltiSnip", "UltiSnips", "NeoSnippet"],
     extensions: [".snip", ".snippet", ".snippets"],
@@ -5244,7 +5244,7 @@ const languages = {
     ace_mode: "text",
     language_id: 81265970,
   },
-  "Vim script": {
+  "'Vim script'": {
     type: "programming",
     color: "#199f4b",
     tm_scope: "source.viml",
@@ -5263,7 +5263,7 @@ const languages = {
     ace_mode: "text",
     language_id: 388,
   },
-  "Visual Basic .NET": {
+  "'Visual Basic .NET'": {
     type: "programming",
     color: "#945db7",
     extensions: [".vb", ".vbhtml"],
@@ -5292,21 +5292,21 @@ const languages = {
     ace_mode: "html",
     language_id: 391,
   },
-  "Wavefront Material": {
+  "'Wavefront Material'": {
     type: "data",
     extensions: [".mtl"],
     tm_scope: "source.wavefront.mtl",
     ace_mode: "text",
     language_id: 392,
   },
-  "Wavefront Object": {
+  "'Wavefront Object'": {
     type: "data",
     extensions: [".obj"],
     tm_scope: "source.wavefront.obj",
     ace_mode: "text",
     language_id: 393,
   },
-  "Web Ontology Language": {
+  "'Web Ontology Language'": {
     type: "data",
     extensions: [".owl"],
     tm_scope: "text.xml",
@@ -5341,7 +5341,7 @@ const languages = {
     ace_mode: "text",
     language_id: 658679714,
   },
-  "Wget Config": {
+  "'Wget Config'": {
     type: "data",
     group: "INI",
     aliases: ["wgetrc"],
@@ -5350,7 +5350,7 @@ const languages = {
     ace_mode: "text",
     language_id: 668457123,
   },
-  "Windows Registry Entries": {
+  "'Windows Registry Entries'": {
     type: "data",
     extensions: [".reg"],
     tm_scope: "source.reg",
@@ -5367,14 +5367,14 @@ const languages = {
     tm_scope: "source.wollok",
     language_id: 632745969,
   },
-  "World of Warcraft Addon Data": {
+  "'World of Warcraft Addon Data'": {
     type: "data",
     extensions: [".toc"],
     tm_scope: "source.toc",
     ace_mode: "text",
     language_id: 396,
   },
-  "X BitMap": {
+  "'X BitMap'": {
     type: "data",
     group: "C",
     aliases: ["xbm"],
@@ -5385,14 +5385,14 @@ const languages = {
     codemirror_mime_type: "text/x-csrc",
     language_id: 782911107,
   },
-  "X Font Directory Index": {
+  "'X Font Directory Index'": {
     type: "data",
     filenames: ["encodings.dir", "fonts.alias", "fonts.dir", "fonts.scale"],
     tm_scope: "source.fontdir",
     ace_mode: "text",
     language_id: 208700028,
   },
-  "X PixMap": {
+  "'X PixMap'": {
     type: "data",
     group: "C",
     aliases: ["xpm"],
@@ -5753,7 +5753,7 @@ const languages = {
     ace_mode: "text",
     language_id: 411,
   },
-  "cURL Config": {
+  "'cURL Config'": {
     type: "data",
     group: "INI",
     aliases: ["curlrc"],
@@ -5810,7 +5810,7 @@ const languages = {
     ace_mode: "text",
     language_id: 415,
   },
-  "mIRC Script": {
+  "'mIRC Script'": {
     type: "programming",
     color: "#3d57c3",
     extensions: [".mrc"],
@@ -5914,26 +5914,24 @@ const languages = {
     language_id: 421,
   },
 };
-
 const languageArray = Object.keys(languages);
-const languageQueryString =
-  `query gitfacts {
-` +
-  languageArray.slice(8, 9).reduce(
-    (total, language) =>
-      total +
-      `
-   l${language
-     .replace(/[\s.+\-'"*()01356789]+/g, "s")
-     .replace(/[24#]+/g, "sharp")} : search(query:"language:${language}",
-type: REPOSITORY)
-{
-repositoryCount
-}`,
-    ""
-  ) +
-  "}";
-console.log(languageArray.length);
+// const languageQueryString =
+//   `query gitfacts {
+// ` +
+//   languageArray.slice(8, 9).reduce(
+//     (total, language) =>
+//       total +
+//       `
+//    l${language
+//      .replace(/[\s.+\-'"*()01356789]+/g, "s")
+//      .replace(/[24#]+/g, "sharp")} : search(query:"language:${language}",
+// type: REPOSITORY)
+// {
+// repositoryCount
+// }`,
+//     ""
+//   ) +
+//   "}";
 let optionsSkeleton = [
   {
     name: "Programming Languages",
@@ -5971,7 +5969,7 @@ let optionsSkeleton = [
         name: "language",
         checked: true,
         title:
-          "Default 20 most popular languages (JavaScript, Python, Java, TypeScript, C#, PhP, C++, C, Shell, Ruby, Visual Basic .NET, Objective-C, SQL, Ruby, MATLAB, Groovy, Pascal, Assembly, Visual Basic, Go, Swift, Perl, R)",
+          "Default 22 most popular languages (JavaScript, Python, Java, TypeScript, C#, PhP, C++, C, Shell, Ruby, Visual Basic .NET, Objective-C, SQL, MATLAB, Groovy, Pascal, Assembly, Visual Basic, Go, Swift, Perl, R)",
         query_value: [
           "JavaScript",
           "Python",
@@ -5986,7 +5984,6 @@ let optionsSkeleton = [
           "Visual Basic .NET",
           "Objective-C",
           "SQL",
-          "Ruby",
           "MATLAB",
           "Groovy",
           "Pascal",
@@ -6021,7 +6018,7 @@ let optionsSkeleton = [
         htmlForAndInputId: "all",
         inputType: "radio",
         name: "language",
-        title: "All (not recommended due to API overload)",
+        title: "All 572 github languages (not recommended due to API overload)",
         query_value: languageArray,
       },
       {
@@ -6044,7 +6041,7 @@ let optionsSkeleton = [
     index: 1,
     unravel: [true, false, false],
     query_name: "size",
-    query_value: ["<5000", "50000..1000000", ">=1000000"],
+    query_value: ["0..50", "50..1000", ">1000"],
     input: [
       {
         htmlForAndInputId: "default",
@@ -6052,18 +6049,18 @@ let optionsSkeleton = [
         inputType: "radio",
         name: "size",
         title:
-          "Default (3 sizes: 0 to 50KB, 50KB to 1MB, more than 1MB) (<5000, 50000..1000000, >=1000000)",
-        query_value: ["<5000", "50000..1000000", ">=1000000"],
+          "Default (3 sizes: 0 to 50KB, 50KB to 1MB, more than 1MB) (<5000 50000..1000000 >=1000000)",
+        query_value: ["0..50", "50..1000", ">1000"],
       },
       {
         htmlForAndInputId: "4 categories",
         checked: false,
         inputType: "radio",
         name: "size",
-        title: "4 sizes: 0 to 50KB, 50KB to 1MB, more than 1MB)",
-        query_value: ["0..50", "50..1000", "1000..10000", ">10000"],
+        title:
+          "Repositories of 4 sizes (0 to 50KB, 50KB to 1MB, 1MB to 1GB and greater than 1GB) (0..50 50..1000 1000..1000000 >1000000)",
+        query_value: ["0..50", "50..1000", "1000..1000000", ">1000000"],
       },
-
       {
         htmlForAndInputId: "custom",
         inputType: "radio",
@@ -6076,8 +6073,8 @@ let optionsSkeleton = [
         htmlForAndInputId: "choose repo size",
         inputType: "text",
         name: "size",
-        title:
-          'Please, enter all the desired repository size ranges in bytes, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repository sizes from 5KB to 10MB and greater than 1GB input: "5000..10000000 >=1000000000.',
+        placeholder: "Repository size in KB",
+        title: `Please, enter all the desired repository size ranges in KB separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, 5000..10000000 >1000000000 yields repos sized from 5MB to 10GB and greater than 1TB `,
       },
     ],
   },
@@ -6102,21 +6099,23 @@ let optionsSkeleton = [
           "2020-01-01..2020-12-31",
         ],
         name: "created",
-        title: "Default: repositories created in years 2020, 2019 and 2018",
+        title:
+          "Default: repositories created in years 2020, 2019 and 2018 (2018-01-01..2018-12-31 2019-01-01..2019-12-31 2020-01-01..2020-12-31)",
       },
       {
-        htmlForAndInputId: "Repositories created in 2020",
+        htmlForAndInputId:
+          "Repositories since the beginning of 2020 (>2019-12-31)",
         inputType: "radio",
         query_value: [">2019-12-31"],
         name: "created",
-        title: "Repositories created in 2020",
+        title: "Repositories since the beginning of 2020 (>2019-12-31)",
       },
       {
-        htmlForAndInputId: "All repositories",
+        htmlForAndInputId: "Old repos",
         inputType: "radio",
-        query_value: [""],
+        query_value: ["2000-01-01..2011-01-01"],
         name: "created",
-        title: "All repositories",
+        title: "Repositories created in 2000-2010s (2000-01-01..2011-01-01)",
       },
       {
         htmlForAndInputId: "custom",
@@ -6128,9 +6127,10 @@ let optionsSkeleton = [
     input_secondLayer: [
       {
         inputType: "text",
+        placeholder: "<YYYY-MM-DD",
         name: "created",
         title:
-          'Please, enter all the desired repository date ranges in YYYY-MM-DD format, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories created on 30th of June 2020 and from 21 of July 2013 enter "2020-06-30>=2013-07-21" ',
+          "Please, enter all the desired repository date ranges in YYYY-MM-DD format separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, 2020-06-30 >=2013-07-21 yields repositories created on 30th June of 2020 and later than 21 of July 2013 ",
       },
     ],
   },
@@ -6138,31 +6138,33 @@ let optionsSkeleton = [
     name: "Number of stars",
     index: 3,
     query_name: "stars",
-    query_value: ["<=10", "10..100", ">=100"],
+    query_value: ["<10", "10..100", ">=100"],
     unravel: [true, false, false],
     input: [
       {
         htmlForAndInputId: "default 0 to 10, 10 to 100, more than 100",
         inputType: "radio",
         checked: true,
-        query_value: ["<=10", "10..100", ">=100"],
+        query_value: ["<10", "10..100", ">=100"],
         name: "stars",
         title:
-          "Default: search for the repositories that have 0 to 10, 10 to 100 and more than a hundred stars",
+          "Default: search for the repositories that have 0 to 10, 10 to 100 and more than a hundred stars (<10 10..100 >100)",
       },
       {
-        htmlForAndInputId: "Zero stars and more than 1000 stars",
+        htmlForAndInputId:
+          "Zero stars, 1 star, 1 to 1000 and more than a 1000 stars (0 1 1..1000 >1000)",
         inputType: "radio",
-        query_value: ["0", ">1000"],
+        query_value: ["0", "1", "1..1000", ">1000"],
         name: "stars",
-        title: "Zero stars and more than 1000 stars",
+        title:
+          "Zero stars, 1 star, 1 to 1000 and more than a 1000 stars (0 1 1..1000 >1000)",
       },
       {
         htmlForAndInputId: "More than a 100 stars",
         inputType: "radio",
         query_value: [">100"],
         name: "stars",
-        title: "More than a 100 stars",
+        title: "More than a 100 stars (>100)",
       },
       {
         htmlForAndInputId: "custom",
@@ -6173,8 +6175,11 @@ let optionsSkeleton = [
     ],
     input_secondLayer: [
       {
+        inputType: "text",
+        placeholder: "0..100 200 >1000",
+        name: "stars",
         title:
-          'Please, enter all the desired repository stars ranges, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories created that have from 4 to 6 stars and more than a 1000 stars enter "4..6 >=1000" ',
+          "Please, enter all the desired repository star ranges separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, 4..6 >1000 yields repositories created that have been starred 4 to 6 times and more than a 1000 times.",
       },
     ],
   },
@@ -6334,7 +6339,7 @@ let optionsSkeleton = [
     input_secondLayer: [
       {
         title:
-          'Please, enter all the desired repository followers ranges, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories that have from 4 to 6 followers and more than a 1000 followers enter "4..6 >=1000" ',
+          'Please, enter all the desired repository followers ranges separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories that have from 4 to 6 followers and more than a 1000 followers enter "4..6 >=1000" ',
       },
     ],
   },
@@ -6371,7 +6376,7 @@ let optionsSkeleton = [
     input_secondLayer: [
       {
         title:
-          'Please, enter all the desired repository forks ranges, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories that have from 4 to 6 forks and more than a 1000 forks enter "4..6 >=1000" ',
+          'Please, enter all the desired repository forks ranges separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories that have from 4 to 6 forks and more than a 1000 forks enter "4..6 >=1000" ',
       },
     ],
   },
@@ -6425,7 +6430,7 @@ let optionsSkeleton = [
         inputType: "text",
         name: "pushed",
         title:
-          'Please, enter all the desired repository date ranges in YYYY-MM-DD format, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories created on 30th of June 2020 and from 21 of July 2013 enter "2020-06-30>=2013-07-21" ',
+          'Please, enter all the desired repository date ranges in YYYY-MM-DD format separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories created on 30th of June 2020 and from 21 of July 2013 enter "2020-06-30>=2013-07-21" ',
       },
     ],
   },
@@ -6484,7 +6489,7 @@ let optionsSkeleton = [
     input_secondLayer: [
       {
         title:
-          'Please, enter all the desired repository topics ranges, separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories that have from 4 to 6 topics and more than a 1000 topics enter "4..6 >=1000"',
+          'Please, enter all the desired repository topics ranges separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories that have from 4 to 6 topics and more than a 1000 topics enter "4..6 >=1000"',
       },
     ],
   },

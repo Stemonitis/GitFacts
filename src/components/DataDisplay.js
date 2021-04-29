@@ -8,7 +8,7 @@ const DataDisplay = (props) => {
     <div className="SunBurstContainer">
       <div className="buttonWrapper">
         <div>
-          <div className="toggle">
+          <div className="toggle1">
             <input
               className="toggle-state"
               type="checkbox"

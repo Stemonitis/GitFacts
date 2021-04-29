@@ -4,6 +4,7 @@ import DataDisplay from "./DataDisplay";
 import { useLazyQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import initialData from "./initialData";
+import Info from "./Info";
 
 const Main = () => {
   const [queryString, updateQueryString] = useState([
@@ -21,7 +22,7 @@ const Main = () => {
   let [responseData, updateResponseData] = useState([]);
   //This is the data that goes to d3 part of the application. Initial data is the initial picture you see
   //on the screen
-  let [sunBurstData, updateSunBurstData] = useState(initialData[1]);
+  let [sunBurstData, updateSunBurstData] = useState(initialData[1]); //"initial"); //initialData[1]);
   //piece of state to track the amount of queries. We need it because making large queries result in errors.
   let [loadingCount, updateLoadingCount] = useState([0, 0]);
   //lazyquery for calling the github server
@@ -50,22 +51,25 @@ const Main = () => {
   );
 
   return (
-    <main>
-      <Options
-        updateQueryString={updateQueryString}
-        updateQueryIterator={updateQueryIterator}
-        updateResponseData={updateResponseData}
-        updateLoadingCount={updateLoadingCount}
-        fire={fire}
-      />
-      <DataDisplay
-        loading={loading}
-        loadingCount={loadingCount}
-        error={error}
-        queryResult={sunBurstData}
-        queryString={queryString[1]}
-      />
-    </main>
+    <>
+      <main>
+        <Options
+          updateQueryString={updateQueryString}
+          updateQueryIterator={updateQueryIterator}
+          updateResponseData={updateResponseData}
+          updateLoadingCount={updateLoadingCount}
+          fire={fire}
+        />
+        <DataDisplay
+          loading={loading}
+          loadingCount={loadingCount}
+          error={error}
+          queryResult={sunBurstData}
+          queryString={queryString[1]}
+        />
+      </main>
+      <Info />
+    </>
   );
 };
 

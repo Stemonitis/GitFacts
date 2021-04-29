@@ -283,7 +283,7 @@ const Options = (props) => {
             <label id="labelOption" htmlFor="addOptions">
               Select a Search Parameter
               <select onClick={(e) => addANewOption(e)}>
-                {optionsDef.map((option, index) => {
+                {optionsSkeleton.map((option, index) => {
                   return (
                     <option key={index} value={option.index}>
                       {option.name}
