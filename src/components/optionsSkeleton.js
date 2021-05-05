@@ -5961,7 +5961,6 @@ let optionsSkeleton = [
       "Perl",
       "R",
     ],
-    unravel: [true, false, false],
     input: [
       {
         htmlForAndInputId: "default20",
@@ -6039,7 +6038,6 @@ let optionsSkeleton = [
   {
     name: "Repository size",
     index: 1,
-    unravel: [true, false, false],
     query_name: "size",
     query_value: ["0..50", "50..1000", ">1000"],
     input: [
@@ -6081,7 +6079,6 @@ let optionsSkeleton = [
   {
     name: "Date Created",
     index: 2,
-    unravel: [true, false, false],
     query_name: "created",
     query_value: [
       "2018-01-01..2018-12-31",
@@ -6139,7 +6136,6 @@ let optionsSkeleton = [
     index: 3,
     query_name: "stars",
     query_value: ["<10", "10..100", ">=100"],
-    unravel: [true, false, false],
     input: [
       {
         htmlForAndInputId: "default 0 to 10, 10 to 100, more than 100",
@@ -6188,7 +6184,7 @@ let optionsSkeleton = [
     index: 4,
     query_name: "in",
     query_value: ["name", "description"],
-    unravel: [true, false, false],
+    checked_default: { name: true, description: true },
     input: [
       {
         htmlForAndInputId: "default name",
@@ -6221,7 +6217,6 @@ let optionsSkeleton = [
     index: 5,
     query_name: "repo",
     query_value: ["Stemonitis/GitFacts"],
-    unravel: [true, false, false],
     input: [
       {
         htmlForAndInputId: "default repo",
@@ -6232,7 +6227,7 @@ let optionsSkeleton = [
         title: "Search Stemonitis/GitFacts (this app)",
       },
       {
-        htmlForAndInputId: "customize",
+        htmlForAndInputId: "custom",
         inputType: "radio",
         checked: false,
         name: "repo",
@@ -6251,7 +6246,6 @@ let optionsSkeleton = [
     index: 6,
     query_name: "user",
     query_value: ["Stemonitis"],
-    unravel: [true, false, false],
     input: [
       {
         htmlForAndInputId: "default Stemonitis",
@@ -6262,7 +6256,7 @@ let optionsSkeleton = [
         title: "Default: search in repositories owned by Stemonitis",
       },
       {
-        htmlForAndInputId: "customize",
+        htmlForAndInputId: "custom",
         inputType: "radio",
         checked: false,
         name: "user",
@@ -6281,7 +6275,6 @@ let optionsSkeleton = [
     index: 7,
     query_name: "organization",
     query_value: ["Stemonitis"],
-    unravel: [true, false, false],
     input: [
       {
         htmlForAndInputId: "default arch",
@@ -6292,7 +6285,7 @@ let optionsSkeleton = [
         title: "Default: search in repositories owned by arch linux",
       },
       {
-        htmlForAndInputId: "customize",
+        htmlForAndInputId: "custom",
         inputType: "radio",
         checked: false,
         name: "organization",
@@ -6310,7 +6303,6 @@ let optionsSkeleton = [
     index: 8,
     query_name: "followers",
     query_value: [">=10000"],
-    unravel: [true, false, false],
     input: [
       {
         htmlForAndInputId: "default >=10000",
@@ -6330,7 +6322,7 @@ let optionsSkeleton = [
           "Search for repositories with 0 and more than a thousand followers",
       },
       {
-        htmlForAndInputId: "customize",
+        htmlForAndInputId: "custom",
         inputType: "radio",
         name: "followers",
         title: "Customize",
@@ -6348,7 +6340,6 @@ let optionsSkeleton = [
     index: 9,
     query_name: "forks",
     query_value: [">=1"],
-    unravel: [true, false, false],
     input: [
       {
         htmlForAndInputId: "default more than 1 or 1",
@@ -6367,7 +6358,7 @@ let optionsSkeleton = [
         title: "More than 10 forks",
       },
       {
-        htmlForAndInputId: "customize",
+        htmlForAndInputId: "custom",
         inputType: "radio",
         name: "forks",
         title: "Customize",
@@ -6384,7 +6375,6 @@ let optionsSkeleton = [
     name: "Date Last Updated(pushed)",
     query_name: "pushed",
     index: 10,
-    unravel: [true, false, false],
     query_value: [
       "2018-01-01..2018-12-31",
       "2019-01-01..2019-12-31",
@@ -6439,7 +6429,6 @@ let optionsSkeleton = [
     index: 11,
     query_name: "topic",
     query_value: ["Data visualization"],
-    unravel: [true, false, false],
     input: [
       {
         htmlForAndInputId: "default Data visualization",
@@ -6451,7 +6440,7 @@ let optionsSkeleton = [
           'Default: search for the repositories with topic "Data visualization"',
       },
       {
-        htmlForAndInputId: "Customize",
+        htmlForAndInputId: "custom",
         inputType: "radio",
         checked: false,
         title: "Enter your topic. More on topics https://github.com/topics/",
@@ -6468,7 +6457,6 @@ let optionsSkeleton = [
     index: 12,
     query_name: "topics",
     query_value: ["Data visualization"],
-    unravel: [true, false, false],
     input: [
       {
         htmlForAndInputId: "default more than 1",
@@ -6479,7 +6467,7 @@ let optionsSkeleton = [
         title: "Default: search for the repositories with more than one topic",
       },
       {
-        htmlForAndInputId: "Customize",
+        htmlForAndInputId: "custom",
         inputType: "radio",
         checked: false,
         title:
@@ -6498,7 +6486,6 @@ let optionsSkeleton = [
     index: 13,
     query_name: "license",
     query_value: ["mit"],
-    unravel: [true, false, false],
     input: [
       {
         htmlForAndInputId: "default mit",
@@ -6509,7 +6496,7 @@ let optionsSkeleton = [
         title: "Default: search for the repositories with mit license",
       },
       {
-        htmlForAndInputId: "Customize",
+        htmlForAndInputId: "custom",
         inputType: "radio",
         name: "license",
         title:
@@ -6528,7 +6515,6 @@ let optionsSkeleton = [
     query_name: "is",
     index: 14,
     query_value: ["public"],
-    unravel: [true, false, false],
     input: [
       {
         htmlForAndInputId: "default public",
@@ -6560,7 +6546,6 @@ let optionsSkeleton = [
     name: "Mirror repositories",
     query_name: "mirror",
     query_value: ["true", "false"],
-    unravel: [true, false, false],
     index: 15,
     input: [
       {
@@ -6585,7 +6570,6 @@ let optionsSkeleton = [
     name: "Archived",
     query_name: "archived",
     query_value: ["true", "false"],
-    unravel: [true, false, false],
     index: 16,
     input: [
       {

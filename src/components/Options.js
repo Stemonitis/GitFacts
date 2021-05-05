@@ -1,33 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import useOptionBox from "./useOptionBox";
-import optionsSkeleton from "../optionsSkeleton.js";
+import optionsSkeleton from "./optionsSkeleton.js";
 import makeGQL from "./makeGQL.js";
 
 const Options = (props) => {
   //this is the hook for the search bar. It updates automatically every
   //every time you type so you actually dont need the button
   const [keyword, updateKeyword] = useState("");
-  //these are the family of hooks for different options.
+  const [closeIndex, closeOptions] = useState("l");
+
+  //these are the family of hooks for different options. There are a lot of hooks, but because of
+  //the necessity of keeping both their states, order and closed/open states and also the fact that
+  //we have to give a key to each components to track their order in the drag and drop area
   //main
-  const [languageQuery, Language] = useOptionBox(optionsSkeleton[0]);
-  const [reposizeQuery, RepoSize] = useOptionBox(optionsSkeleton[1]);
-  const [datecreatedQuery, DateCreated] = useOptionBox(optionsSkeleton[2]);
-  const [starsQuery, Stars] = useOptionBox(optionsSkeleton[3]);
+  const [languageQuery, Language] = useOptionBox(
+    optionsSkeleton[0],
+    closeOptions
+  );
+  const [reposizeQuery, RepoSize] = useOptionBox(
+    optionsSkeleton[1],
+    closeOptions
+  );
+  const [datecreatedQuery, DateCreated] = useOptionBox(
+    optionsSkeleton[2],
+    closeOptions
+  );
+
+  const [starsQuery, Stars] = useOptionBox(optionsSkeleton[3], closeOptions);
   //additional
-  const [searchInQuery, SearchIn] = useOptionBox(optionsSkeleton[4]);
-  const [repoQuery, RepoSearch] = useOptionBox(optionsSkeleton[5]);
-  const [userQuery, User] = useOptionBox(optionsSkeleton[6]);
-  const [organizationQuery, Organization] = useOptionBox(optionsSkeleton[7]);
-  const [followersQuery, Followers] = useOptionBox(optionsSkeleton[8]);
-  const [forksQuery, Forks] = useOptionBox(optionsSkeleton[9]);
-  const [pushedQuery, Pushed] = useOptionBox(optionsSkeleton[10]);
-  const [topicQuery, Topic] = useOptionBox(optionsSkeleton[11]);
-  const [topicsQuery, Topics] = useOptionBox(optionsSkeleton[12]);
-  const [licenseQuery, License] = useOptionBox(optionsSkeleton[13]);
-  const [visibilityQuery, Visibility] = useOptionBox(optionsSkeleton[14]);
-  const [mirrorQuery, Mirror] = useOptionBox(optionsSkeleton[15]);
-  const [archivedQuery, Archived] = useOptionBox(optionsSkeleton[16]);
+  const [searchInQuery, SearchIn] = useOptionBox(
+    optionsSkeleton[4],
+    closeOptions
+  );
+  const [repoQuery, RepoSearch] = useOptionBox(
+    optionsSkeleton[5],
+    closeOptions
+  );
+  const [userQuery, User] = useOptionBox(optionsSkeleton[6], closeOptions);
+  const [organizationQuery, Organization] = useOptionBox(
+    optionsSkeleton[7],
+    closeOptions
+  );
+  const [followersQuery, Followers] = useOptionBox(
+    optionsSkeleton[8],
+    closeOptions
+  );
+  const [forksQuery, Forks] = useOptionBox(optionsSkeleton[9], closeOptions);
+  const [pushedQuery, Pushed] = useOptionBox(optionsSkeleton[10], closeOptions);
+  const [topicQuery, Topic] = useOptionBox(optionsSkeleton[11], closeOptions);
+  const [topicsQuery, Topics] = useOptionBox(optionsSkeleton[12], closeOptions);
+  const [licenseQuery, License] = useOptionBox(
+    optionsSkeleton[13],
+    closeOptions
+  );
+  const [visibilityQuery, Visibility] = useOptionBox(
+    optionsSkeleton[14],
+    closeOptions
+  );
+  const [mirrorQuery, Mirror] = useOptionBox(optionsSkeleton[15], closeOptions);
+  const [archivedQuery, Archived] = useOptionBox(
+    optionsSkeleton[16],
+    closeOptions
+  );
+
   //this is the hook that updates the order of options it used in the
   //function handle on drag that makes sure that we keep track of the
   //order of draggable options. Options array gets mapped into the
@@ -40,20 +76,18 @@ const Options = (props) => {
   ]);
   //toggles the state of the "plus" button for adding options
   const [select, updateSelect] = useState(false);
-  //this hook gets triggered every time we push sunburst. It tells
-  //us that user is done with altering the options and wants to see the
-  //result. QueryString is an array that consists of 1)array of GQL tags
-  //with max 100 2)initial array of optinbox states in the initial order.
-  //you need to have a valid initial state in this hook, in other case the components will
-  //not load
-
+  useEffect(() => {
+    let items = Array.from(optionsArray);
+    let optionsOrder = optionsArray.map((option) => option.key);
+    let filtered = items.filter((option, i) => optionsOrder[i] != closeIndex);
+    updateOptions(filtered);
+  }, [closeIndex]);
   //this function handles rearrangement of options and updates the order of optionboxes
   function handleOnDragEnd(result) {
     if (!result.destination) return;
     const items = Array.from(optionsArray);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-    const optionsOrder = optionsArray.map((option) => option.key);
     const requestList = [
       languageQuery,
       reposizeQuery,
@@ -73,18 +107,23 @@ const Options = (props) => {
       mirrorQuery,
       archivedQuery,
     ];
-    let queryList = optionsOrder.map((order) => requestList[order]);
+    const optionsOrder = optionsArray.map((option) => option.key);
+    let queryList = optionsOrder.map((order) => requestList.current[order]);
     let filtered = items.filter((option, i) => {
       return queryList[i] !== false;
     });
     updateOptions(filtered);
   }
+  //this function handles closing options. It gets passed down to the optionBox and is triggered every time
+  //a user closes the button. It also resets the state of the corresponding query to default
+
   //handles adding new options. When the new option of the same kind is added their state is shared
   function addANewOption(e) {
     //first check for the options that have false queries and delete them, so there are no
     //duplicated options. Also we want to delete and splice out all of the options that
-    //have the same key (they will automatically dissapear from the options screen)
+    //have the same key (they will automatically disappear from the options screen)
     const optionsOrder = optionsArray.map((option) => option.key);
+    let item = Array.from(optionsArray);
     const requestList = [
       languageQuery,
       reposizeQuery,
@@ -104,7 +143,6 @@ const Options = (props) => {
       mirrorQuery,
       archivedQuery,
     ];
-    let item = Array.from(optionsArray);
     let queryList = optionsOrder.map((order) => requestList[order]);
     let items = item.filter((option, i) => {
       return queryList[i] !== false;
@@ -178,7 +216,13 @@ const Options = (props) => {
     updateOptions(items);
   }
   //this function gets triggered by "sunburst my search" button. it makes the proper gql formatted queries
-  //and updates the query string state
+  //and updates the query string state. It tells
+  //us that user is done with altering the options and wants to see the
+  //result. QueryString is an array that consists of 1)array of GQL tags
+  //with max 100 2)initial array of optinbox states in the initial order.
+  //you need to have a valid initial state in this hook, in other case the components will
+  //not load
+
   function requestGitData() {
     const optionsOrder = optionsArray.map((option) => option.key);
     const requestList = [
@@ -209,14 +253,14 @@ const Options = (props) => {
       keyword,
       optionsOrder.map((order) => requestList[order]).filter((i) => i !== false)
     );
-
+    console.log(newQuery);
     props.updateQueryIterator(newQuery[0].length - 1);
     props.updateQueryString(newQuery);
     props.updateResponseData([]);
     props.updateLoadingCount([0, newQuery[0].length]);
     props.fire();
   }
-
+  console.log(languageQuery, "languageQuery");
   return (
     <div id="OptionsContainer">
       <div id="options">

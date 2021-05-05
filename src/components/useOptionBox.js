@@ -1,53 +1,82 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-const useOptionBox = (option) => {
+const useOptionBox = (option, closeOptions) => {
+  //this custom hook is the hook that defines the optionboxes based on the information given in the options
+  //skeleton.
+  //The initial, default, state of the query is defined in the options skeleton. This is why it is set as a
+  //the default state in the query state. The key is the name of the optionbox and the name of the filter,
+  //and the value is an !!!array of the keywords. Every time if the optionbox is closed and created again it`s
+  //state is created again and it is default.
   const [query, setQuery] = useState({
     [option.query_name]: option.query_value,
   });
+
   const OptionBox = () => {
-    const [checkboxes, setCheckBox] = useState({});
-    const [custom, unravel] = useState(option.unravel);
-    console.log(custom, "custom");
-
-    useEffect(() => {
-      if (query === false) {
-        setQuery({ [option.query_name]: option.query_value });
-      }
-    }, []);
-    const handleCustomOptions = (e) => {
+    console.log("rerender");
+    //this is the boolean that unravels first layer of (notcustomisable and default) options
+    const [unravel1, setUnravel1] = useState(false);
+    //this is the boolean that unravels the second layer of the custom options,
+    const [unravel2, setUnravel2] = useState(false);
+    //this is the state for the checkboxes that appear after the first unravel (like fot the search in,
+    //archived or mirrored)
+    const [checkboxes, setCheckboxes] = useState(option.checked_default);
+    //this is the state for the custom checkboxes that appear after choosing the custom radio button
+    const [customCheckboxes, setCustomCheckBox] = useState({});
+    const handleCheckBoxOptions = (
+      e,
+      existingCheckBoxesState,
+      checkBoxSetter
+    ) => {
+      //first we have to dichotomise the algorrithm based on whether we have multiple options (checkboxes)
+      //or the textarea input
       if (e.target.type == "checkbox") {
-        let newCheckSet = checkboxes;
+        console.log("checkbox");
+        //in the case of the checkboxes we need to first get the information about the other checkboxes
+        //if they are checked or not. This checked state is kept in the "checkboxes" for the checkboxes in the
+        //first layer (not custom) and in the customCheckboxes for the checkboxes that may have been unfolded
+        //after selecting a custom option in the form
+        let newCheckSet = existingCheckBoxesState;
+        //The form of the checkboxlist is the state that has the checkbox keyword as a key and it`s status
+        // as a boolean. This is the only way to keep track of the state if the checkbox gets unchecked
         newCheckSet[e.target.id] = e.target.checked;
-        setCheckBox(newCheckSet);
-
-        let languageArray = Object.keys(checkboxes).filter(
-          (key) => checkboxes[key]
+        //next we update the state of the checkboxes
+        checkBoxSetter(newCheckSet);
+        console.log(newCheckSet, "newCheckSet");
+        //here we filter out all the checkboxes with the "false" state for the cases when the option gets
+        //unchecked
+        let checkBoxArray = Object.keys(existingCheckBoxesState).filter(
+          (key) => customCheckboxes[key]
         );
-        setQuery({ [option.query_name]: languageArray });
+        console.log(checkBoxArray, "checkBoxArray");
+        //next we update the query value of the optionBox
+        setQuery({ [option.query_name]: checkBoxArray });
       } else {
         setQuery({ [e.target.name]: e.target.value.trim().split(" ") });
       }
     };
-    return custom[0] ? (
+    return (
       <div className="OptionBox">
+        {/* the close button handles state update in the options component and also it resets the state of
+        the option to default one so it matches the checked button form on the option reopening */}
         <button
           className="closeButton"
           type="button"
           onClick={() => {
-            unravel([false, false, false]);
-            setQuery(false);
+            closeOptions(option.index);
+            setQuery({ [option.query_name]: option.query_value });
           }}
         >
           X
         </button>
+        {/* this button toggles the first layer of options  */}
         <span id="optionTitle">{option.name}</span>
         <button
           className="buttonschoose"
-          onClick={() => unravel([true, !custom[1], false])}
+          onClick={() => setUnravel1(!unravel1)}
         >
           {">>"}
         </button>
-        {custom[1] ? (
+        {unravel1 ? (
           <div className="formOptions">
             {option.input
               .slice(0, option.input.length - 1)
@@ -60,10 +89,22 @@ const useOptionBox = (option) => {
                       type={item.inputType}
                       name={item.name}
                       defaultChecked={item.checked}
-                      onClick={() => {
-                        setQuery({ [item.name]: item.query_value });
-                        unravel([true, true, false]);
+                      onChange={(e) => {
+                        // if (e.target.type == "checkbox") {
+                        //   console.log("checkbox");
+                        //   //in case our form provides multiple set of options we need more sophisticated
+                        //   //way to handle the options
+                        //   handleCheckBoxOptions(e, checkboxes, setCheckboxes);
+                        //   setUnravel1(true);
+                        // } else {
+                        //   console.log("radio");
+                        //   setQuery({ [item.name]: item.query_value });
+                        //   setUnravel1(true);
+                        // }
                       }}
+                      // onBlur={() => {
+                      //   setQuery({ [item.name]: item.query_value });
+                      // }}
                     />
                     {item.title}
                     <br></br>
@@ -74,27 +115,38 @@ const useOptionBox = (option) => {
               htmlFor={option.input[option.input.length - 1].htmlForAndInputId}
             >
               <input
-                id={option.input[option.input.length - 1].htmlForAndUnputId}
+                id={option.input[option.input.length - 1].htmlForAndInputId}
                 type={option.input[option.input.length - 1].inputType}
                 name={option.input[option.input.length - 1].name}
                 onChange={() => {
-                  unravel([true, true, true]);
-                  setQuery({
-                    [option.input[option.input.length - 1].name]: [],
-                  });
-                }}
-                onBlur={() => {
-                  unravel([true, true, true]);
-                  setQuery({
-                    [option.input[option.input.length - 1].name]: [],
-                  });
+                  if (
+                    option.input[option.input.length - 1].htmlForAndInputId ===
+                    "custom"
+                  ) {
+                    setUnravel2(!unravel2);
+                    setQuery({
+                      [option.input[option.input.length - 1].name]: [],
+                    });
+                  } else {
+                    () => {
+                      if (e.target.type == "checkbox") {
+                        console.log("checkbox");
+                        handleCheckBoxOptions(e, checkboxes, setCheckboxes);
+                      } else {
+                        setQuery({
+                          [option.input[option.input.length - 1].name]:
+                            option.input[option.input.length - 1].query_value,
+                        });
+                      }
+                    };
+                  }
                 }}
               />
               {option.input[option.input.length - 1].title}
               <br></br>
             </label>
             <br></br>
-            {custom[2] ? (
+            {unravel2 && (
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -103,10 +155,10 @@ const useOptionBox = (option) => {
                 <button
                   className="buttonschoose"
                   onClick={() => {
-                    unravel([true, true, false]);
+                    setUnravel2(false);
                   }}
                 >
-                  Don`t forget to save me!
+                  Close
                 </button>
                 <br></br>
 
@@ -119,8 +171,20 @@ const useOptionBox = (option) => {
                         id={item.query_value}
                         type={item.inputType}
                         name={item.name}
-                        onChange={(e) => handleCustomOptions(e)}
-                        onBlur={(e) => handleCustomOptions(e)}
+                        onChange={(e) =>
+                          handleCheckBoxOptions(
+                            e,
+                            customCheckboxes,
+                            setCustomCheckBox
+                          )
+                        }
+                        onBlur={(e) =>
+                          handleCheckBoxOptions(
+                            e,
+                            customCheckboxes,
+                            setCustomCheckBox
+                          )
+                        }
                       />
                       <br></br>
 
@@ -130,23 +194,19 @@ const useOptionBox = (option) => {
                   );
                 })}
               </form>
-            ) : (
-              ""
             )}
             <button
               className="buttonschoose"
-              onClick={() => unravel([true, false, false])}
+              onClick={() => setUnravel1(false)}
             >
               {" "}
-              Save{" "}
+              Close{" "}
             </button>
           </div>
         ) : (
           ""
         )}
       </div>
-    ) : (
-      ""
     );
   };
   return [query, OptionBox];
