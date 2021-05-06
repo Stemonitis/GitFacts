@@ -10,18 +10,40 @@ const useOptionBox = (option, closeOptions) => {
   const [query, setQuery] = useState({
     [option.query_name]: option.query_value,
   });
+  console.log(query, "query");
 
   const OptionBox = () => {
-    console.log("rerender");
     //this is the boolean that unravels first layer of (notcustomisable and default) options
     const [unravel1, setUnravel1] = useState(false);
     //this is the boolean that unravels the second layer of the custom options,
     const [unravel2, setUnravel2] = useState(false);
-    //this is the state for the checkboxes that appear after the first unravel (like fot the search in,
-    //archived or mirrored)
-    const [checkboxes, setCheckboxes] = useState(option.checked_default);
-    //this is the state for the custom checkboxes that appear after choosing the custom radio button
-    const [customCheckboxes, setCustomCheckBox] = useState({});
+    //these are the states for the checkboxes that appear after the first unravel (like fot the search in,
+    //archived or mirrored) and for the second layer of the checkboxes. This states exist to keep track
+    //of the checked options while combining the query and are passed to the onclick function that is triggered
+    //after interacting with the checkboxes and is responsible for updating the query.
+    const [checkboxesStateForQuery, setCheckboxesStateForQuery] = useState(
+      option.checked_default
+    );
+    const [
+      secondLayerCheckboxesStateForQuery,
+      setSecondLayerCheckboxesStateForQuery,
+    ] = useState({});
+    //these hooks store values of radio or checkboxes so that the user selected values dont dissappear on
+    //rerendering the forms. It uses an object with the htmlForAndInputId property of each button as a
+    //a key so you can easily find and update the state. Initial state is just sets all the button htmlForInput
+    //to true if that property is initially there or to false if that property is missing. Second layer is
+    //just an empty object as there are no initial checked options in the custom layer.
+    const [keepCheckedState, setCheckedState] = useState(
+      option.input.reduce(
+        (object, l) => ({
+          ...object,
+          ...{ ...{ [l.htmlForAndInputId]: l.checked === true } },
+        }),
+        {}
+      )
+    );
+    const [keepSecondLayerState, setSecondLayerState] = useState({});
+    //the function that updates the query in the case form has multiple checked inpputs(checkboxes)
     const handleCheckBoxOptions = (
       e,
       existingCheckBoxesState,
@@ -30,7 +52,6 @@ const useOptionBox = (option, closeOptions) => {
       //first we have to dichotomise the algorrithm based on whether we have multiple options (checkboxes)
       //or the textarea input
       if (e.target.type == "checkbox") {
-        console.log("checkbox");
         //in the case of the checkboxes we need to first get the information about the other checkboxes
         //if they are checked or not. This checked state is kept in the "checkboxes" for the checkboxes in the
         //first layer (not custom) and in the customCheckboxes for the checkboxes that may have been unfolded
@@ -38,16 +59,16 @@ const useOptionBox = (option, closeOptions) => {
         let newCheckSet = existingCheckBoxesState;
         //The form of the checkboxlist is the state that has the checkbox keyword as a key and it`s status
         // as a boolean. This is the only way to keep track of the state if the checkbox gets unchecked
-        newCheckSet[e.target.id] = e.target.checked;
+        newCheckSet[e.target.attributes.query_value.nodeValue] =
+          e.target.checked;
+
         //next we update the state of the checkboxes
         checkBoxSetter(newCheckSet);
-        console.log(newCheckSet, "newCheckSet");
         //here we filter out all the checkboxes with the "false" state for the cases when the option gets
         //unchecked
         let checkBoxArray = Object.keys(existingCheckBoxesState).filter(
-          (key) => customCheckboxes[key]
+          (key) => existingCheckBoxesState[key]
         );
-        console.log(checkBoxArray, "checkBoxArray");
         //next we update the query value of the optionBox
         setQuery({ [option.query_name]: checkBoxArray });
       } else {
@@ -62,8 +83,23 @@ const useOptionBox = (option, closeOptions) => {
           className="closeButton"
           type="button"
           onClick={() => {
+            //this button closes the option: it updates it`s position in the option component by
+            //closeOptions updater, sets the query value to default and also all the checkboxes` states to
+            //default as well.
             closeOptions(option.index);
             setQuery({ [option.query_name]: option.query_value });
+            setCheckboxesStateForQuery(option.checked_default);
+            setSecondLayerCheckboxesStateForQuery({});
+            setCheckedState(
+              option.input.reduce(
+                (object, l) => ({
+                  ...object,
+                  ...{ ...{ [l.htmlForAndInputId]: l.checked === true } },
+                }),
+                {}
+              )
+            );
+            setSecondLayerState({});
           }}
         >
           X
@@ -77,6 +113,8 @@ const useOptionBox = (option, closeOptions) => {
           {">>"}
         </button>
         {unravel1 ? (
+          // here we map the options of the form except the last one option, as it can have custom options that
+          // can unravel if we click on it
           <div className="formOptions">
             {option.input
               .slice(0, option.input.length - 1)
@@ -85,26 +123,42 @@ const useOptionBox = (option, closeOptions) => {
                   <label key={index} htmlFor={item.htmlForAndInputId}>
                     <input
                       key={item.query_value}
-                      id={item.htmlForAndUnputId}
+                      id={item.htmlForAndInputId}
                       type={item.inputType}
                       name={item.name}
-                      defaultChecked={item.checked}
+                      query_value={item.query_value}
+                      defaultChecked={keepCheckedState[item.htmlForAndInputId]}
                       onChange={(e) => {
-                        // if (e.target.type == "checkbox") {
-                        //   console.log("checkbox");
-                        //   //in case our form provides multiple set of options we need more sophisticated
-                        //   //way to handle the options
-                        //   handleCheckBoxOptions(e, checkboxes, setCheckboxes);
-                        //   setUnravel1(true);
-                        // } else {
-                        //   console.log("radio");
-                        //   setQuery({ [item.name]: item.query_value });
-                        //   setUnravel1(true);
-                        // }
+                        if (e.target.type == "checkbox") {
+                          //this is to keep the default state of the form the way user selected it
+                          const newState = keepCheckedState;
+                          newState[item.htmlForAndInputId] = e.target.checked;
+                          setCheckedState(newState);
+                          //in case our form provides multiple set of options we need more sophisticated
+                          //way to handle the options
+                          handleCheckBoxOptions(
+                            e,
+                            checkboxesStateForQuery,
+                            setCheckboxesStateForQuery
+                          );
+                        } else {
+                          //this is for the time we go from the custom checkboxes` state and we need to reset
+                          //the values from it
+                          setSecondLayerState({});
+                          setSecondLayerCheckboxesStateForQuery({});
+                          //now we need access to the previous default state for the radio buttons
+                          const newState = keepCheckedState;
+                          //and we need to set all the defaultchecked radiostates except this one to false
+                          Object.keys(newState).forEach(
+                            (v) => (newState[v] = false)
+                          );
+                          newState[item.htmlForAndInputId] = e.target.checked;
+                          setCheckedState(newState);
+                          setQuery({ [item.name]: item.query_value });
+                          //and close the custom option choices if they were open
+                          setUnravel2(false);
+                        }
                       }}
-                      // onBlur={() => {
-                      //   setQuery({ [item.name]: item.query_value });
-                      // }}
                     />
                     {item.title}
                     <br></br>
@@ -118,27 +172,47 @@ const useOptionBox = (option, closeOptions) => {
                 id={option.input[option.input.length - 1].htmlForAndInputId}
                 type={option.input[option.input.length - 1].inputType}
                 name={option.input[option.input.length - 1].name}
-                onChange={() => {
+                query_value={option.input[option.input.length - 1].query_value}
+                defaultChecked={
+                  keepCheckedState[
+                    option.input[option.input.length - 1].htmlForAndInputId
+                  ]
+                }
+                onChange={(e) => {
                   if (
                     option.input[option.input.length - 1].htmlForAndInputId ===
                     "custom"
                   ) {
-                    setUnravel2(!unravel2);
+                    //the same as previous one
+                    const newState = keepCheckedState;
+                    Object.keys(newState).forEach((v) => (newState[v] = false));
+                    newState[
+                      option.input[option.input.length - 1].htmlForAndInputId
+                    ] = e.target.checked;
+                    setCheckedState(newState);
+                    setUnravel2(true);
                     setQuery({
                       [option.input[option.input.length - 1].name]: [],
                     });
                   } else {
-                    () => {
-                      if (e.target.type == "checkbox") {
-                        console.log("checkbox");
-                        handleCheckBoxOptions(e, checkboxes, setCheckboxes);
-                      } else {
-                        setQuery({
-                          [option.input[option.input.length - 1].name]:
-                            option.input[option.input.length - 1].query_value,
-                        });
-                      }
-                    };
+                    const newState = keepCheckedState;
+                    newState[
+                      option.input[option.input.length - 1].htmlForAndInputId
+                    ] = e.target.checked;
+                    console.log(e.target.checked);
+                    setCheckedState(newState);
+                    if (e.target.type == "checkbox") {
+                      handleCheckBoxOptions(
+                        e,
+                        checkboxesStateForQuery,
+                        setCheckboxesStateForQuery
+                      );
+                    } else {
+                      setQuery({
+                        [option.input[option.input.length - 1].name]:
+                          option.input[option.input.length - 1].query_value,
+                      });
+                    }
                   }
                 }}
               />
@@ -171,20 +245,18 @@ const useOptionBox = (option, closeOptions) => {
                         id={item.query_value}
                         type={item.inputType}
                         name={item.name}
-                        onChange={(e) =>
+                        query_value={item.query_value}
+                        defaultChecked={keepSecondLayerState[item.query_value]}
+                        onChange={(e) => {
+                          const newObject = keepSecondLayerState;
+                          newObject[item.query_value] = e.target.value;
+                          setSecondLayerState(newObject);
                           handleCheckBoxOptions(
                             e,
-                            customCheckboxes,
-                            setCustomCheckBox
-                          )
-                        }
-                        onBlur={(e) =>
-                          handleCheckBoxOptions(
-                            e,
-                            customCheckboxes,
-                            setCustomCheckBox
-                          )
-                        }
+                            secondLayerCheckboxesStateForQuery,
+                            setSecondLayerCheckboxesStateForQuery
+                          );
+                        }}
                       />
                       <br></br>
 

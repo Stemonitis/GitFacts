@@ -4127,7 +4127,7 @@ const languages = {
     tm_scope: "source.regexp",
     language_id: 363378884,
   },
-  "Ren'Py": {
+  RenPy: {
     type: "programming",
     aliases: ["renpy"],
     color: "#ff7f7f",
@@ -6237,12 +6237,15 @@ let optionsSkeleton = [
     input_secondLayer: [
       {
         title:
-          'Search for the owner and repo in following format: "owner:repo"',
+          'Search for the owner and repo in following format: "owner/repo". You can enter multiple owner/repo pairs, separated by spaces',
+        placeholder: "twbs/bootstrap, rails/rails",
+        name: "repo",
+        inputType: "text",
       },
     ],
   },
   {
-    name: "Search within user's repositories",
+    name: "Search within user's(owner's) repositories",
     index: 6,
     query_name: "user",
     query_value: ["Stemonitis"],
@@ -6251,7 +6254,7 @@ let optionsSkeleton = [
         htmlForAndInputId: "default Stemonitis",
         inputType: "radio",
         checked: true,
-        query_value: "",
+        query_value: "Stemonitis",
         name: "user",
         title: "Default: search in repositories owned by Stemonitis",
       },
@@ -6260,41 +6263,47 @@ let optionsSkeleton = [
         inputType: "radio",
         checked: false,
         name: "user",
-        title: "Enter username here",
+        title: "Enter username(ownername) here",
       },
     ],
     input_secondLayer: [
       {
         title:
-          "Please, enter user within whose repositories you want to conduct a search ",
+          "Please, enter users(owners) within whose repositories you want to conduct a search separated with spaces",
+        name: "user",
+        inputType: "text",
+        placeholder: "github atom electron octokit",
       },
     ],
   },
   {
     name: "Search within organization's repositories",
     index: 7,
-    query_name: "organization",
-    query_value: ["Stemonitis"],
+    query_name: "org",
+    query_value: ["freeCodeCamp"],
     input: [
       {
-        htmlForAndInputId: "default arch",
+        htmlForAndInputId: "default fcc",
         inputType: "radio",
         checked: true,
-        query_value: "arch",
-        name: "organization",
-        title: "Default: search in repositories owned by arch linux",
+        query_value: "freeCodeCamp",
+        name: "org",
+        title: "Default: search in repositories owned by freeCodeCamp",
       },
       {
         htmlForAndInputId: "custom",
         inputType: "radio",
         checked: false,
-        name: "organization",
+        name: "org",
         title: "Enter organization here",
       },
     ],
     input_secondLayer: [
       {
-        title: "Please, enter organization name",
+        title: "Please, enter organization names separated by spaces",
+        placeholder: "tensorflow freeCodeCamp mozilla",
+        name: "org",
+        inputType: "text",
       },
     ],
   },
@@ -6302,24 +6311,23 @@ let optionsSkeleton = [
     name: "Number of Followers",
     index: 8,
     query_name: "followers",
-    query_value: [">=10000"],
+    query_value: ["0", "1", "2", "2..10", "10..99", ">99"],
     input: [
       {
-        htmlForAndInputId: "default >=10000",
+        htmlForAndInputId: "default small ranges",
         inputType: "radio",
         checked: true,
-        query_value: [">=10000"],
+        query_value: ["0", "1", "2", "2..10", "10..99", ">99"],
         name: "followers",
         title:
-          "Default: search for the repositories that have more than 10 000 followers",
+          "Default: search for the users that have 0, 1, 2, 2 to 10, 10 to 99 and more than 99 followers (0 1 2 2..10 10..99 >99)",
       },
       {
-        htmlForAndInputId: "more than a 1000 and 0 followers",
+        htmlForAndInputId: "more than 0 followers and more than 0 followers",
         inputType: "radio",
-        query_value: ["0", ">1000"],
+        query_value: ["0", ">0"],
         name: "followers",
-        title:
-          "Search for repositories with 0 and more than a thousand followers",
+        title: "Search for users with 0 and more than 0 followers (0 >0)",
       },
       {
         htmlForAndInputId: "custom",
@@ -6331,7 +6339,10 @@ let optionsSkeleton = [
     input_secondLayer: [
       {
         title:
-          'Please, enter all the desired repository followers ranges separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories that have from 4 to 6 followers and more than a 1000 followers enter "4..6 >=1000" ',
+          'Please, enter all the desired user followers ranges separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories that have from 4 to 6 followers and more than a 1000 followers enter "4..6 >=1000" ',
+        name: "followers",
+        placeholder: "20..50 >200 <2",
+        inputType: "text",
       },
     ],
   },
@@ -6339,23 +6350,23 @@ let optionsSkeleton = [
     name: "Number of Forks",
     index: 9,
     query_name: "forks",
-    query_value: [">=1"],
+    query_value: ["0", "1", "2", "2..10", "10..99", ">99"],
     input: [
       {
-        htmlForAndInputId: "default more than 1 or 1",
+        htmlForAndInputId: "default default small ranges",
         inputType: "radio",
         checked: true,
-        query_value: [">=1"],
+        query_value: ["0", "1", "2", "2..10", "10..99", ">99"],
         name: "forks",
         title:
-          "Default: search for the repositories that have been forked one or more times",
+          "Default: search for the repositories that have been forked 0, 1, 2, 2 to 10, 10 to 99 and more than 99 times (0 1 2 2..10 10..00 >99)",
       },
       {
-        htmlForAndInputId: "more than 10 forks",
+        htmlForAndInputId: "0 and more than 10 forks",
         inputType: "radio",
-        query_value: [">10"],
+        query_value: ["0", ">10"],
         name: "forks",
-        title: "More than 10 forks",
+        title: "Repositories that were forked 0 and more than 10 times (0 >10)",
       },
       {
         htmlForAndInputId: "custom",
@@ -6368,6 +6379,9 @@ let optionsSkeleton = [
       {
         title:
           'Please, enter all the desired repository forks ranges separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories that have from 4 to 6 forks and more than a 1000 forks enter "4..6 >=1000" ',
+        name: "forks",
+        placeholder: "20..50 >200 <2",
+        inputType: "text",
       },
     ],
   },
@@ -6392,21 +6406,14 @@ let optionsSkeleton = [
         ],
         name: "pushed",
         title:
-          "Default: repositories last updated in years 2020, 2019 and 2018",
+          "Default: repositories last updated in years 2020, 2019 and 2018 (2018-01-01..2018-12-31 2019-01-01..2019-12-31 2020-01-01..2020-12-31)",
       },
       {
-        htmlForAndInputId: "Repositories updated in 2020",
+        htmlForAndInputId: "Repositories updated since 2020",
         inputType: "radio",
         query_value: [">2019-12-31"],
         name: "pushed",
-        title: "Repositories updated in 2020",
-      },
-      {
-        htmlForAndInputId: "All repositories",
-        inputType: "radio",
-        query_value: [""],
-        name: "pushed",
-        title: "All repositories",
+        title: "Repositories updated since 2020 (>2019-12-31)",
       },
       {
         htmlForAndInputId: "custom",
@@ -6419,6 +6426,7 @@ let optionsSkeleton = [
       {
         inputType: "text",
         name: "pushed",
+        placeholder: "YYYY-MM-DD",
         title:
           'Please, enter all the desired repository date ranges in YYYY-MM-DD format separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories created on 30th of June 2020 and from 21 of July 2013 enter "2020-06-30>=2013-07-21" ',
       },
@@ -6441,6 +6449,7 @@ let optionsSkeleton = [
       },
       {
         htmlForAndInputId: "custom",
+        name: "topic",
         inputType: "radio",
         checked: false,
         title: "Enter your topic. More on topics https://github.com/topics/",
@@ -6448,7 +6457,11 @@ let optionsSkeleton = [
     ],
     input_secondLayer: [
       {
-        title: "Please, enter topic that you want to search for here.",
+        title:
+          "Please, enter topic (ortopics separated with spaces) that you want to search for here.",
+        inputType: "text",
+        placeholder: "C++ Kubernetes Android",
+        name: "topic",
       },
     ],
   },
@@ -6456,15 +6469,16 @@ let optionsSkeleton = [
     name: "Number of Topics",
     index: 12,
     query_name: "topics",
-    query_value: ["Data visualization"],
+    query_value: ["0", ">1"],
     input: [
       {
         htmlForAndInputId: "default more than 1",
         inputType: "radio",
         checked: true,
-        query_value: [">1"],
+        query_value: ["0", ">1"],
         name: "topics",
-        title: "Default: search for the repositories with more than one topic",
+        title:
+          "Default: search for the repositories with 0 and more than one topic",
       },
       {
         htmlForAndInputId: "custom",
@@ -6476,6 +6490,9 @@ let optionsSkeleton = [
     ],
     input_secondLayer: [
       {
+        name: "topics",
+        placeholder: "<3 4 5 >5",
+        inputType: "text",
         title:
           'Please, enter all the desired repository topics ranges separated by spaces. You can use >, >=, <, and <= to search for values that are greater than, greater than or equal to, less than, and less than or equal to another value. Also, you can search for values between a range using n..n syntax. For example, to search for the repositories that have from 4 to 6 topics and more than a 1000 topics enter "4..6 >=1000"',
       },
@@ -6505,6 +6522,9 @@ let optionsSkeleton = [
     ],
     input_secondLayer: [
       {
+        inputType: "text",
+        placeholder: "mit cc ncsa",
+        name: "license",
         title:
           "Please, enter a license or list of licenses separated by commas",
       },
@@ -6514,6 +6534,7 @@ let optionsSkeleton = [
     name: "Visibility",
     query_name: "is",
     index: 14,
+    checked_default: { public: true },
     query_value: ["public"],
     input: [
       {
@@ -6546,6 +6567,7 @@ let optionsSkeleton = [
     name: "Mirror repositories",
     query_name: "mirror",
     query_value: ["true", "false"],
+    checked_default: { true: true, false: true },
     index: 15,
     input: [
       {
@@ -6570,10 +6592,11 @@ let optionsSkeleton = [
     name: "Archived",
     query_name: "archived",
     query_value: ["true", "false"],
+    checked_default: { true: true, false: true },
     index: 16,
     input: [
       {
-        htmlForAndInputId: "default is a archived",
+        htmlForAndInputId: "default is archived",
         inputType: "checkbox",
         checked: true,
         query_value: "true",
@@ -6581,7 +6604,7 @@ let optionsSkeleton = [
         title: "Repositories that are archived",
       },
       {
-        htmlForAndInputId: "Default is not a archived",
+        htmlForAndInputId: "Default is not archived",
         inputType: "checkbox",
         checked: true,
         query_value: "false",

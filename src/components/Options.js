@@ -108,7 +108,7 @@ const Options = (props) => {
       archivedQuery,
     ];
     const optionsOrder = optionsArray.map((option) => option.key);
-    let queryList = optionsOrder.map((order) => requestList.current[order]);
+    let queryList = optionsOrder.map((order) => requestList[order]);
     let filtered = items.filter((option, i) => {
       return queryList[i] !== false;
     });
@@ -260,7 +260,6 @@ const Options = (props) => {
     props.updateLoadingCount([0, newQuery[0].length]);
     props.fire();
   }
-  console.log(languageQuery, "languageQuery");
   return (
     <div id="OptionsContainer">
       <div id="options">
