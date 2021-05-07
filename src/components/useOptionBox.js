@@ -102,7 +102,7 @@ const useOptionBox = (option, closeOptions) => {
             setSecondLayerState({});
           }}
         >
-          X
+          x
         </button>
         {/* this button toggles the first layer of options  */}
         <span id="optionTitle">{option.name}</span>

@@ -5,16 +5,16 @@ const Navigation = (props) => {
 
   return (
     <nav className={`top-right ${openClosed ? "open" : ""}`}>
-      <a className="disc l1">
+      <a className="disc l1" href="#share1">
         <div>Share </div>
       </a>
-      <a className="disc l2">
+      <a className="disc l2" href="#about">
         <div>About </div>
       </a>
-      <a className="disc l3">
+      <a className="disc l3" href="#howto">
         <div>HowTo </div>
       </a>
-      <a className="disc l4">
+      <a className="disc l4" href="#home">
         <div>Home </div>
       </a>
       <a className="disc l5 toggle" onClick={(e) => openClose(!openClosed)}>
