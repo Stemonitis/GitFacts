@@ -1,3 +1,4 @@
+import * as firebase from "firebase";
 import React, { useState, useEffect } from "react";
 import { render } from "react-dom";
 import Header from "./Header";
