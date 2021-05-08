@@ -52,7 +52,7 @@ const Main = () => {
 
   return (
     <>
-      <main>
+      <main id="home">
         <Options
           updateQueryString={updateQueryString}
           updateQueryIterator={updateQueryIterator}

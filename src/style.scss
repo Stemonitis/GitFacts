@@ -4,7 +4,13 @@ html {
   border-right: 5vw solid black;
   font-family: "Fira Sans Condensed", sans-serif;
 }
-
+h1,
+h2 {
+  font-family: "Alegreya", serif;
+}
+.black {
+  background-color: black;
+}
 body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   margin: 0;
@@ -188,18 +194,10 @@ ul {
   background-color: rgb(231, 236, 236);
 }
 .closeButton {
+  color: rgb(165, 165, 165);
+  font-weight: bolder;
   align-self: flex-end;
-  width: 18px;
-  height: 18px;
   text-align: center;
-  align-self: right;
-  font-size: 10px;
-  border: darkgray;
-  border-radius: 40%;
-  background-color: rgb(233, 233, 233);
-}
-.closeButton:hover {
-  background-color: rgb(231, 236, 236);
 }
 
 #plus {
@@ -208,7 +206,6 @@ ul {
   border-color: white;
   border-radius: 50%;
   background-color: white;
-  font-size: 5vh;
   text-align: center;
   align-self: center;
   box-shadow: rgb(255, 255, 255);
@@ -400,7 +397,10 @@ a {
 a:hover {
   color: white;
 }
-
+.black {
+  background-color: black;
+  color: white;
+}
 footer {
   text-align: right;
   font-size: 3vw;
@@ -412,6 +412,9 @@ footer {
   margin: 0;
 }
 @media (max-width: 425px) {
+  nav {
+    display: none;
+  }
   header {
     height: 130px;
     justify-content: center;
