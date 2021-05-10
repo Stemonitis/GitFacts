@@ -6458,7 +6458,7 @@ let optionsSkeleton = [
     input_secondLayer: [
       {
         title:
-          "Please, enter topic (ortopics separated with spaces) that you want to search for here.",
+          "Please, enter topic (or topics separated with spaces) that you want to search for here. If there is a space in the topic name, use dashes insted (e.g. data-visualization, machine-learning).",
         inputType: "text",
         placeholder: "C++ Kubernetes Android",
         name: "topic",

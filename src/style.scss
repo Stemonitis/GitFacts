@@ -11,6 +11,16 @@ h2 {
 .black {
   background-color: black;
 }
+#howto {
+  padding: 20px;
+  margin: 0px;
+}
+#about {
+  padding: 20px;
+}
+#share1 {
+  padding: 20px;
+}
 body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   margin: 0;
@@ -372,7 +382,16 @@ ul {
   border-radius: 20px;
   background: #afa9a9;
 }
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+}
 
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 .bar {
   border-radius: 20px;
   width: 0%;
@@ -391,11 +410,12 @@ ul {
 }
 
 a {
-  color: rgb(88, 99, 97);
+  color: rgb(84, 180, 163);
   text-decoration: none;
 }
 a:hover {
-  color: white;
+  color: rgb(224, 137, 202);
+  text-decoration: underline;
 }
 .black {
   background-color: black;
@@ -410,6 +430,7 @@ footer {
   height: 5vw;
   z-index: 0;
   margin: 0;
+  padding: 5px;
 }
 @media (max-width: 425px) {
   nav {
