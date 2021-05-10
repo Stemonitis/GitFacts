@@ -24,7 +24,7 @@ For more details and use examples please refer to the <a href="https://gitfacts.
 
 <h1 align="center">Thanks for reading!</h1>
 
-If you have anything you think you can contribute to please contact me or open an issue.
+If you have anything you think you can contribute to please contact me (atokhtamysh@gmail.com) or open an issue.
 
 
 
