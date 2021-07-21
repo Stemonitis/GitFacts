@@ -266,12 +266,15 @@ const Options = (props) => {
         <div id="SearchBar">
           <label htmlFor="searchWindow">
             <input
+              key="searchInput"
               id="searchWindow"
               type="text"
               placeholder="Search in GitHub..."
               value={keyword}
-              onChange={(e) => updateKeyword(e.target.value)}
-              onBlur={(e) => updateKeyword(e.target.value)}
+              onChange={(e) => {
+                updateKeyword(e.target.value);
+              }}
+              // onBlur={(e) => updateKeyword(e.target.value)}
             />
           </label>
           <div id="buttonDiv" type="submit">

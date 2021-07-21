@@ -54,7 +54,6 @@ body {
 header {
   margin: 0;
   background-color: white;
-
   margin-left: -5vw;
   width: 100vw;
   height: 13vw;
@@ -65,7 +64,6 @@ header {
 }
 #header-wrapper {
   margin-left: 10vw;
-  text-shadow: 10px 10px 5px rgb(165, 165, 165);
   justify-self: flex-start;
   display: flex;
   flex-direction: column;
@@ -110,7 +108,7 @@ main {
   margin-left: 5vw;
 }
 #SearchBar {
-  margin-top: 20px;
+  margin-top: 80px;
   height: 10vh;
   display: flex;
   flex-direction: column;
@@ -122,6 +120,7 @@ main {
   align-self: flex-start;
   font-style: italic;
   font-family: "Fira Sans Condensed", sans-serif;
+  font-size: larger;
 }
 #goButton {
   height: 30px;
@@ -132,7 +131,7 @@ main {
   font-size: smaller;
 }
 #searchWindow:hover {
-  background-color: rgb(132, 133, 132);
+  background-color: rgb(221, 221, 221);
   height: 20px;
 }
 
@@ -155,13 +154,12 @@ ul {
   text-align: center;
   flex-direction: column;
   font-family: "Fira Sans Condensed", sans-serif;
-  border-radius: 2%;
-  background-image: linear-gradient(
-    to bottom left,
-    rgba(255, 255, 255, 0.308),
-    rgb(201, 200, 200),
-    rgb(255, 250, 250)
-  );
+  border-radius: 15px;
+  background: linear-gradient(145deg, #d8d8d8, #ffffff);
+  box-shadow: 20px 20px 49px #cccccc, -20px -20px 49px #ffffff;
+}
+.OptionBox:hover {
+  background-color: white;
 }
 #labelOption {
   max-height: 10vh;
@@ -172,13 +170,10 @@ ul {
   display: flex;
   text-align: center;
   flex-direction: column;
-  border-radius: 2%;
-  background-image: linear-gradient(
-    to bottom left,
-    rgba(255, 255, 255, 0.308),
-    rgb(201, 200, 200),
-    rgb(255, 250, 250)
-  );
+  border-radius: 15px;
+  background: linear-gradient(145deg, #d8d8d8, #ffffff);
+  box-shadow: 20px 20px 49px #cccccc, -20px -20px 49px #ffffff;
+  margin-bottom: 40px;
 }
 #optionTitle {
   font-family: "Alegreya", serif;
@@ -191,7 +186,9 @@ ul {
   margin: 10px;
   border: darkgray;
   border-radius: 20%;
-  background-color: rgb(255, 255, 255);
+  background: linear-gradient(145deg, #d8d8d8, #ffffff);
+  box-shadow: 20px 20px 49px #cccccc, -20px -20px 49px #ffffff;
+  // background-color: rgb(255, 255, 255);
   /* background: repeating-linear-gradient(
     90deg,
     yellow 0px,
@@ -202,14 +199,22 @@ ul {
 }
 .buttonschoose:hover {
   background-color: rgb(231, 236, 236);
+  color: rgb(246, 147, 221);
 }
 .closeButton {
-  color: rgb(165, 165, 165);
+  width: 25px;
+  height: 25px;
   font-weight: bolder;
   align-self: flex-end;
   text-align: center;
+  border-style: none;
+  border-radius: 30%;
+  background: linear-gradient(145deg, #ffffff, #d8d8d8);
+  box-shadow: 13px 13px 26px #dfdfdf, -13px -13px 26px #ffffff;
 }
-
+.closeButton:hover {
+  color: rgb(246, 147, 221);
+}
 #plus {
   width: 35px;
   height: 35px;
@@ -415,7 +420,7 @@ a {
 }
 a:hover {
   color: rgb(224, 137, 202);
-  text-decoration: underline;
+  text-decoration: none;
 }
 .black {
   background-color: black;
@@ -621,7 +626,7 @@ nav {
 
   &:hover {
     background: shade($color-inner, 90%);
-    text-decoration: underline;
+    text-decoration: none;
   }
   &:active {
     background: shade($color-inner, 50%);
