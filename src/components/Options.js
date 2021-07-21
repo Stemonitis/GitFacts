@@ -8,8 +8,12 @@ const Options = (props) => {
   //this is the hook for the search bar. It updates automatically every
   //every time you type so you actually dont need the button
   const [keyword, updateKeyword] = useState("");
+  //this function is passed upon the creation of every component in order to be track the state of the order of
+  //filters in this component ("Options"), it updtes the closeIndex which triggers rerender of the component
+  //as it is a dependency in the useEffect below
+  //this function handles closing options. It gets passed down to the optionBox and is triggered every time
+  //a user closes the button. It also resets the state of the corresponding query to default
   const [closeIndex, closeOptions] = useState("l");
-
   //these are the family of hooks for different options. There are a lot of hooks, but because of
   //the necessity of keeping both their states, order and closed/open states and also the fact that
   //we have to give a key to each components to track their order in the drag and drop area
@@ -76,6 +80,7 @@ const Options = (props) => {
   ]);
   //toggles the state of the "plus" button for adding options
   const [select, updateSelect] = useState(false);
+  //keeps track of closed components as described above
   useEffect(() => {
     let items = Array.from(optionsArray);
     let optionsOrder = optionsArray.map((option) => option.key);
@@ -114,8 +119,6 @@ const Options = (props) => {
     });
     updateOptions(filtered);
   }
-  //this function handles closing options. It gets passed down to the optionBox and is triggered every time
-  //a user closes the button. It also resets the state of the corresponding query to default
 
   //handles adding new options. When the new option of the same kind is added their state is shared
   function addANewOption(e) {
@@ -253,7 +256,6 @@ const Options = (props) => {
       keyword,
       optionsOrder.map((order) => requestList[order]).filter((i) => i !== false)
     );
-    console.log(newQuery);
     props.updateQueryIterator(newQuery[0].length - 1);
     props.updateQueryString(newQuery);
     props.updateResponseData([]);
@@ -330,11 +332,14 @@ const Options = (props) => {
               Select a Search Parameter
               <select onClick={(e) => addANewOption(e)}>
                 {optionsSkeleton.map((option, index) => {
-                  return (
-                    <option key={index} value={option.index}>
-                      {option.name}
-                    </option>
-                  );
+                  //do not allow duplicate options!!!
+                  if (!optionsArray.some((l) => l.key == option.index)) {
+                    return (
+                      <option key={index} value={option.index}>
+                        {option.name}
+                      </option>
+                    );
+                  }
                 })}
               </select>
             </label>

@@ -116,6 +116,7 @@ main {
 }
 
 #searchWindow {
+  z-index: 12;
   width: 25vw;
   align-self: flex-start;
   font-style: italic;
@@ -329,6 +330,7 @@ ul {
 }
 
 .formOptions {
+  z-index: 12;
   text-align: left;
   font-size: smaller;
   font-weight: 100;
@@ -466,6 +468,7 @@ footer {
     align-self: center;
   }
   #searchWindow {
+    z-index: 12;
     width: 100%;
     align-self: flex-start;
   }

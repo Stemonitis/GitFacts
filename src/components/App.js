@@ -64,6 +64,7 @@ const App = () => {
         showProgress={true}
         spotlightClicks={true}
         run={true}
+        showSkipButton={true}
       />
       <ApolloProvider client={client}>
         <Header />

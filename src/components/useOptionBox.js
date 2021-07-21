@@ -10,7 +10,6 @@ const useOptionBox = (option, closeOptions) => {
   const [query, setQuery] = useState({
     [option.query_name]: option.query_value,
   });
-  console.log(query, "query");
 
   const OptionBox = () => {
     //this is the boolean that unravels first layer of (notcustomisable and default) options
