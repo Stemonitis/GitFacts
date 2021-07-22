@@ -330,7 +330,7 @@ const Options = (props) => {
           {select ? (
             <label id="labelOption" htmlFor="addOptions">
               Select a Search Parameter
-              <select onClick={(e) => addANewOption(e)}>
+              <select onChange={(e) => addANewOption(e)}>
                 {optionsSkeleton.map((option, index) => {
                   //do not allow duplicate options!!!
                   if (!optionsArray.some((l) => l.key == option.index)) {

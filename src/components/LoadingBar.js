@@ -11,6 +11,7 @@ const LoadingBar = (props) => {
             width: (100 / props.loadingCount[1]) * props.loadingCount[0] + "%",
           }}
         ></div>
+        <div>If you wish to stop loading, please refresh the page</div>
       </div>
     </div>
   );

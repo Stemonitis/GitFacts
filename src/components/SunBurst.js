@@ -11,12 +11,12 @@ import {
 } from "d3";
 import React, { useRef, useEffect, useState, useLayoutEffect } from "react";
 import transformIntoPartionData from "./transformIntoPartionData.js";
-
 export default function SunBurst(props) {
   const sunRef = useRef(0);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [size, resize] = useState(0);
+  const [empty, emptyEnt] = useState(false);
   //happens synchronously with the render
   useLayoutEffect(() => {
     setWidth(sunRef.current.clientWidth);
@@ -32,13 +32,18 @@ export default function SunBurst(props) {
 
   useEffect(() => {
     let sunData;
-    // if (props.queryResult === 0) {
     if (props.queryResult.name === "initialData") {
       sunData = props.queryResult;
     } else {
       sunData = transformIntoPartionData(props.queryResult, props.queryString);
     }
-
+    if (
+      partition().size([2 * Math.PI, 7])(hierarchy(sunData).sum((d) => d.size))
+        .value === 0
+    ) {
+      emptyEnt(true);
+      return;
+    }
     //this is the d3 code for the whole diagram
     if (props.zoom) {
       let radius = width / 2; //width > height ? height / 2 : width / 2;
@@ -51,7 +56,6 @@ export default function SunBurst(props) {
           .sum((d) => d.size)
           .sort((a, b) => b.size - a.size)
       );
-
       const svg = select(sunRef.current)
         .append("svg")
         .style("width", width + "px")
@@ -337,5 +341,12 @@ export default function SunBurst(props) {
     }
   }, [props.queryResult, props.queryString, width, height]);
 
-  return <div className="SunBurst" ref={sunRef}></div>;
+  return (
+    <>
+      <div className="SunBurst" ref={sunRef}></div>
+      {empty && (
+        <div>No results :(( Try rephrasing or using different filters!</div>
+      )}
+    </>
+  );
 }

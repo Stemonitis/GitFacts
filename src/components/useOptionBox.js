@@ -257,7 +257,6 @@ const useOptionBox = (option, closeOptions) => {
                           );
                         }}
                       />
-                      <br></br>
 
                       {item.title}
                       <br></br>
